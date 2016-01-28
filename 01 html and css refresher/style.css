@@ -1,0 +1,31 @@
+.nav {
+	padding: 20px 0;
+}
+
+.nav .logo {
+	text-decoration: none;
+	color: #00DE61;
+	font-weight: bold;
+	font-size: 3em;
+}
+
+.nav .logo img {
+	margin-right: 20px;
+}
+
+.nav .links {
+	margin-top: 20px;
+	float: right;
+}
+
+.nav .links a {
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+	margin-left: 26px;
+}
+
+.small-icon {
+	height: 15px;
+	width: auto;
+}
