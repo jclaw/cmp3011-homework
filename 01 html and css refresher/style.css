@@ -7,9 +7,37 @@ a.active {
 	color: #00de61 !important;
 }
 
-.small-icon {
+.icon-small {
 	height: 15px;
 	width: auto;
+}
+
+.icon-med {
+	height: 35px;
+	width: auto;
+}
+
+.button {
+	float: left;
+	background: #00de61;
+    border-radius: 2px;
+    font-weight: 500;
+    border: 0;
+    color: #fff;
+    line-height: 50px;
+    height: 60px;
+    /*width: 100%;*/
+    padding: 0 40px;
+    max-width: 360px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.3em;
+    transition: background 100ms linear;
+}
+
+.button:hover {
+	background: #00bf4d;
+
 }
 
 /******************/
@@ -20,15 +48,15 @@ a.active {
 	padding: 20px 0;
 }
 
-.nav .logo {
+.logo {
 	text-decoration: none;
 	color: #00DE61;
 	font-weight: bold;
 	font-size: 3em;
 }
 
-.nav .logo img {
-	margin-right: 20px;
+.logo img {
+	margin-right: 10px;
 }
 
 .nav .links {
@@ -51,16 +79,17 @@ a.active {
 
 .hero {
 	width: 100%;
-	height: 404px;
 	background: #D8D8D8;
 	padding: 83px 0;
-	text-align: center;
+	text-align: center;;
+	overflow: hidden;
 }
 
 .hero .hero-box {
-	width: 914px;
+	/*width: 914px;
+	margin: 0 auto;*/
 	background: rgba(255,255,255,0.9);
-	margin: 0 auto;
+	
 	padding: 14px 28px;
 	border-top: 5px solid #00de61;
 }
@@ -78,7 +107,7 @@ a.active {
 
 .hero .hero-title {
 	color: black;
-	font-size: 54px;
+	font-size: 50px;
 	font-weight: bold;
 	margin: 10px 0;
 }
@@ -86,7 +115,7 @@ a.active {
 .hero .hero-subtitle {
 	color: #B8B8B8;
 	font-weight: medium;
-	font-size: 24px;
+	font-size: 20px;
 }
 
 .sub-nav {
@@ -134,10 +163,6 @@ a.active {
 	padding-bottom: 40px;
 }
 
-.article-body p {
-	padding-bottom: 5px;
-}
-
 .dropcap {
 	font-size: 61px;
 	color: #00de61;
@@ -150,13 +175,54 @@ a.active {
 	font-size: 20px;
 }
 
+.article-body p {
+	padding-bottom: 10px;
+}
+
+.article-body p:not(.beginning) {
+	line-height: 26px;
+}
+
 .footer {
-	padding: 80px;
+	padding: 40px 0;
 	background: black;
+	width: 100%;
+}
+
+.footer .logo {
+	display: block;
+	width: 190px;
+	margin: 0 auto;
+	margin-bottom: 30px;
 }
 
 .footer .logo img {
 	height: 38px;
-	width: auto;
+
 }
 
+.input-and-button .input {
+	height: 60px;
+	border-radius: 2px;
+	float: left;
+	font-size: 1.3em;
+	padding-left: 20px;
+	border: none;
+	margin-right: 4px;
+	width: 68%;
+}
+
+.input-and-button .button {
+	width: 30%;
+	padding: 0;
+}
+
+.social {
+	display: block;
+	text-align: center;
+	margin-top: 150px;
+}
+
+.social * {
+	margin: 0 4px;
+}
