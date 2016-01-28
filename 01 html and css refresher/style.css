@@ -61,7 +61,7 @@ a.active {
 	width: 914px;
 	background: rgba(255,255,255,0.9);
 	margin: 0 auto;
-	padding: 28px;
+	padding: 14px 28px;
 	border-top: 5px solid #00de61;
 }
 
@@ -74,14 +74,19 @@ a.active {
 	border-bottom: 2px solid #00de61;
 	font-weight: bold;
 	margin: 0;
-	margin-bottom: 10px;
 }
 
 .hero .hero-title {
 	color: black;
 	font-size: 54px;
 	font-weight: bold;
-	margin: 0;
+	margin: 10px 0;
+}
+
+.hero .hero-subtitle {
+	color: #B8B8B8;
+	font-weight: medium;
+	font-size: 24px;
 }
 
 .sub-nav {
@@ -121,5 +126,37 @@ a.active {
 
 .post .post-box h3 {
 	margin: 0;
+}
+
+.article-body {
+	margin-top: 36px;
+	font-size: 16px;
+	padding-bottom: 40px;
+}
+
+.article-body p {
+	padding-bottom: 5px;
+}
+
+.dropcap {
+	font-size: 61px;
+	color: #00de61;
+	font-weight: bold;
+	float: left;
+	margin: -16px 8px -16px 0;
+}
+
+.article-body .beginning {
+	font-size: 20px;
+}
+
+.footer {
+	padding: 80px;
+	background: black;
+}
+
+.footer .logo img {
+	height: 38px;
+	width: auto;
 }
 
