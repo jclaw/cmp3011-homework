@@ -1,3 +1,7 @@
+/******************/
+/****** nav *******/
+/******************/
+
 .nav {
 	padding: 20px 0;
 }
@@ -29,3 +33,44 @@
 	height: 15px;
 	width: auto;
 }
+
+/******************/
+/**** content *****/
+/******************/
+
+.hero {
+	width: 100%;
+	height: 404px;
+	background: #D8D8D8;
+	padding-top: 83px;
+	text-align: center;
+}
+
+.hero .hero-box {
+	width: 914px;
+	background: rgba(255,255,255,0.9);
+	margin: 0 auto;
+	padding: 28px;
+	border-top: 5px solid #00de61;
+}
+
+.hero .feature-text {
+	font-size: 1em;
+	display: inline-block;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	padding-bottom: .5rem;
+	border-bottom: 2px solid #00de61;
+	font-weight: bold;
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+.hero .hero-title {
+	color: black;
+	font-size: 54px;
+	font-weight: bold;
+	margin: 0;
+}
+
+
