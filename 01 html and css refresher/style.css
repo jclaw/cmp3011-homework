@@ -161,12 +161,16 @@ a.active {
 	position: relative;
 /*	background-color: rgba(0,0,0,0);
 	transition: background-color .3s;*/
+
 }
 
 .post:focus, .post:hover {
 	color: black;
 	text-decoration: none;
 }
+
+
+
 /*
 .post:hover {
 	background-color: rgba(0,0,0,.3);
@@ -202,9 +206,13 @@ a.active {
 	margin-top: 14px;
 	margin-left: 14px;
 	background: rgba(255,255,255,0.9);
-	border-left: 5px solid #00de61;
+	/*border-left: 5px solid #00de61;*/
 	width: 80%;
-	padding: 4px 7px 10px;
+	height: 64px;
+	position: relative;
+	-webkit-transition: height .1s, padding-top .1s;
+	-moz-transition: height .1s, padding-top .1s;
+	transition: height .1s, padding-top .1s;
 
 /*	margin: 0 auto;
 	padding: 110px 100px;
@@ -217,7 +225,28 @@ a.active {
 	opacity: 1;
 }*/
 
+.post:hover .post-box {
+	height: 69px;
+	padding-top: 5px;
+}
+
+.post .post-box .green-box {
+	position: absolute;
+	background: #00de61;
+	height: 64px;
+	width: 5px;
+	-webkit-transition: width .2s .1s;
+	-moz-transition: width .2s .1s;
+	transition: width .2s .1s;
+}
+
+.post:hover .post-box .green-box {
+	width: 100%;
+}
+
 .post .post-box h3 {
+	position: absolute;
+	padding: 4px 7px 10px 12px;
 	margin: 0;
 	font-weight: bold;
 /*	color: white;*/
