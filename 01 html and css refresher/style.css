@@ -55,6 +55,11 @@ a.active {
 	font-size: 3em;
 }
 
+.logo:hover, .logo:focus {
+	text-decoration: none;
+	color: #00DE61;
+}
+
 .logo img {
 	margin-right: 10px;
 }
@@ -79,10 +84,20 @@ a.active {
 
 .hero {
 	width: 100%;
-	background: #D8D8D8;
 	padding: 83px 0;
-	text-align: center;;
+	text-align: center;
 	overflow: hidden;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#home .hero {
+	background-image: url(images/hero2@2x.jpg);
+}
+
+#article .hero {
+	background-image: url(images/hero@2x.jpg);
 }
 
 .hero .hero-box {
@@ -120,8 +135,8 @@ a.active {
 
 .sub-nav {
 	width: 100%;
-	padding: 2px 0;
-	margin: 24px 0 34px;
+	padding: 2px 7px;
+	margin: 40px 0 30px;
 	font-weight: bold;
 }
 
@@ -140,8 +155,22 @@ a.active {
 	width: 556px;
 	height: 278px;
 	float: left;
-	background-color: #D8D8D8;
 	margin: 7px;
+	color: black;
+	overflow: hidden;
+	position: relative;
+}
+
+.post:focus, .post:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.post img {
+	width: 100%;
+	z-index: -100;
+	position: absolute;
+
 }
 
 .post .post-box {
@@ -151,14 +180,16 @@ a.active {
 	border-left: 5px solid #00de61;
 	width: 80%;
 	padding: 4px 7px 10px;
+
 }
 
 .post .post-box h3 {
 	margin: 0;
+	font-weight: bold;
 }
 
 .article-body {
-	margin-top: 36px;
+	margin-top: 80px;
 	font-size: 16px;
 	padding-bottom: 40px;
 }
@@ -185,6 +216,7 @@ a.active {
 
 .footer {
 	padding: 40px 0;
+	margin-top: 100px;
 	background: black;
 	width: 100%;
 }
