@@ -159,18 +159,43 @@ a.active {
 	color: black;
 	overflow: hidden;
 	position: relative;
+/*	background-color: rgba(0,0,0,0);
+	transition: background-color .3s;*/
 }
 
 .post:focus, .post:hover {
 	color: black;
 	text-decoration: none;
 }
+/*
+.post:hover {
+	background-color: rgba(0,0,0,.3);
+}
+*/
+.post #art1 {
+	background-image: url(images/hero@2x.jpg);
+}
 
-.post img {
+.post #art2 {
+	background-image: url(images/inspiration-gift@2x.jpg);
+}
+
+.post #art3 {
+	background-image: url(images/inspiration-return@2x.jpg);
+}
+
+.post #art4 {
+	background-image: url(images/inspiration-sell@2x.jpg);
+}
+
+.post .post-image {
 	width: 100%;
+	height: 100%;
 	z-index: -100;
 	position: absolute;
-
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .post .post-box {
@@ -181,11 +206,21 @@ a.active {
 	width: 80%;
 	padding: 4px 7px 10px;
 
+/*	margin: 0 auto;
+	padding: 110px 100px;
+	text-align: center;
+	opacity: 0;
+	transition: opacity .3s;*/
 }
+
+/*.post .post-box:hover {
+	opacity: 1;
+}*/
 
 .post .post-box h3 {
 	margin: 0;
 	font-weight: bold;
+/*	color: white;*/
 }
 
 .article-body {
