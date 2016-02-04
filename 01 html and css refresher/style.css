@@ -103,13 +103,15 @@ a.active {
 .hero .hero-box {
 	/*width: 914px;
 	margin: 0 auto;*/
-	background: rgba(255,255,255,0.9);
-	
 	padding: 14px 28px;
+	background: rgba(255,255,255,0.9);
 	border-top: 5px solid #00de61;
+	position: relative;
+	overflow: hidden;
 }
 
-.hero .feature-text {
+.hero .hero-box .feature-text {
+	position: relative;
 	font-size: 1em;
 	display: inline-block;
 	letter-spacing: 3px;
@@ -120,14 +122,15 @@ a.active {
 	margin: 0;
 }
 
-.hero .hero-title {
+.hero .hero-box .hero-title {
+	position: relative;
 	color: black;
 	font-size: 50px;
 	font-weight: bold;
 	margin: 10px 0;
 }
 
-.hero .hero-subtitle {
+.hero .hero-box .hero-subtitle {
 	color: #B8B8B8;
 	font-weight: medium;
 	font-size: 20px;
@@ -210,9 +213,10 @@ a.active {
 	width: 80%;
 	height: 64px;
 	position: relative;
-	-webkit-transition: height .1s, padding-top .1s;
-	-moz-transition: height .1s, padding-top .1s;
-	transition: height .1s, padding-top .1s;
+	-webkit-transition: height .1s 150ms, padding-top .1s 150ms;
+	-moz-transition: height .1s 150ms, padding-top .1s 150ms;
+	transition: height .1s 150ms, padding-top .1s 150ms;
+
 
 /*	margin: 0 auto;
 	padding: 110px 100px;
@@ -228,6 +232,9 @@ a.active {
 .post:hover .post-box {
 	height: 69px;
 	padding-top: 5px;
+	-webkit-transition: height .1s, padding-top .1s;
+	-moz-transition: height .1s, padding-top .1s;
+	transition: height .1s, padding-top .1s;
 }
 
 .post .post-box .green-box {
@@ -235,13 +242,16 @@ a.active {
 	background: #00de61;
 	height: 64px;
 	width: 5px;
-	-webkit-transition: width .2s .1s;
-	-moz-transition: width .2s .1s;
-	transition: width .2s .1s;
+	-webkit-transition: width 150ms;
+	-moz-transition: width 150ms;
+	transition: width 150ms;
 }
 
 .post:hover .post-box .green-box {
 	width: 100%;
+	-webkit-transition: width 150ms .1s;
+	-moz-transition: width 150ms .1s;
+	transition: width 150ms .1s;
 }
 
 .post .post-box h3 {
@@ -334,3 +344,4 @@ a.active {
     background-color: white;
     border-right: 2px solid #00de61;
 }
+
