@@ -99,17 +99,8 @@ a.active {
 	color: black;
 }
 
-.hero #line {
-	width: 200%;
-    -webkit-transform-origin: top left;
-    transform-origin: top left;
-    -webkit-transform: skew(-20deg,0deg);
-    transform: skew(-20deg,0deg);
-    pointer-events: none;
-    position: absolute;
-    background-color: rgba(0,222,97,.7);
-    right: 100%;
-    height: 3801px;
+.hero:hover {
+	color: black;
 }
 
 #home .hero {
@@ -125,12 +116,38 @@ a.active {
 	margin: 0 auto;*/
 	margin-top: 83px;
 	margin-bottom: 83px;
-	padding: 14px 28px;
 	background: rgba(255,255,255,0.9);
-	border-top: 5px solid #00de61;
+	padding: 0;
+/*	border-top: 5px solid #00de61;*/
 	position: relative;
 	overflow: hidden;
 }
+
+/*.hero .hero-box .green-box1 {
+	height: 0;
+	transition: height .2s;
+}*/
+
+.hero .hero-box .green-box2 {
+	width: 100%;
+	transition: height .4s cubic-bezier(0, 0, 0, 0.99);
+}
+
+/*.hero:hover .hero-box .green-box1 {
+	height: 100%;
+	transition: height .2s .3s;
+}
+*/
+.hero:hover .hero-box .green-box2 {
+	height: 100%;
+	transition: height .3s;
+}
+
+
+.hero .hero-box .hero-content {
+	padding: 14px 28px;
+}
+
 
 .hero .hero-box .feature-text {
 	position: relative;
@@ -233,7 +250,7 @@ a.active {
 	background: rgba(255,255,255,0.9);
 	/*border-left: 5px solid #00de61;*/
 	width: 80%;
-	height: 64px;
+	height: 72px;
 	position: relative;
 
 
@@ -252,21 +269,42 @@ a.active {
 
 }
 
-.post .post-box .green-box {
+.green-box {
 	position: absolute;
 	background: #00de61;
-	height: 64px;
-	width: 5px;
-
 }
 
-.post:hover .post-box .green-box {
+.green-box1 {
+	width: 5px;
+}
+.green-box2 {
+	height: 5px;
+}
 
+.post .post-box .green-box1 {
+	height: 100%;
+	transition: height .2s .3s;
+}
+
+.post .post-box .green-box2 {
+	width: 0;
+	transition: width .3s;
+}
+
+.post:hover .post-box .green-box1 {
+	height: 0;
+
+	transition: height .2s;
+}
+
+.post:hover .post-box .green-box2 {
+	width: 100%;
+	transition: width .3s .2s;
 }
 
 .post .post-box h3 {
 	position: absolute;
-	padding: 4px 7px 10px 12px;
+	padding: 9px 7px 10px 12px;
 	margin: 0;
 	font-weight: bold;
 /*	color: white;*/
