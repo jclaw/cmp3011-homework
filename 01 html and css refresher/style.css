@@ -116,7 +116,7 @@ a.active {
 }
 
 a.hero:hover #line {
-	right: -12%;
+	right: -128.5px;
 }
 
 #home .hero {
