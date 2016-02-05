@@ -131,17 +131,15 @@ a.active {
 .hero .hero-box .green-box2 {
 	width: 100%;
 	overflow: hidden;
+	-webkit-transition: height .4s cubic-bezier(0, 0, 0.07, 0.9);
+	-moz-transition: height .4s cubic-bezier(0, 0, 0.07, 0.9);
 	transition: height .4s cubic-bezier(0, 0, 0.07, 0.9);
-/*	transition: height .6s;*/
 }
 
-/*.hero:hover .hero-box .green-box1 {
-	height: 100%;
-	transition: height .2s .3s;
-}
-*/
 .hero:hover .hero-box .green-box2 {
 	height: 100%;
+	-webkit-transition: height .3s;
+	-moz-transition: height .3s;
 	transition: height .3s;
 }
 
@@ -219,12 +217,6 @@ a.active {
 }
 
 
-
-/*
-.post:hover {
-	background-color: rgba(0,0,0,.3);
-}
-*/
 .post #art1 {
 	background-image: url(images/hero@2x.jpg);
 }
@@ -290,22 +282,29 @@ a.active {
 
 .post .post-box .green-box1 {
 	height: 100%;
+	-webkit-transition: height .2s .3s;
+	-moz-transition: height .2s .3s;
 	transition: height .2s .3s;
 }
 
 .post .post-box .green-box2 {
 	width: 0;
+	-webkit-transition: width .3s;
+	-moz-transition: width .3s;
 	transition: width .3s;
 }
 
 .post:hover .post-box .green-box1 {
 	height: 0;
-
+	-webkit-transition: height .2s;
+	-moz-transition: height .2s;
 	transition: height .2s;
 }
 
 .post:hover .post-box .green-box2 {
 	width: 100%;
+	-webkit-transition: width .3s .2s;
+	-moz-transition: width .3s .2s;
 	transition: width .3s .2s;
 }
 
