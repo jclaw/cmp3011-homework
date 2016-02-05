@@ -110,13 +110,6 @@ a.active {
     background-color: rgba(0,222,97,.7);
     right: 100%;
     height: 3801px;
-    -webkit-transition: right .2s;
-    -moz-transition: right .2s;
-    transition: right .2s;
-}
-
-a.hero:hover #line {
-	right: -128.5px;
 }
 
 #home .hero {
@@ -242,9 +235,6 @@ a.hero:hover #line {
 	width: 80%;
 	height: 64px;
 	position: relative;
-	-webkit-transition: height .1s 150ms, padding-top .1s 150ms;
-	-moz-transition: height .1s 150ms, padding-top .1s 150ms;
-	transition: height .1s 150ms, padding-top .1s 150ms;
 
 
 /*	margin: 0 auto;
@@ -259,11 +249,7 @@ a.hero:hover #line {
 }*/
 
 .post:hover .post-box {
-	height: 69px;
-	padding-top: 5px;
-	-webkit-transition: height .1s, padding-top .1s;
-	-moz-transition: height .1s, padding-top .1s;
-	transition: height .1s, padding-top .1s;
+
 }
 
 .post .post-box .green-box {
@@ -271,16 +257,11 @@ a.hero:hover #line {
 	background: #00de61;
 	height: 64px;
 	width: 5px;
-	-webkit-transition: width 150ms;
-	-moz-transition: width 150ms;
-	transition: width 150ms;
+
 }
 
 .post:hover .post-box .green-box {
-	width: 100%;
-	-webkit-transition: width 150ms .1s;
-	-moz-transition: width 150ms .1s;
-	transition: width 150ms .1s;
+
 }
 
 .post .post-box h3 {
