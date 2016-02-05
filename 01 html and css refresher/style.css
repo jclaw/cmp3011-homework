@@ -130,7 +130,9 @@ a.active {
 
 .hero .hero-box .green-box2 {
 	width: 100%;
-	transition: height .4s cubic-bezier(0, 0, 0, 0.99);
+	overflow: hidden;
+	transition: height .4s cubic-bezier(0, 0, 0.07, 0.9);
+/*	transition: height .6s;*/
 }
 
 /*.hero:hover .hero-box .green-box1 {
@@ -173,6 +175,11 @@ a.active {
 	color: #B8B8B8;
 	font-weight: medium;
 	font-size: 20px;
+}
+
+.hero .hero-box .green-box2 .hero-subtitle {
+	color: white;
+	margin-top: 144px;
 }
 
 .sub-nav {
