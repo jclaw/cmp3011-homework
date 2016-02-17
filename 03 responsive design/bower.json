@@ -1,0 +1,14 @@
+{
+  "name": "03",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Jackson Clawson"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jclaw/cmp3011-homework",
+  "moduleType": [],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
