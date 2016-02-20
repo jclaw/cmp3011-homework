@@ -369,6 +369,10 @@ a.hero.hover #line {
 	margin-top: 100px;
 	background: black;
 	width: 100%;
+
+	@media only screen and (max-width: 767px) {
+		margin-top: 40px;
+	}
 }
 
 .footer .logo {
@@ -383,21 +387,37 @@ a.hero.hover #line {
 
 }
 
-.input-and-button .input {
-	height: 60px;
-	border-radius: 2px;
-	float: left;
-	font-size: 1.3em;
-	padding-left: 20px;
-	border: none;
-	margin-right: 4px;
-	width: 68%;
+.input-and-button {
+	.input {
+		height: 60px;
+		border-radius: 2px;
+		float: left;
+		font-size: 1.3em;
+		padding-left: 20px;
+		border: none;
+		margin-right: 4px;
+		width: 68%;
+	}
+	.button {
+		width: 30%;
+		padding: 0;
+	}
+
+	@media only screen and (max-width: 767px) {
+		.input {
+			width: 100%;
+			margin-bottom: 5px;
+		}
+
+		.button {
+			width: 100%;
+			max-width: none;
+		}
+
+	}
 }
 
-.input-and-button .button {
-	width: 30%;
-	padding: 0;
-}
+
 
 .social {
 	display: block;

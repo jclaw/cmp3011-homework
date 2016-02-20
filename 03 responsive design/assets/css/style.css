@@ -296,6 +296,9 @@ a.hero.hover #line {
   margin-top: 100px;
   background: black;
   width: 100%; }
+  @media only screen and (max-width: 767px) {
+    .footer {
+      margin-top: 40px; } }
 
 .footer .logo {
   display: block;
@@ -319,6 +322,14 @@ a.hero.hover #line {
 .input-and-button .button {
   width: 30%;
   padding: 0; }
+
+@media only screen and (max-width: 767px) {
+  .input-and-button .input {
+    width: 100%;
+    margin-bottom: 5px; }
+  .input-and-button .button {
+    width: 100%;
+    max-width: none; } }
 
 .social {
   display: block;
