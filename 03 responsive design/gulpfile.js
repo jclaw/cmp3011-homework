@@ -15,17 +15,22 @@ gulp.task('html', function () {
     .pipe(connect.reload());
 });
 
-
 gulp.task('sass', function () {
-    gulp.src('scss/style.scss')
+    gulp.src('assets/scss/style.scss')
       .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('css'))
+      .pipe(gulp.dest('assets/css'))
       .pipe(connect.reload());
+});
+
+gulp.task('js', function () {
+  gulp.src('assets/js/*')
+    .pipe(connect.reload());
 });
 
 gulp.task('watch', function() {
   gulp.watch('*.html', ['html']);
-  gulp.watch(['scss/*'], ['sass']);
+  gulp.watch(['assets/scss/*'], ['sass']);
+  gulp.watch(['assets/js/*'], ['js']);
 });
 
 gulp.task('serve', ['express'], function() {

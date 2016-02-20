@@ -34,6 +34,9 @@ a.active {
 .button:hover {
   background: #00bf4d; }
 
+.hidden {
+  visibility: none; }
+
 /******************/
 /****** nav *******/
 /******************/
@@ -53,6 +56,9 @@ a.active {
 .logo img {
   margin-right: 10px; }
 
+.nav .logo {
+  float: left; }
+
 .nav .links {
   margin-top: 20px;
   float: right;
@@ -63,6 +69,16 @@ a.active {
   color: black;
   font-weight: bold;
   margin-left: 26px; }
+
+.hamburger {
+  margin-top: 13px;
+  float: right;
+  background: url(../images/menu.svg);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  width: 35px;
+  cursor: pointer; }
 
 /******************/
 /**** content *****/
@@ -76,6 +92,9 @@ a.active {
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
+  color: black; }
+
+.hero:hover, .hero:focus {
   color: black; }
 
 .hero #line {
@@ -93,7 +112,7 @@ a.active {
   -moz-transition: right .2s;
   transition: right .2s; }
 
-a.hero:hover #line {
+a.hero.hover #line {
   right: -128.5px; }
 
 #home .hero {
@@ -130,11 +149,17 @@ a.hero:hover #line {
   font-size: 50px;
   font-weight: bold;
   margin: 10px 0; }
+  @media only screen and (max-width: 767px) {
+    .hero .hero-box .hero-title {
+      font-size: 28px; } }
 
 .hero .hero-box .hero-subtitle {
   color: #B8B8B8;
   font-weight: medium;
   font-size: 20px; }
+  @media only screen and (max-width: 767px) {
+    .hero .hero-box .hero-subtitle {
+      font-size: 16px; } }
 
 .sub-nav {
   width: 100%;
