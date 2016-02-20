@@ -11,29 +11,27 @@ gulp.task('express', function(){
 });
 
 gulp.task('html', function () {
-  gulp.src('builds/dumbo/*.html')
+  gulp.src('*.html')
     .pipe(connect.reload());
 });
 
 
 gulp.task('sass', function () {
-    gulp.src('process/sass/style.scss')
+    gulp.src('scss/style.scss')
       .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('builds/dumbo/styles'))
+      .pipe(gulp.dest('css'))
       .pipe(connect.reload());
 });
 
 gulp.task('watch', function() {
-  gulp.watch('builds/dumbo/*.html', ['html']);
-  gulp.watch('builds/dumbo/views/*.html', ['views']);
-  gulp.watch('builds/dumbo/scripts/**/*', ['js']);
-  gulp.watch(['process/sass/**/*'], ['sass']);
+  gulp.watch('*.html', ['html']);
+  gulp.watch(['scss/*'], ['sass']);
 });
 
 gulp.task('serve', ['express'], function() {
   connect.server({
-    livereload: true,
-    root: 'builds/dumbo'
+    livereload: false,
+    root: '.'
   });
 });
 gulp.task('default', ['sass', 'watch', 'serve']);
