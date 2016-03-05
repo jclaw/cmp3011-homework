@@ -10,9 +10,9 @@ For this assignment, I designed and built a form for Tusk Marketplace. Tusk is a
 
 I designed the whole process but only built out the core part of the room form (not the optional details, and not any other part of the process). 
 
-Since we are using Angular for our front-end, I implemented the form validation with some of Angular's built-in functionality. It was largely an exercise in finding what already exists and trying to understand how to apply it. As a result, almost all of the form validation takes place in javascript embedded html attributes in `userListings.html`.
+Since we are using Angular for our front-end, I implemented the form validation with some of Angular's built-in functionality. It was largely an exercise in finding what already exists and trying to understand how to apply it. As a result, almost all of the form validation takes place in javascript embedded html attributes in `userListings.html`. Angular allows you to define constraints for input fields in forms, such as a min and max for a date input. If a constraint is violated, an error is added to the data model. HTML elements, such as the `.errorMsg` class in my file, can be told to watch for these errors and only be visible when a certain one occurs. 
 
-The line at the bottom of `userListings.html` that is commented out, `<pre>room = {{rForm | json}}</pre>`, will display the data model in the browser if it is commented in. That is a good way to see what is happening with the data. Angular allows you to define constraints for input fields in forms, such as a min and max for a date input. If a constraint is violated, an error is added to the data model. HTML elements, such as the `.errorMsg` class in my file, can be told to watch for these errors and only be visible when a certain one occurs. 
+The line at the bottom of `userListings.html` that is commented out, `<pre>room = {{rForm | json}}</pre>`, will display the data model in the browser if it is commented in. That is a good way to see what is happening with the data. 
 
 Documentation and examples I found helpful:
 * https://docs.angularjs.org/api/ng/input/input%5Bdate%5D
