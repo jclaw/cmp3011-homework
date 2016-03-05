@@ -6,6 +6,7 @@ Jackson Clawson
 Repo: https://github.com/TuftsTusk/dumbo  
 Website: www.tuskmarketplace.com  
 URL of page in dev environment: http://localhost:8080/#/mylistings/listing/1
+Branch: userlistings
 
 For this assignment, I designed and built a form for Tusk Marketplace. Tusk is an online marketplace for students, and allows students to post sublet listings, textbooks, furniture, and other misc items. I decided to focus on the sublet listing process. I hadn't thought through the process yet, so I spent a good amount of time designing the flow of information and what the forms should look like. I arrived at a concept that allows students to list their apartment and add multiple rooms to the same listing. Students can set different rent prices and dates and upload photos for each room individually. 
 
