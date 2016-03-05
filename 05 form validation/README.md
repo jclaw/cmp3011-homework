@@ -23,9 +23,9 @@ Documentation and examples I found helpful:
 
 
 Files created or modified: 
-- builds/dumbo/views/userListings.html
-- builds/dumbo/scripts/controllers/userListings.js
-- process/sass/partials/_interface.scss
-- process/sass/partials/_userListings.scss
+- `builds/dumbo/views/userListings.html`
+- `builds/dumbo/scripts/controllers/userListings.js`
+- `process/sass/partials/_interface.scss`
+- `process/sass/partials/_userListings.scss`
 
 Time spent: 5 hours designing, 8 hours building
