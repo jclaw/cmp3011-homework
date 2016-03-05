@@ -1,7 +1,7 @@
-> FAMB97: Intermediate Web Design
-> 05 form validation
-> Jackson Clawson
-> 3/5/16
+FAMB97: Intermediate Web Design  
+05 form validation  
+Jackson Clawson  
+3/5/16
 
 Repo: https://github.com/TuftsTusk/dumbo
 Website: www.tuskmarketplace.com
