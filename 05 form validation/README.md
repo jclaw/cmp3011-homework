@@ -12,6 +12,8 @@ I designed the whole process but only built out the core part of the room form (
 
 Since we are using Angular for our front-end, I implemented the form validation with some of Angular's built-in functionality. It was largely an exercise in finding what already exists and trying to understand how to apply it. As a result, almost all of the form validation takes place in javascript embedded html attributes in `userListings.html`. Angular allows you to define constraints for input fields in forms, such as a min and max for a date input. If a constraint is violated, an error is added to the data model. HTML elements, such as the `.errorMsg` class in my file, can be told to watch for these errors and only be visible when a certain one occurs. 
 
+Any attributes that have the prefix `ng` are communicating with Angular. Any content in the html that has double curly braces tells Angular to substitute in content for those terms. 
+
 The line at the bottom of `userListings.html` that is commented out, `<pre>room = {{rForm | json}}</pre>`, will display the data model in the browser if it is commented in. That is a good way to see what is happening with the data. 
 
 Documentation and examples I found helpful:
