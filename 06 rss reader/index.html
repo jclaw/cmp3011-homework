@@ -5,6 +5,9 @@
 <title>Ajax RSS Feed Reader | Assignment 8</title>
 <style>
 body { font-family: Helvetica; }
+.entry { margin: 1.33em 0 }
+.entry .title { margin: 0; }
+.entry p { margin: 0; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -13,10 +16,10 @@ body { font-family: Helvetica; }
   <p>
   <label for="source">Select feed:</label>
   <select name="source" id="source">
-  <option value=""></option>
-  <option value="HomePage.xml">NYTimes homepage</option>
-  <option value="US.xml">United Stated</option>
-  <option value="NYRegion.xml">New York Region</option>
+	  <option value=""></option>
+	  <option value="HomePage.xml">NYTimes homepage</option>
+	  <option value="US.xml">United States</option>
+	  <option value="NYRegion.xml">New York Region</option>
   </select>
   </p>
   <p>Number to display: <input type="radio" name="display_number" value="5" checked /> 5 <input type="radio" name="display_number" value="10" /> 10 <input type="radio" name="display_number" value="20" /> 20</p>
@@ -24,27 +27,93 @@ body { font-family: Helvetica; }
 <input type="submit" name="submit" id="submit" value="Show feed!" />
 </form>
 <hr />
+<div id="content">
+	<h2 id="title"><a></a></h2>
 
 <!--
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Feed content will appear here visually on the page.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 -->
+</div>
 
 <!-- jQuery library via Google CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+<script type="text/javascript" src="jFeed-master/build/dist/jquery.jfeed.js"></script>
 <!-- YOUR JAVASCRIPT GOES HERE -->
 <script type="text/javascript">
 
 $('#rss_reader').on( 'submit', function (event) {
 	event.preventDefault() ; // don't actually submit the form
-
+	var form = $(this);
 	// add more code here!
 	// --
 	// general application flow:
 	// grab the values from the form
-	// make sure the feed source isn't empty!
+	var src = form.find('#source option:selected').attr('value');
+	var numArticles = form.find('input[name=display_number]:checked').val();
+	var summaries = form.find('#include_summaries').is(':checked');
+	if (src != '') {
+		$.get('feeds/' + src, function(data) {
+			console.log(data);
+			var channel = $(data).find('channel');
+			var link = channel.find('link:first').attr('href');
+			parseRSS(link, create_articles);
+		});
+	}
+
+	function create_articles(feed) {
+		console.log(feed);
+		var content = $('#content'),
+			titleLink = content.find('#title a');
+		content.html('');
+		titleLink.attr('href', feed.link);
+		titleLink.text(feed.title);
+
+		var entries = feed.entries;
+		for (var i = 0; i < entries.length && i < numArticles; i++) {
+			var el = $('<div></div>');
+			el.addClass('entry');
+
+			var title = $('<h4><a></a></h4>'),
+				titleLink = title.find('a');
+			title.addClass('title');
+			titleLink.attr('href', entries[i].link);
+			titleLink.text(entries[i].title);
+			el.append(title);
+
+			if (summaries) {
+				var summary = $('<p></p>');
+				summary.text(entries[i].contentSnippet);
+				el.append(summary);
+			}
+
+			content.append(el);
+		}
+
+	}
+
+	function parseRSS(url, callback) {
+		$.ajax({
+			url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
+    		dataType: 'json',
+    		success: function(data) {
+      		callback(data.responseData.feed);
+    }
+  });
+
+
+		// jQuery.getFeed({
+		// 	url: src,
+		// 	success: function(feed) {
+		// 		console.log(feed);
+		// 		var content = $('#content'),
+		// 			titleLink = content.find('#title a');
+		// 		titleLink.attr('href', feed.link);
+		// 		titleLink.text(feed.title);
+		// 	}
+		// });
+	}
 	// then load the correct file (which is the value of the source pull-down menu field)
 	// parse the file, and add the appropriate fields from the feed to the HTML document.
 
@@ -63,13 +132,14 @@ $('#rss_reader').on( 'submit', function (event) {
 	    $ python -m SimpleHTTPServer {Return}
 	4) In a web browser, go to http://localhost:8000/
 
-	To stop the web server, in the command prompt window press Control+C. 
+	To stop the web server, in the command prompt window press Control+C.
 
 	*/
 
 }) ;
 
 </script>
+
 
 </body>
 </html>
