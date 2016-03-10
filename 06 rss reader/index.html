@@ -45,22 +45,33 @@ Feed content will appear here visually on the page.
 $('#rss_reader').on( 'submit', function (event) {
 	event.preventDefault() ; // don't actually submit the form
 	var form = $(this);
-	// add more code here!
-	// --
-	// general application flow:
+
 	// grab the values from the form
 	var src = form.find('#source option:selected').attr('value');
 	var numArticles = form.find('input[name=display_number]:checked').val();
 	var summaries = form.find('#include_summaries').is(':checked');
 	if (src != '') {
+		// get local xml files
 		$.get('feeds/' + src, function(data) {
-			console.log(data);
 			var channel = $(data).find('channel');
 			var link = channel.find('link:first').attr('href');
+			// retrieve RSS, parse, push to document
 			parseRSS(link, create_articles);
 		});
 	}
 
+	// retrieve and parse
+	function parseRSS(url, callback) {
+		$.ajax({
+			url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
+    		dataType: 'json',
+    		success: function(data) {
+      		callback(data.responseData.feed);
+    	}
+  		});
+	}
+
+	// push to document
 	function create_articles(feed) {
 		console.log(feed);
 		var content = $('#content'),
@@ -89,32 +100,7 @@ $('#rss_reader').on( 'submit', function (event) {
 
 			content.append(el);
 		}
-
 	}
-
-	function parseRSS(url, callback) {
-		$.ajax({
-			url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(url),
-    		dataType: 'json',
-    		success: function(data) {
-      		callback(data.responseData.feed);
-    }
-  });
-
-
-		// jQuery.getFeed({
-		// 	url: src,
-		// 	success: function(feed) {
-		// 		console.log(feed);
-		// 		var content = $('#content'),
-		// 			titleLink = content.find('#title a');
-		// 		titleLink.attr('href', feed.link);
-		// 		titleLink.text(feed.title);
-		// 	}
-		// });
-	}
-	// then load the correct file (which is the value of the source pull-down menu field)
-	// parse the file, and add the appropriate fields from the feed to the HTML document.
 
 	/*
 
