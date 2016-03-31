@@ -31,11 +31,9 @@ app.get('/', function(request, response) {
 app.get('/load', function(request, response) {
 
 	try {
-		console.log('trying');
 		response.set('Content-Type', 'application/json');
-		var d = JSON.parse(fs.readFileSync('assets/json/scales.json', 'utf8'));
+		var d = JSON.parse(fs.readFileSync('assets/json/musicdata.json', 'utf8'));
 		var newData = translateToFile(d.data);
-		console.log(newData);
 		response.send(newData);
 	}
 	catch (err) {
@@ -70,17 +68,21 @@ function translateToFile(data) {
 	console.log('translating');
 	var scales = data.scales;
 	var chords = data.chords;
-	var newData = {};
-	var i = 0;
-	var scale = scales.ionian;
-	console.log(scale);
+	var newData = {
+		scales: {},
+		chords: {}
+	};
+	for (var key in scales) {
+		var scale = scales[key];
 		var temp = [];
-		for (var i = 0; i < scale.length; i++) {
-			var el = scale[i];
+		for (var j = 0; j < scale.length; j++) {
+			var el = scale[j];
 			console.log(el + ": " + map[el]);
-			temp[i] = map[el];
+			temp[j] = map[el];
 		}
-		newData['ionian'] = temp;
+		newData.scales[key] = temp;
+	}
+	newData.chords = chords;
 
 	return newData;
 }
