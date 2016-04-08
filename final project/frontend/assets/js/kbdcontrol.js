@@ -56,6 +56,7 @@ ascii.connect(piano);
 piano.connect(synth);
 
 
+msg = JZZ.MIDI(0x90, 63, 127);
 
 
 
