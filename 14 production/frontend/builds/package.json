@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.5.5",
+    "angular-foundation": "^0.8.0",
+    "foundation": "^4.2.1",
     "jquery": "^2.2.3",
     "jzz": "^0.3.2"
   }
