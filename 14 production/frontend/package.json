@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/jclaw/cmp3011-homework#readme",
   "dependencies": {
-    "jzz": "^0.3.1"
+    "connect-livereload": "^0.5.4",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^3.2.2",
+    "gulp-sass": "^2.2.0"
   }
 }

@@ -218,6 +218,7 @@
     piano.style.WebkitUserSelect = 'none';
     piano.style.MsUserSelect = 'none';
     piano.style.KhtmlUserSelect = 'none';
+	piano.className = 'keys';
 
     if (pos == 'E' || pos == 'W') {
       piano.style.width = h + 'px';
@@ -249,6 +250,7 @@
       this.stl1[midi] = { backgroundColor:'#aaa', borderColor:'#000' };
       _style(key, this.stl0[midi]);
       _style(key, stl);
+	  key.className = 'whiteKey';
       piano.appendChild(key);
     }
     var hole = Math.ceil(this.current.ww - this.current.bw * 3 / 4);
@@ -294,6 +296,7 @@
       this.stl1[midi] = { backgroundColor:'#888', borderColor:'#000' };
       _style(key, this.stl0[midi]);
       _style(key, stl);
+	  key.className = 'blackKey';
       piano.appendChild(key);
     }
     if (this.current.onCreate) this.current.onCreate.apply(this);
