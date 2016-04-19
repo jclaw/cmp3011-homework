@@ -1,8 +1,7 @@
-.navbar {
-	width: 100%;
-}
-
 #piano {
+	* {
+		box-sizing: content-box;
+	}
 	.inner {
 		position:absolute;
 		bottom:5px;

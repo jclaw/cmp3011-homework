@@ -1,9 +1,14 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    connect = require('gulp-connect'),
-	express = require('express'),
-	reload = require('connect-livereload');
+var gulp	= require('gulp'),
+    sass	= require('gulp-sass'),
+    connect	= require('gulp-connect'),
+	express	= require('express'),
+	reload	= require('connect-livereload'),
+	$		= require('gulp-load-plugins')();
 
+var sassPaths = [
+	'builds/node_modules/foundation-sites/scss',
+	'builds/node_modules/motion-ui/src'
+];
 
 gulp.task('express', function(){
   var app = express();
@@ -31,19 +36,17 @@ gulp.task('js', function() {
 });
 
 gulp.task('sass', function () {
-    gulp.src('process/sass/style.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('builds/styles'))
-      .pipe(connect.reload());
+	return gulp.src('process/sass/app.scss')
+		.pipe($.sass({
+			includePaths: sassPaths
+		})
+			.on('error', sass.logError))
+		.pipe($.autoprefixer({
+			browsers: ['last 2 versions', 'ie >= 9']
+		}))
+		.pipe(gulp.dest('builds/styles'))
+		.pipe(connect.reload());
 });
-
-gulp.task('foundation', function () {
-    gulp.src('builds/node_modules/foundation/scss/foundation.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest('builds/styles'))
-      .pipe(connect.reload());
-});
-
 
 gulp.task('watch', function() {
   gulp.watch('builds/dumbo/*.html', ['html']);
@@ -61,4 +64,4 @@ gulp.task('serve', ['express'], function() {
 });
 
 
-gulp.task('default', ['sass', 'foundation', 'watch', 'serve']);
+gulp.task('default', ['sass', 'watch', 'serve']);

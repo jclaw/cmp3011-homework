@@ -11,8 +11,10 @@
   "dependencies": {
     "angular": "^1.5.5",
     "angular-foundation": "^0.8.0",
-    "foundation": "^4.2.1",
+    "foundation-sites": "^6.2.1",
     "jquery": "^2.2.3",
-    "jzz": "^0.3.2"
+    "jzz": "^0.3.2",
+    "motion-ui": "^1.2.2",
+    "what-input": "^2.0.1"
   }
 }
