@@ -11,23 +11,6 @@ var twoOctASCII = {
 
 generateNoteAssignments(twoOctASCII);
 
-function generateNoteAssignments(obj) {
-	var notes = [
-		'C','C#','D','D#','E','F','F#','G','G#','A','A#','B'
-	]
-	var noteIndex = notes.indexOf(obj.startingNote.note);
-	var octave = obj.startingNote.octave;
-	for (var i = 0; i < obj.ASCII.length; i++) {
-		if (noteIndex >= 12) { // cycle through octave
-			octave++;
-			noteIndex = 0;
-		}
-		obj.noteAssignments[obj.ASCII[i]] = notes[noteIndex] + octave;
-		noteIndex++;
-	}
-}
-
-
 // piano soundfont
 
 var keyboard = twoOctASCII;
@@ -62,17 +45,43 @@ var piano = JZZ.input.Kbd({
 ascii.connect(piano);
 piano.connect(synth);
 
+function processNote(midi, state, playing) {
+	if (state == 'on') noteOnTriggered(midi);
+}
+
+function noteOnTriggered(midi) {
+	console.log(midi);
+}
 
 msg = JZZ.MIDI(0x90, 63, 127);
 
 function displayNoteAssignments(ref) {
 	$.each(twoOctASCII.noteAssignments, function(key, value) {
-		console.log('key', key,'value',value);
 		ref.getKey(value).setInnerHTML('<span class="inner">' + key + "</span>");
 	});
 }
 
 
+function debugPrint() {
+	console.log('piano',piano);
+	console.log(piano.playing);
+}
+
+function generateNoteAssignments(obj) {
+	var notes = [
+		'C','C#','D','D#','E','F','F#','G','G#','A','A#','B'
+	]
+	var noteIndex = notes.indexOf(obj.startingNote.note);
+	var octave = obj.startingNote.octave;
+	for (var i = 0; i < obj.ASCII.length; i++) {
+		if (noteIndex >= 12) { // cycle through octave
+			octave++;
+			noteIndex = 0;
+		}
+		obj.noteAssignments[obj.ASCII[i]] = notes[noteIndex] + octave;
+		noteIndex++;
+	}
+}
 
 ///////////////////////////////////////////////////////////////////
 

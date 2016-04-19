@@ -129,11 +129,13 @@
   Piano.prototype.press = function(midi) {
     _style(this.keys[midi], this.stl1[midi]);
     _style(this.keys[midi], this.locs[midi]);
+	processNote(midi, 'on', this.playing);
     this.noteOn(midi);
   }
   Piano.prototype.release = function(midi) {
     _style(this.keys[midi], this.stl0[midi]);
     _style(this.keys[midi], this.locs[midi]);
+	processNote(midi, 'off', this.playing);
     this.noteOff(midi);
   }
   Piano.prototype.external = function(msg) {
@@ -179,7 +181,7 @@
     try { this.createAt(this.current.parent); }
     catch(e) {
       if (!this.bottom) {
-        this.bottom = document.createElement('div'); 
+        this.bottom = document.createElement('div');
         document.body.appendChild(this.bottom);
       }
       this.createAt(this.bottom);
