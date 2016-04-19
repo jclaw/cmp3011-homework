@@ -1,28 +1,3 @@
-body {
-	font-family: helvetica;
-}
-#piano {
-	.inner {
-		position:absolute;
-		bottom:5px;
-		left:0;
-		width:100%;
-		text-align:center;
-		font-weight: bold;
-		transition: opacity .1s;
-		opacity: .4;
-	}
-
-	.whiteKey .inner {
-		color: black;
-	}
-	.blackKey .inner {
-		color: white;
-	}
-
-	.keys:hover {
-		.inner {
-			opacity: 0;
-		}
-	}
-}
+@import 'partials/variables';
+@import 'partials/interface';
+@import 'partials/main';

@@ -37,6 +37,13 @@ gulp.task('sass', function () {
       .pipe(connect.reload());
 });
 
+gulp.task('foundation', function () {
+    gulp.src('builds/node_modules/foundation/scss/foundation.scss')
+      .pipe(sass().on('error', sass.logError))
+      .pipe(gulp.dest('builds/styles'))
+      .pipe(connect.reload());
+});
+
 
 gulp.task('watch', function() {
   gulp.watch('builds/dumbo/*.html', ['html']);
@@ -54,4 +61,4 @@ gulp.task('serve', ['express'], function() {
 });
 
 
-gulp.task('default', ['sass', 'watch', 'serve']);
+gulp.task('default', ['sass', 'foundation', 'watch', 'serve']);
