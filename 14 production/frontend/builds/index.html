@@ -10,8 +10,67 @@
 
 </head>
 <body>
-	<div id=piano></div>
-	<div id=loading>*** MIDI.js is loading soundfont... ***</div>
+<div class="top-bar">
+	<div class="top-bar-title">
+		<span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+			<button class="menu-icon dark" type="button" data-toggle></button>
+		</span>
+		<strong>Site Title</strong>
+	</div>
+	<div id="responsive-menu">
+		<div class="top-bar-left">
+			<ul class="dropdown menu" data-dropdown-menu>
+				<li><a href="#">One</a></li>
+				<li><a href="#">Two</a></li>
+				<li><a href="#">Three</a></li>
+			</ul>
+		</div>
+		<div class="top-bar-right">
+			<ul class="menu">
+				<li><input type="search" placeholder="Search"></li>
+				<li><button type="button" class="button">Search</button></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="row site-content">
+	<div class="large-12 columns">
+		<div class="row">
+			<div class="small-12 large-8 large-offset-2 columns">
+				<div class="player-container">
+					<div class="player-content">
+						<div class="progress" role="progressbar" tabindex="0" aria-valuenow="50" aria-valuemin="0" aria-valuetext="50 percent" aria-valuemax="100">
+							<div class="progress-meter" style="width: 50%"></div>
+						</div>
+						<div class="player-prompt">
+							<h3>Can you hear that? It’s your reference note.</h3>
+							<h6><a href="">I don’t hear anything. Help!</a></h6>
+						</div>
+						<div class="orb-container">
+							<div class="orb">
+								<div class="orb-outer">
+									<div class="orb-inner">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="piano-container">
+							<div id=piano></div>
+						</div>
+						<div id=loading>*** MIDI.js is loading soundfont... ***</div>
+					</div>
+					<div class="player-footer">
+						<button class="secondary hollow button" href="#">Skip</button>
+						<a class="disabled button float-right" href="#">Disabled Button</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 	<div class="row">
 		<div class="large-12 columns">

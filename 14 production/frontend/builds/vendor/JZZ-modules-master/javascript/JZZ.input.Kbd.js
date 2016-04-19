@@ -208,9 +208,9 @@
     var key;
     var stl;
     var piano = document.createElement('span');
-    piano.style.display = 'inline-block';
+    piano.style.display = 'block';
     piano.style.position = 'relative';
-    piano.style.margin = '0px';
+    piano.style.margin = '0 auto';
     piano.style.padding = '0px';
     piano.style.borderStyle = 'none';
     piano.style.userSelect = 'none';

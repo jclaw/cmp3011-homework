@@ -1,3 +1,12 @@
 body {
 	font-family: helvetica;
+	background: $light-gray;
+}
+
+.top-bar {
+	background: $primary-color;
+}
+
+.site-content {
+	margin-top: 40px;
 }

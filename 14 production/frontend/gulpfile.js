@@ -49,9 +49,8 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('builds/dumbo/*.html', ['html']);
-  gulp.watch('builds/dumbo/views/*.html', ['views']);
-  gulp.watch('builds/dumbo/scripts/**/*', ['js']);
+  gulp.watch('builds/*.html', ['html']);
+  gulp.watch('builds/scripts/**/*', ['js']);
   gulp.watch(['process/sass/**/*'], ['sass']);
 });
 
