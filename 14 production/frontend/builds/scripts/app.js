@@ -5,6 +5,12 @@ earApp.controller('PlayerCtrl', function($scope) {
 	$scope.exercisesTotal = 6;
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
+	var min = JZZ.MIDI.noteValue(keyboard.startingNote.note + keyboard.startingNote.octave);
+	$scope.kbdRange = {
+		min: min,
+		max: min + keyboard.ASCII.length - 1
+	};
+
 
 	$scope.viewData = {
 		title: '',
@@ -30,27 +36,54 @@ earApp.controller('PlayerCtrl', function($scope) {
 		$scope.viewData.set(state);
 	}
 
+	// $scope.playReferenceNote = function() {
+	// 	var note = $scope.referenceNote;
+	// 	makeNote(note, 2000);
+	// 	$(piano.getKeyDOM(note)).addClass('referenceNote');
+	// }
+	//
+	// $scope.playMysteryNote = function() {
+	// 	makeNote($scope.mysteryNote, 2000);
+	// }
+
+	$scope.playSpecialNote = function(type) {
+		if (typeof type == 'string') {
+			var note = $scope[type] // get note from previously defined scope var
+			makeNote(note, 2000);
+			$(piano.getKeyDOM(note)).addClass(type);
+		} else {
+			console.log('BAD ARG');
+		}
+	}
+
+
 	function initiateMysteryNote() {
-		// select mystery note
-		// play note
+		// TODO: account for smaller keyboard sizes when screen size changes
+		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max, $scope.referenceNote);
+
+		// $scope.playMysteryNote();
+		$scope.playSpecialNote('mysteryNote');
 		// add playing class to orb
 	}
 
-	function playReferenceNote() {
-		var note = $scope.referenceNote;
-		makeNote(note, 2000);
-		$(piano.getKeyDOM(note)).addClass('referenceNote');
+	function selectRandNote(min, max, skip) {
+		var note;
+		do {
+			note = Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		while (note == skip);
+		return note;
 	}
 
 	function makeNote(note, duration) {
 		piano.noteOn(0, note, 120).wait(duration).noteOff(0, note);
 	}
 
-
-
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
-		setTimeout(playReferenceNote, 2000);
+		setTimeout(function() {
+			$scope.playSpecialNote('referenceNote')
+		}, 2000);
 	}
 
 });

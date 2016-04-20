@@ -66,6 +66,10 @@
 			background: $dark-gray;
 		}
 
+		.mysteryNote {
+			background: initial;
+		}
+
 		&:hover {
 			.inner {
 				opacity: 0;
