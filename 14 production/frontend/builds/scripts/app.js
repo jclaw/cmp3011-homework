@@ -51,6 +51,10 @@ earApp.controller('PlayerCtrl', function($scope) {
 			var note = $scope[type] // get note from previously defined scope var
 			makeNote(note, 2000);
 			$(piano.getKeyDOM(note)).addClass(type);
+			$scope[type + 'Playing'] = true;
+			setTimeout(function(){
+				$scope[type + 'Playing'] = false;
+			}, 2000);
 		} else {
 			console.log('BAD ARG');
 		}

@@ -49,7 +49,7 @@
 							<h6><a ng-href="{{viewData.subtitleLink}}">{{viewData.subtitle}}</a></h6>
 						</div>
 						<div class="orb-container">
-							<div class="orb" ng-if="state=='mysteryNote'">
+							<div class="orb" ng-if="state=='mysteryNote'" ng-class="{'playing': (mysteryNotePlaying)}">
 								<i class="playbutton fa fa-play fa-2x" aria-hidden="true" ng-click="playSpecialNote('mysteryNote');"></i>
 								<div class="orb-outer animated infinite pulse-1 _2000ms ease-in-out">
 									<div class="orb-inner animated infinite pulse-4 _1500ms ease-in-out">

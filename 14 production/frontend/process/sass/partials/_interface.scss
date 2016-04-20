@@ -58,7 +58,7 @@
 			}
 		}
 
-		.playing {
+		.playing:not(.mysteryNote) {
 			background: $medium-gray;
 		}
 
@@ -66,9 +66,9 @@
 			background: $dark-gray;
 		}
 
-		.mysteryNote {
-			background: initial;
-		}
+		// .mysteryNote {
+		// 	background: initial;
+		// }
 
 		&:hover {
 			.inner {
@@ -138,6 +138,34 @@
 				}
 			}
 
+			&:hover {
+				.playbutton {
+					opacity: 1;
+					font-size: 3em;
+					margin-left: -14px;
+					@include transition(all .3s .2s);
+				}
+				.orb-outer {
+					@include orb-diameter($outer-diameter * 1.2);
+					animation-duration: 4000ms;
+				}
+				.orb-inner {
+					@include orb-diameter($outer-diameter - 15);
+					animation-duration: 3000ms;
+				}
+			}
+
+			&.playing {
+				.orb-outer {
+					@include orb-diameter($max-diameter);
+					animation-duration: 400ms;
+				}
+				.orb-inner {
+					@include orb-diameter($max-diameter - 20);
+					animation-duration: 200ms;
+				}
+			}
+
 			&.error {
 				$outer-diameter-error: 80px;
 				.orb-outer {
@@ -161,23 +189,6 @@
 				.orb-inner {
 					background: $success-color;
 					@include orb-diameter($outer-diameter-success - 20);
-				}
-			}
-
-			&:hover {
-				.playbutton {
-					opacity: 1;
-					font-size: 3em;
-					margin-left: -14px;
-					@include transition(all .3s .2s);
-				}
-				.orb-outer {
-					@include orb-diameter($outer-diameter * 1.2);
-					animation-duration: 4000ms;
-				}
-				.orb-inner {
-					@include orb-diameter($outer-diameter - 15);
-					animation-duration: 3000ms;
 				}
 			}
 		}
