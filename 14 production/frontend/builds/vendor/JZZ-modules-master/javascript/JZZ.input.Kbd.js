@@ -137,7 +137,7 @@
   }
   Piano.prototype.release = function(midi) {
     _style(this.keys[midi], this.stl0[midi]);
-	this.keys[midi].className = this.keys[midi].className.replace(/\bplaying\b/,'');
+	this.keys[midi].className = this.keys[midi].className.replace(/\b playing\b/,'');
     // _style(this.keys[midi], this.locs[midi]);
 	processNote(midi, 'off', this.playing);
     this.noteOff(midi);
@@ -155,7 +155,7 @@
       else if (msg.isNoteOff()) {
         this.playing[midi] = undefined;
         _style(this.keys[midi], this.stl0[midi]);
-		this.keys[midi].className = this.keys[midi].className.replace(/\bplaying\b/,'');
+		this.keys[midi].className = this.keys[midi].className.replace(/\b playing\b/,'');
 		processNote(midi, 'off', this.playing);
         // _style(this.keys[midi], this.locs[midi]);
       }
