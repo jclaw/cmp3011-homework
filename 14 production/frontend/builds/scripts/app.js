@@ -22,16 +22,31 @@ earApp.controller('PlayerCtrl', function($scope) {
 	}
 
 	$scope.setState = function(state) {
-		if ($scope.state == 'referenceNote')
+		if ($scope.state == 'referenceNote' && state == 'mysteryNote') {
+			// moving from referenceNote to mysteryNote
+			initiateMysteryNote();
+		}
 		$scope.state = state;
 		$scope.viewData.set(state);
 	}
 
+	function initiateMysteryNote() {
+		// select mystery note
+		// play note
+		// add playing class to orb
+	}
+
 	function playReferenceNote() {
 		var note = $scope.referenceNote;
-		piano.noteOn(0, note, 120).wait(2000).noteOff(0, note);
+		makeNote(note, 2000);
 		$(piano.getKeyDOM(note)).addClass('referenceNote');
 	}
+
+	function makeNote(note, duration) {
+		piano.noteOn(0, note, 120).wait(duration).noteOff(0, note);
+	}
+
+
 
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
