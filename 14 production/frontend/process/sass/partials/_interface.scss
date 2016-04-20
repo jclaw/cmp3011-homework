@@ -88,6 +88,19 @@
 					@include transition(all .3s);
 				}
 			}
+
+			&.error {
+				$outer-diameter: 80px;
+				.orb-outer {
+					background: lighten($alert-color, 25%);
+					@include orb-diameter($outer-diameter);
+
+				}
+				.orb-inner {
+					background: $alert-color;
+					@include orb-diameter($outer-diameter - 10);
+				}
+			}
 		}
 	}
 
