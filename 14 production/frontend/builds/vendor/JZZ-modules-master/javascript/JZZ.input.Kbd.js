@@ -12,7 +12,9 @@
   }
   function _returnFalse() { return false; }
   function _style(key, stl) {
-    for(var k in stl) key.style[k] = stl[k];
+    for(var k in stl) {
+		if (k == 'left') key.style[k] = stl[k];
+	}
   }
   function _keyNum(name) {
     if (!(typeof name == 'string')) return undefined;
@@ -128,13 +130,15 @@
   }
   Piano.prototype.press = function(midi) {
     _style(this.keys[midi], this.stl1[midi]);
-    _style(this.keys[midi], this.locs[midi]);
+	this.keys[midi].className = this.keys[midi].className + ' playing';
+    // _style(this.keys[midi], this.locs[midi]);
 	processNote(midi, 'on', this.playing);
     this.noteOn(midi);
   }
   Piano.prototype.release = function(midi) {
     _style(this.keys[midi], this.stl0[midi]);
-    _style(this.keys[midi], this.locs[midi]);
+	this.keys[midi].className = this.keys[midi].className.replace(/\bplaying\b/,'');
+    // _style(this.keys[midi], this.locs[midi]);
 	processNote(midi, 'off', this.playing);
     this.noteOff(midi);
   }
@@ -144,12 +148,16 @@
       if (msg.isNoteOn()) {
         this.playing[midi] = 'E';
         _style(this.keys[midi], this.stl1[midi]);
-        _style(this.keys[midi], this.locs[midi]);
+		this.keys[midi].className = this.keys[midi].className + ' playing';
+		processNote(midi, 'on', this.playing);
+        // _style(this.keys[midi], this.locs[midi]);
       }
       else if (msg.isNoteOff()) {
         this.playing[midi] = undefined;
         _style(this.keys[midi], this.stl0[midi]);
-        _style(this.keys[midi], this.locs[midi]);
+		this.keys[midi].className = this.keys[midi].className.replace(/\bplaying\b/,'');
+		processNote(midi, 'off', this.playing);
+        // _style(this.keys[midi], this.locs[midi]);
       }
     }
     this.forward(msg);
@@ -232,7 +240,7 @@
       midi = _keyMidi(i + first);
       key = document.createElement('span'); this.keys[midi] = key;
       stl = { display:'inline-block', position:'absolute', margin:'0px', padding:'0px', borderStyle:'solid', borderWidth:'1px' };
-      this.locs[midi] = stl;
+    //   this.locs[midi] = stl;
       if (pos == 'E' || pos == 'W') {
         stl.width = wl + 'px';
         stl.height = ww + 'px';
@@ -248,7 +256,7 @@
       }
       this.stl0[midi] = { backgroundColor:'#fff', borderColor:'#000' };
       this.stl1[midi] = { backgroundColor:'#aaa', borderColor:'#000' };
-      _style(key, this.stl0[midi]);
+    //   _style(key, this.stl0[midi]);
       _style(key, stl);
 	  key.className = 'whiteKey';
       piano.appendChild(key);
@@ -279,7 +287,7 @@
       else continue;
       key = document.createElement('span'); this.keys[midi] = key;
       stl = { display:'inline-block', position:'absolute', margin:'0px', padding:'0px', borderStyle:'solid', borderWidth:'1px' };
-      this.locs[midi] = stl;
+    //   this.locs[midi] = stl;
       if (pos == 'E' || pos == 'W') {
         stl.width = bl + 'px';
         stl.height = bw + 'px';
@@ -356,6 +364,22 @@
     }
     return keys;
   }
+  Piano.prototype.getKeyDOM = function(note) {
+	var k = JZZ.MIDI.noteValue(note);
+	if (this.keys[k] !== undefined) return this.keys[k];
+  }
+  Piano.prototype.getKeysDOM = function(from, to) {
+	  var keys = [];
+	  var n0 = from === undefined ? undefined : JZZ.MIDI.noteValue(from);
+	  var n1 = to === undefined ? undefined : JZZ.MIDI.noteValue(to);
+	  if (n0 !== undefined && n1 !== undefined && n1 < n0) { var nn = n0; n0 = n1; n1 = nn; }
+	  for (var k in this.keys) {
+		if (n0 !== undefined && k < n0) continue;
+		if (n1 !== undefined && k > n1) continue;
+		keys.push(this.keys[k]);
+	  }
+	  return keys;
+  }
   Piano.prototype.getWhiteKeys = function(from, to) {
     var keys = new Keys(this);
     var n0 = from === undefined ? undefined : JZZ.MIDI.noteValue(from);
@@ -400,7 +424,7 @@
       for (var n in s0) this.piano.stl0[midi][n] = s0[n];
       for (var n in s1) this.piano.stl1[midi][n] = s1[n];
       _style(this.piano.keys[midi], this.piano.playing[midi] ? this.piano.stl1[midi] :  this.piano.stl0[midi]);
-      _style(this.piano.keys[midi], this.piano.locs[midi]);
+    //   _style(this.piano.keys[midi], this.piano.locs[midi]);
     }
     return this;
   }
@@ -424,6 +448,8 @@
     port._close = function(){ piano._close(); }
     port.getKey = function(note) { return piano.getKey(note); }
     port.getKeys = function(a, b) { return piano.getKeys(a, b); }
+	port.getKeyDOM = function(note) { return piano.getKeyDOM(note); }
+	port.getKeysDOM = function(a, b) { return piano.getKeysDOM(a, b); }
     port.getWhiteKeys = function(a, b) { return piano.getWhiteKeys(a, b); }
     port.getBlackKeys = function(a, b) { return piano.getBlackKeys(a, b); }
     port._resume();

@@ -31,7 +31,6 @@
       var midi = self.notes[e.keyCode];
       if (midi !== undefined && !self.playing[midi]) {
         self.playing[midi] = true;
-		processNote(midi, 'on', self.playing);
         self.noteOn(midi);
       }
     };
@@ -39,7 +38,6 @@
       var midi = self.notes[e.keyCode];
       if (midi !== undefined && self.playing[midi]) {
         self.playing[midi] = undefined;
-		processNote(midi, 'off', self.playing);
         self.noteOff(midi);
       }
     };
