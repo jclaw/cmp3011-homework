@@ -51,32 +51,35 @@
 		margin: 30px;
 		.orb {
 			$max-diameter: 200px;
+			$outer-diameter: $max-diameter - 50;
 			margin: 0 auto;
 			height: $max-diameter;
 			width: 1px;
 			position: relative;
+			text-align: center;
+			line-height: $max-diameter;
+			@include transition(all .3s);
+
+			.playbutton {
+				position: absolute;
+				z-index: 100;
+				line-height: 200px;
+				margin-left: -9px;
+				opacity: 0;
+				@include transition(all .3s);
+			}
 
 			* {
 				border-radius: 1000px;
 			}
 
 			.orb-outer {
-				$outer-diameter: $max-diameter - 50;
 				position: absolute;
 				top: 50%;
 				left: -50%;
 				@include orb-diameter($outer-diameter);
 				@include transition(all .3s);
 				background: lighten($primary-color, 25%);
-
-				&:hover {
-					@include orb-diameter($outer-diameter * 1.2);
-
-					.orb-inner {
-						@include orb-diameter($outer-diameter - 20);
-						animation-duration: 200ms;
-					}
-				}
 
 				.orb-inner {
 					$scale: .6;
@@ -90,15 +93,31 @@
 			}
 
 			&.error {
-				$outer-diameter: 80px;
+				$outer-diameter-error: 80px;
 				.orb-outer {
 					background: lighten($alert-color, 25%);
-					@include orb-diameter($outer-diameter);
+					@include orb-diameter($outer-diameter-error);
 
 				}
 				.orb-inner {
 					background: $alert-color;
-					@include orb-diameter($outer-diameter - 10);
+					@include orb-diameter($outer-diameter-error - 10);
+				}
+			}
+
+			&:hover {
+				.playbutton {
+					opacity: 1;
+					font-size: 3em;
+					margin-left: -14px;
+					@include transition(all .3s .2s);
+				}
+				.orb-outer {
+					@include orb-diameter($outer-diameter * 1.2);
+				}
+				.orb-inner {
+					@include orb-diameter($outer-diameter - 20);
+					animation-duration: 200ms;
 				}
 			}
 		}
