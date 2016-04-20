@@ -7,11 +7,13 @@ $.fn.extend({
         });
     }
 });
+
+
 // $('.orb-inner').addClass('infinite').animateCss('pulse');
 
 // $('.orb-outer')
 // 	.mouseenter(function() {
-// 		$('.orb-outer').removeClass('animated');
+// 		$('.orb-outer').changeDuration('_1000ms');
 // 	})
 // 	.mouseleave(function() {
 // 		$('.orb-outer').addClass('animated');

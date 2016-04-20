@@ -74,6 +74,7 @@
 
 					.orb-inner {
 						@include orb-diameter($outer-diameter - 20);
+						animation-duration: 200ms;
 					}
 				}
 

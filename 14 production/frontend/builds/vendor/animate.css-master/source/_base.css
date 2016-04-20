@@ -11,9 +11,38 @@
   animation-duration: 2s;
 }
 
-.animated._2s {
-	animation-duration: 2s;
+.animated._2000ms {
+	animation-duration: 2000ms;
 }
+
+.animated._1750ms {
+	animation-duration: 1750ms;
+}
+
+.animated._1500ms {
+	animation-duration: 1500ms;
+}
+
+.animated._1250ms {
+	animation-duration: 1250ms;
+}
+
+.animated._1000ms {
+	animation-duration: 1000ms;
+}
+
+.animated._750ms {
+	animation-duration: 750ms;
+}
+
+.animated._500ms {
+	animation-duration: 500ms;
+}
+
+.animated._250ms {
+	animation-duration: 250ms;
+}
+
 
 .animated.flipOutX,
 .animated.flipOutY,
