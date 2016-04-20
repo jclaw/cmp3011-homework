@@ -1,13 +1,3 @@
-@charset "UTF-8";
-
-/*!
- * animate.css -http://daneden.me/animate
- * Version - 3.5.1
- * Licensed under the MIT license - http://opensource.org/licenses/MIT
- *
- * Copyright (c) 2016 Daniel Eden
- */
-
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
@@ -23,6 +13,11 @@
 .animated.hinge {
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
+}
+
+.animated._2s {
+	-webkit-animation-duration: 2s;
+	animation-duration: 2s;
 }
 
 .animated.flipOutX,
@@ -160,6 +155,47 @@
 .pulse {
   -webkit-animation-name: pulse;
   animation-name: pulse;
+}
+
+
+@-webkit-keyframes pulse-small {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.02, 1.02, 1.02);
+    transform: scale3d(1.02, 1.02, 1.02);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@keyframes pulse-small {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.02, 1.02, 1.02);
+    transform: scale3d(1.02, 1.02, 1.02);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse-small {
+  -webkit-animation-name: pulse-small;
+  animation-name: pulse-small;
 }
 
 @-webkit-keyframes rubberBand {

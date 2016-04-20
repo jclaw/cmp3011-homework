@@ -1,0 +1,5 @@
+@mixin orb-diameter($diam) {
+	height: $diam;
+	width: $diam;
+	margin: (-$diam / 2) 0 0 (-$diam / 2);
+}

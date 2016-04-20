@@ -8,3 +8,11 @@ $.fn.extend({
     }
 });
 // $('.orb-inner').addClass('infinite').animateCss('pulse');
+
+// $('.orb-outer')
+// 	.mouseenter(function() {
+// 		$('.orb-outer').removeClass('animated');
+// 	})
+// 	.mouseleave(function() {
+// 		$('.orb-outer').addClass('animated');
+// 	})
