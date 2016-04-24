@@ -85,7 +85,7 @@ angular.module('earApp')
 	}
 
 	function processNote(midi) {
-		$scope.currNote = midi;
+		$scope.currNote = Number(midi);
 		if ($scope.state == 'mysteryNote' && !$scope.mysteryNotePlaying) {
 			if ($scope.currNote == $scope.mysteryNote) {
 				// correct note
@@ -93,6 +93,11 @@ angular.module('earApp')
 			} else {
 				// incorrect note
 				console.log('incorrect');
+				$('.orb').removeClassWildcard('e-');
+				var errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
+				console.log($scope.mysteryNote, $scope.currNote);
+				console.log(errorClass);
+				$('.orb').addClass('error ' + errorClass);
 			}
 		}
 		else if ($scope.mysteryNotePlaying) {
@@ -138,8 +143,27 @@ $.fn.extend({
         $(this).addClass('animated ' + animationName).one(animationEnd, function() {
             $(this).removeClass('animated ' + animationName);
         });
-    }
+    },
+	removeClassWildcard: function (prefix) {
+		var maxErrors = 24;
+		var pattern = new RegExp(prefix + '\\d{1,' + maxErrors +'}');
+		console.log(pattern);
+		$(this).removeClass( function() { /* Matches even table-col-row */
+		     var toReturn = '',
+		         classes = this.className.split(' ');
+		     for(var i = 0; i < classes.length; i++ ) {
+		         if( pattern.test( classes[i] ) ) { /* Filters */
+		             toReturn += classes[i] +' ';
+		         }
+		     }
+		     return toReturn ; /* Returns all classes to be removed */
+		});
+	}
 });
+
+
+
+
 
 
 // $('.orb-inner').addClass('infinite').animateCss('pulse');

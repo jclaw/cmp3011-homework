@@ -4,3 +4,15 @@
 	margin: (-$diam / 2) 0 0 (-$diam / 2);
 	line-height: $diam;
 }
+
+@mixin error-styles($diam) {
+	.orb-outer {
+		background: lighten($alert-color, 25%);
+		@include orb-diameter($diam);
+
+	}
+	.orb-inner {
+		background: $alert-color;
+		@include orb-diameter($diam - 10);
+	}
+}

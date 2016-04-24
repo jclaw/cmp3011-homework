@@ -97,7 +97,8 @@
 		margin: 30px;
 		.orb {
 			$max-diameter: 200px;
-			$outer-diameter: $max-diameter - 50;
+			$rest-diameter: $max-diameter - 50;
+			$outer-diameter: $rest-diameter;
 			margin: 0 auto;
 			height: $max-diameter;
 			width: 0px;
@@ -167,16 +168,16 @@
 			}
 
 			&.error {
-				$outer-diameter-error: 80px;
-				.orb-outer {
-					background: lighten($alert-color, 25%);
-					@include orb-diameter($outer-diameter-error);
+				$min-error-diameter: 60px;
+				$max-error-diameter: $rest-diameter - 20px;
+				$num-errors: 24;
+				$offset: ($max-error-diameter - $min-error-diameter) / ($num-errors - 1);
+				@for $i from 1 through $num-errors {
+					&.e-#{$i} {
+						@include error-styles($min-error-diameter + ($offset * $i));
+					}
+				}
 
-				}
-				.orb-inner {
-					background: $alert-color;
-					@include orb-diameter($outer-diameter-error - 10);
-				}
 			}
 
 			&.success {
