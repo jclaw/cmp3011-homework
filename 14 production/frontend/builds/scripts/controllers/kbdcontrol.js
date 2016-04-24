@@ -1,30 +1,20 @@
-var twoOctASCII = {
-	startingNote: {
-		note: 'C',
-		octave: 4
-	},
-	ASCII: [
-		'R', '5', 'T', '6', 'Y', 'U', '8', 'I', '9', 'O', '0', 'P', '[', 'F', 'V', 'G', 'B', 'N', 'J', 'M', 'K', ',', 'L', '.', '/'
-	],
-	noteAssignments: {}
-}
+'use strict';
 
-generateNoteAssignments(twoOctASCII);
+angular.module('earApp')
+.controller('KeyboardCtrl', function($scope, keyboardConfig) {
 
-// piano soundfont
-
-var keyboard = twoOctASCII;
+var config = keyboardConfig.data;
+console.log(config);
 
 function loaded() { document.getElementById('loading').innerHTML = ''; }
 
-var synth = JZZ.synth.MIDIjs({ soundfontUrl: "./soundfont/", instrument: "acoustic_grand_piano" })
+$scope.synth = JZZ.synth.MIDIjs({ soundfontUrl: "./soundfont/", instrument: "acoustic_grand_piano" })
   .or(function(){ loaded(); alert('Cannot load MIDI.js!\n' + this.err()); })
   .and(function(){ loaded(); });
 
 
-
-var ascii = JZZ.input.ASCII(keyboard.noteAssignments);
-var piano = JZZ.input.Kbd({
+$scope.ascii = JZZ.input.ASCII(config.noteAssignments);
+$scope.piano = JZZ.input.Kbd({
   	parent: 'piano',
       from: 'C4',
       to: 'B4',
@@ -42,21 +32,13 @@ var piano = JZZ.input.Kbd({
       }
 });
 
-ascii.connect(piano);
-piano.connect(synth);
+$scope.ascii.connect($scope.piano);
+$scope.piano.connect($scope.synth);
 
-function processNote(midi, state, playing) {
-	if (state == 'on') noteOnTriggered(midi);
-}
-
-function noteOnTriggered(midi) {
-	console.log(midi);
-}
-
-msg = JZZ.MIDI(0x90, 63, 127);
+// var msg = JZZ.MIDI(0x90, 63, 127);
 
 function displayNoteAssignments(ref) {
-	$.each(twoOctASCII.noteAssignments, function(key, value) {
+	$.each(config.noteAssignments, function(key, value) {
 		ref.getKey(value).setInnerHTML('<span class="inner">' + key + "</span>");
 	});
 }
@@ -64,24 +46,13 @@ function displayNoteAssignments(ref) {
 
 function debugPrint() {
 	console.log('piano',piano);
-	console.log(piano.playing);
+	console.log($scope.piano.playing);
 }
 
-function generateNoteAssignments(obj) {
-	var notes = [
-		'C','C#','D','D#','E','F','F#','G','G#','A','A#','B'
-	]
-	var noteIndex = notes.indexOf(obj.startingNote.note);
-	var octave = obj.startingNote.octave;
-	for (var i = 0; i < obj.ASCII.length; i++) {
-		if (noteIndex >= 12) { // cycle through octave
-			octave++;
-			noteIndex = 0;
-		}
-		obj.noteAssignments[obj.ASCII[i]] = notes[noteIndex] + octave;
-		noteIndex++;
-	}
-}
+
+
+});
+
 
 ///////////////////////////////////////////////////////////////////
 

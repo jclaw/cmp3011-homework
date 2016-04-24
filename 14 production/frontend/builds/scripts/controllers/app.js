@@ -1,10 +1,10 @@
-var earApp = angular.module('earApp', []);
-
-earApp.controller('PlayerCtrl', function($scope) {
+angular.module('earApp')
+.controller('PlayerCtrl', function($scope, $timeout, keyboardConfig) {
 	$scope.exercisesCompleted = 0;
 	$scope.exercisesTotal = 6;
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
+	var keyboard = keyboardConfig.data;
 	var min = JZZ.MIDI.noteValue(keyboard.startingNote.note + keyboard.startingNote.octave);
 	$scope.kbdRange = {
 		min: min,
@@ -39,7 +39,7 @@ earApp.controller('PlayerCtrl', function($scope) {
 	// $scope.playReferenceNote = function() {
 	// 	var note = $scope.referenceNote;
 	// 	makeNote(note, 2000);
-	// 	$(piano.getKeyDOM(note)).addClass('referenceNote');
+	// 	$($scope.piano.getKeyDOM(note)).addClass('referenceNote');
 	// }
 	//
 	// $scope.playMysteryNote = function() {
@@ -49,10 +49,11 @@ earApp.controller('PlayerCtrl', function($scope) {
 	$scope.playSpecialNote = function(type) {
 		if (typeof type == 'string') {
 			var note = $scope[type] // get note from previously defined scope var
-			makeNote(note, 2000);
-			$(piano.getKeyDOM(note)).addClass(type);
 			$scope[type + 'Playing'] = true;
-			setTimeout(function(){
+			makeNote(note, 2000);
+			$($scope.piano.getKeyDOM(note)).addClass(type);
+
+			$timeout(function(){
 				$scope[type + 'Playing'] = false;
 			}, 2000);
 		} else {
@@ -80,12 +81,50 @@ earApp.controller('PlayerCtrl', function($scope) {
 	}
 
 	function makeNote(note, duration) {
-		piano.noteOn(0, note, 120).wait(duration).noteOff(0, note);
+		$scope.piano.noteOn(0, note, 120).wait(duration).noteOff(0, note);
 	}
+
+	function processNote(midi) {
+		$scope.currNote = midi;
+		if ($scope.state == 'mysteryNote' && !$scope.mysteryNotePlaying) {
+			if ($scope.currNote == $scope.mysteryNote) {
+				// correct note
+				console.log('correct');
+			} else {
+				// incorrect note
+				console.log('incorrect');
+			}
+		}
+		else if ($scope.mysteryNotePlaying) {
+			// mystery note is playing
+			console.log('skipping the mystery note');
+		} else {
+			// not in mystery not selection mode
+			console.log('wrong mode');
+		}
+
+
+	}
+
+
+	$( document ).on( 'noteOn noteOff', function(e) {
+		handleNoteEvent(e)
+	});
+
+	function handleNoteEvent(e) {
+		var data = e.detail;
+		stripNote(data.value, data.state, data.playing);
+	}
+
+	function stripNote(midi, state, playing) {
+		if (state == 'on') processNote(midi);
+	}
+
+
 
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
-		setTimeout(function() {
+		$timeout(function() {
 			$scope.playSpecialNote('referenceNote')
 		}, 2000);
 	}

@@ -132,14 +132,31 @@
     _style(this.keys[midi], this.stl1[midi]);
 	this.keys[midi].className = this.keys[midi].className + ' playing';
     // _style(this.keys[midi], this.locs[midi]);
-	processNote(midi, 'on', this.playing);
+
+
+	// processNote(midi, 'on', this.playing);
+	var noteData = {
+		value: midi,
+		state: 'on',
+		playing: this.playing
+	}
+	var event = new CustomEvent('noteOn', { 'detail': noteData});
+	document.dispatchEvent(event);
     this.noteOn(midi);
   }
   Piano.prototype.release = function(midi) {
     _style(this.keys[midi], this.stl0[midi]);
 	this.keys[midi].className = this.keys[midi].className.replace(/\b playing\b/,'');
     // _style(this.keys[midi], this.locs[midi]);
-	processNote(midi, 'off', this.playing);
+
+	// processNote(midi, 'off', this.playing);
+	var noteData = {
+		value: midi,
+		state: 'off',
+		playing: this.playing
+	}
+	var event = new CustomEvent('noteOff', { 'detail': noteData});
+	document.dispatchEvent(event);
     this.noteOff(midi);
   }
   Piano.prototype.external = function(msg) {
@@ -149,14 +166,33 @@
         this.playing[midi] = 'E';
         _style(this.keys[midi], this.stl1[midi]);
 		this.keys[midi].className = this.keys[midi].className + ' playing';
-		processNote(midi, 'on', this.playing);
+		var noteData = {
+			value: midi,
+			state: 'on',
+			playing: this.playing
+		}
+		var event = new CustomEvent('noteOn', { 'detail': noteData});
+		document.dispatchEvent(event);
+		// processNote(midi, 'on', this.playing);
+
+
         // _style(this.keys[midi], this.locs[midi]);
       }
       else if (msg.isNoteOff()) {
         this.playing[midi] = undefined;
         _style(this.keys[midi], this.stl0[midi]);
 		this.keys[midi].className = this.keys[midi].className.replace(/\b playing\b/,'');
-		processNote(midi, 'off', this.playing);
+
+		var noteData = {
+			value: midi,
+			state: 'off',
+			playing: this.playing
+		}
+		var event = new CustomEvent('noteOff', { 'detail': noteData});
+		document.dispatchEvent(event);
+		// processNote(midi, 'off', this.playing);
+
+
         // _style(this.keys[midi], this.locs[midi]);
       }
     }

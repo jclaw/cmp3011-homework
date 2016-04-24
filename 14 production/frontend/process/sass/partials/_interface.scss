@@ -58,7 +58,7 @@
 			}
 		}
 
-		.playing:not(.mysteryNote) {
+		.playing:not(.referenceNote):not(.mysteryNote) {
 			background: $medium-gray;
 		}
 

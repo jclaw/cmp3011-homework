@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type ="text/css" href="styles/app.css"></link>
 
 </head>
-<body>
+<body ng-controller="KeyboardCtrl">
 <div class="top-bar">
 	<div class="top-bar-title">
 		<span data-responsive-toggle="responsive-menu" data-hide-for="medium">
@@ -49,7 +49,7 @@
 							<h6><a ng-href="{{viewData.subtitleLink}}">{{viewData.subtitle}}</a></h6>
 						</div>
 						<div class="orb-container">
-							<div class="orb" ng-if="state=='mysteryNote'" ng-class="{'playing': (mysteryNotePlaying)}">
+							<div class="orb" ng-if="state=='mysteryNote'" ng-class="{'playing': mysteryNotePlaying}">
 								<i class="playbutton fa fa-play fa-2x" aria-hidden="true" ng-click="playSpecialNote('mysteryNote');"></i>
 								<div class="orb-outer animated infinite pulse-1 _2000ms ease-in-out">
 									<div class="orb-inner animated infinite pulse-4 _1500ms ease-in-out">
@@ -243,8 +243,10 @@
 	<script src="vendor/JZZ-modules-master/javascript/JZZ.input.Kbd.js"></script>
 	<script src="vendor/JZZ-modules-master/javascript/JZZ.input.ASCII.js"></script>
 	<script src="vendor/gridster/dist/jquery.gridster.js"></script>
-	<script src="scripts/kbdcontrol.js"></script>
-	<script src="scripts/app.js"></script>
+
+	<script src="scripts/shared/keyboardConfig.js"></script>
+	<script src="scripts/controllers/kbdcontrol.js"></script>
+	<script src="scripts/controllers/app.js"></script>
 </body>
 
 </html>
