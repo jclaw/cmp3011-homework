@@ -96,7 +96,7 @@ angular.module('earApp')
 				$('.orb').removeClassWildcard('e-');
 				var errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
 				console.log($scope.mysteryNote, $scope.currNote);
-				console.log(errorClass);
+				// console.log(errorClass);
 				$('.orb').addClass('error ' + errorClass);
 			}
 		}
@@ -147,7 +147,6 @@ $.fn.extend({
 	removeClassWildcard: function (prefix) {
 		var maxErrors = 24;
 		var pattern = new RegExp(prefix + '\\d{1,' + maxErrors +'}');
-		console.log(pattern);
 		$(this).removeClass( function() { /* Matches even table-col-row */
 		     var toReturn = '',
 		         classes = this.className.split(' ');

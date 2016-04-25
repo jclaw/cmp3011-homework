@@ -172,9 +172,9 @@
 				$max-error-diameter: $rest-diameter - 20px;
 				$num-errors: 24;
 				$offset: ($max-error-diameter - $min-error-diameter) / ($num-errors - 1);
-				@for $i from 1 through $num-errors {
+				@for $i from 0 through $num-errors - 1 {
 					&.e-#{$i} {
-						@include error-styles($min-error-diameter + ($offset * $i));
+						@include error-styles($min-error-diameter + ($offset * ($num-errors - $i)));
 					}
 				}
 
