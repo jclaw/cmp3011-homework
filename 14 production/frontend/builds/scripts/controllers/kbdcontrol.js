@@ -23,12 +23,7 @@ $scope.piano = JZZ.input.Kbd({
       610: { to: 'C6' },
       900: { to: 'C6' },
       onCreate: function() {
-		//   this.getBlackKeys().setStyle({color:'#fff'});
 		  displayNoteAssignments(this);
-        // this.getKey('C5').setStyle({ backgroundColor:'#00f' });
-      //   this.getBlackKeys().setStyle({ backgroundColor:'#c0c' }, {});
-      //   this.getWhiteKeys().setStyle({ backgroundColor:'#fef' }, {});
-		//  	console.log(this.getKeys());
       }
 });
 

@@ -1,7 +1,8 @@
 angular.module('earApp')
 .controller('PlayerCtrl', function($scope, $timeout, keyboardConfig) {
-	$scope.exercisesCompleted = 0;
-	$scope.exercisesTotal = 6;
+	$scope.level = 0;
+	$scope.levels = 6;
+	$scope.numErrors = Array($scope.levels).fill(0);
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
 	var keyboard = keyboardConfig.data;
@@ -10,6 +11,9 @@ angular.module('earApp')
 		min: min,
 		max: min + keyboard.ASCII.length - 1
 	};
+	$scope.errorTimer = null;
+	$scope.action = '';
+	$scope.errorClass = '';
 
 
 	$scope.viewData = {
@@ -36,15 +40,14 @@ angular.module('earApp')
 		$scope.viewData.set(state);
 	}
 
-	// $scope.playReferenceNote = function() {
-	// 	var note = $scope.referenceNote;
-	// 	makeNote(note, 2000);
-	// 	$($scope.piano.getKeyDOM(note)).addClass('referenceNote');
-	// }
-	//
-	// $scope.playMysteryNote = function() {
-	// 	makeNote($scope.mysteryNote, 2000);
-	// }
+	$scope.nextLevel = function() {
+		$scope.level++;
+		if ($scope.level < $scope.levels) {
+			initiateMysteryNote();
+		} else {
+			// game over!
+		}
+	}
 
 	$scope.playSpecialNote = function(type) {
 		if (typeof type == 'string') {
@@ -64,9 +67,9 @@ angular.module('earApp')
 
 	function initiateMysteryNote() {
 		// TODO: account for smaller keyboard sizes when screen size changes
+		$scope.piano.noteOff(0, $scope.referenceNote);
 		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max, $scope.referenceNote);
-
-		// $scope.playMysteryNote();
+		$scope.action = 'waiting';
 		$scope.playSpecialNote('mysteryNote');
 		// add playing class to orb
 	}
@@ -90,14 +93,23 @@ angular.module('earApp')
 			if ($scope.currNote == $scope.mysteryNote) {
 				// correct note
 				console.log('correct');
+				resetOrbClasses();
+				resetOrbTimers();
+				$scope.action = 'success';
+				$scope.$apply();
 			} else {
 				// incorrect note
 				console.log('incorrect');
-				$('.orb').removeClassWildcard('e-');
-				var errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
-				console.log($scope.mysteryNote, $scope.currNote);
-				// console.log(errorClass);
-				$('.orb').addClass('error ' + errorClass);
+				$scope.action = 'error';
+				$scope.errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
+				$scope.numErrors[$scope.level]++;
+				console.log($scope.numErrors);
+				$scope.$apply();
+				if ($scope.errorTimer != null) {
+					$timeout.cancel($scope.errorTimer);
+				}
+				$scope.errorTimer = $timeout(resetOrbClasses, 2000);
+
 			}
 		}
 		else if ($scope.mysteryNotePlaying) {
@@ -111,6 +123,16 @@ angular.module('earApp')
 
 	}
 
+	function resetOrbClasses() {
+		$scope.action = 'waiting';
+		$scope.errorClass = '';
+	}
+
+	function resetOrbTimers() {
+		if ($scope.errorTimer != null) {
+			$timeout.cancel($scope.errorTimer);
+		}
+	}
 
 	$( document ).on( 'noteOn noteOff', function(e) {
 		handleNoteEvent(e)
@@ -129,6 +151,9 @@ angular.module('earApp')
 
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
+		// for (var i = 0; i < $scope.levels; i++) {
+		// 	$scope.numErrors[i] = 0;
+		// }
 		$timeout(function() {
 			$scope.playSpecialNote('referenceNote')
 		}, 2000);
@@ -157,6 +182,7 @@ $.fn.extend({
 		     }
 		     return toReturn ; /* Returns all classes to be removed */
 		});
+		return $(this);
 	}
 });
 
