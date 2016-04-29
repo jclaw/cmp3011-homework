@@ -38,9 +38,21 @@ $scope.piano.connect($scope.synth);
 // var msg = JZZ.MIDI(0x90, 63, 127);
 
 function displayNoteAssignments(ref) {
-	$.each(config.noteAssignments, function(key, value) {
-		ref.getKey(value).setInnerHTML('<span class="inner">' + key + "</span>");
+	var assignments = {};
+	$.each(config.noteAssignments, function(char, noteValue) {
+		// create note assignment display
+		// swapping key and value essentially
+		if (noteValue in assignments) {
+			assignments[noteValue] = assignments[noteValue] + '<br>' + char;
+		} else {
+			assignments[noteValue] = char;
+		}
 	});
+	$.each(assignments, function(noteValue, text) {
+		ref.getKey(noteValue).setInnerHTML('<span class="inner">' + text + '</span>');
+	});
+
+	// ref.getKey('C5').setInnerHTML('<span class="inner">' + '[<br> C' + '</span>');
 }
 
 

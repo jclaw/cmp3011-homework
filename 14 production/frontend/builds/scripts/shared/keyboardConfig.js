@@ -11,7 +11,7 @@ earApp
 			octave: 4
 		},
 		ASCII: [
-			'R', '5', 'T', '6', 'Y', 'U', '8', 'I', '9', 'O', '0', 'P', '[', 'F', 'V', 'G', 'B', 'N', 'J', 'M', 'K', ',', 'L', '.', '/'
+			'R', '5', 'T', '6', 'Y', 'U', '8', 'I', '9', 'O', '0', 'P', '[ C', 'F', 'V', 'G', 'B', 'N', 'J', 'M', 'K', ',', 'L', '.', '/'
 		],
 		noteAssignments: {}
 	}
@@ -32,7 +32,10 @@ earApp
 				octave++;
 				noteIndex = 0;
 			}
-			obj.noteAssignments[obj.ASCII[i]] = notes[noteIndex] + octave;
+			var characters = obj.ASCII[i].split(' ');
+			$.each(characters, function(index, value) {
+				obj.noteAssignments[value] = notes[noteIndex] + octave;
+			})
 			noteIndex++;
 		}
 	}
