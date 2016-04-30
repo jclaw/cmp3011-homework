@@ -1,0 +1,32 @@
+<div class="small-12 large-8 large-offset-2 columns" ng-controller="PlayerCtrl" >
+	<div class="player-container">
+		<div class="player-content">
+			<div class="progress" role="progressbar" tabindex="0" aria-valuenow="50" aria-valuemin="0" aria-valuetext="50 percent" aria-valuemax="100">
+				<div class="progress-meter" ng-style="{width:((level*100)/levels)+'%'}"></div>
+			</div>
+			<div class="player-prompt">
+				<h4>{{viewData.title}}</h4>
+				<h6><a ng-href="{{viewData.subtitleLink}}">{{viewData.subtitle}}</a></h6>
+			</div>
+			<div class="orb-container">
+				<div class="orb {{action}} {{errorClass}}" ng-if="state=='mysteryNote'" ng-class="{'playing': mysteryNotePlaying}">
+					<i class="playbutton fa fa-play fa-2x" aria-hidden="true" ng-click="playSpecialNote('mysteryNote');"></i>
+					<div class="orb-outer animated infinite pulse-1 _2000ms ease-in-out">
+						<div class="orb-inner animated infinite pulse-4 _1500ms ease-in-out">
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="piano-container">
+				<div id=piano></div>
+			</div>
+			<div id=loading>*** MIDI.js is loading soundfont... ***</div>
+		</div>
+		<div class="player-footer">
+			<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')">next</button>
+			<button class="secondary hollow button large round" ng-if="state=='mysteryNote'">skip</button>
+			<button class="button large round float-right" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" ng-click="nextLevel()">continue</button>
+		</div>
+	</div>
+</div>

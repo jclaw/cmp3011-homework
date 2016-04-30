@@ -5,6 +5,7 @@ angular.module('earApp')
 	$scope.numErrors = Array($scope.levels).fill(0);
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
+
 	var keyboard = keyboardConfig.data;
 	var min = JZZ.MIDI.noteValue(keyboard.startingNote.note + keyboard.startingNote.octave);
 	$scope.kbdRange = {
@@ -14,7 +15,6 @@ angular.module('earApp')
 	$scope.errorTimer = null;
 	$scope.action = '';
 	$scope.errorClass = '';
-
 
 	$scope.viewData = {
 		title: '',
@@ -53,12 +53,13 @@ angular.module('earApp')
 		if (typeof type == 'string') {
 			var note = $scope[type] // get note from previously defined scope var
 			$scope[type + 'Playing'] = true;
-			makeNote(note, 2000);
+			var time = 1800;
+			makeNote(note, time);
 			$($scope.piano.getKeyDOM(note)).addClass(type);
 
 			$timeout(function(){
 				$scope[type + 'Playing'] = false;
-			}, 2000);
+			}, time);
 		} else {
 			console.log('BAD ARG');
 		}
@@ -156,12 +157,12 @@ angular.module('earApp')
 		// }
 		$timeout(function() {
 			$scope.playSpecialNote('referenceNote')
-		}, 2000);
+		}, 1800);
 	}
 
 });
 
-$(document).foundation();
+// $(document).foundation();
 $.fn.extend({
     animateCss: function (animationName) {
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -185,18 +186,3 @@ $.fn.extend({
 		return $(this);
 	}
 });
-
-
-
-
-
-
-// $('.orb-inner').addClass('infinite').animateCss('pulse');
-
-// $('.orb-outer')
-// 	.mouseenter(function() {
-// 		$('.orb-outer').changeDuration('_1000ms');
-// 	})
-// 	.mouseleave(function() {
-// 		$('.orb-outer').addClass('animated');
-// 	})

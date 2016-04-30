@@ -73,6 +73,11 @@ gulp.task('html', function () {
     .pipe(connect.reload());
 });
 
+gulp.task('views', function () {
+  gulp.src('builds/views/*')
+    .pipe(connect.reload());
+});
+
 gulp.task('js', function() {
   gulp.src('builds/scripts/**/*')
     .pipe(connect.reload());
@@ -93,6 +98,7 @@ gulp.task('sass', function () {
 
 gulp.task('watch', function() {
 	gulp.watch('builds/*.html', ['html']);
+	gulp.watch('builds/views/*.html', ['views']);
 	gulp.watch('builds/scripts/**/*', ['js']);
 	gulp.watch([animatePath + '/source/**/*'], ['createCSS']);
 	gulp.watch(['process/sass/**/*'], ['sass']);

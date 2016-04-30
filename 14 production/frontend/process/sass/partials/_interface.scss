@@ -58,12 +58,17 @@
 			}
 		}
 
-		.playing:not(.referenceNote):not(.mysteryNote) {
-			background: $medium-gray;
+		.playing {
+			&:not(.referenceNote):not(.mysteryNote) {
+				background: $medium-gray;
+			}
+			&.referenceNote {
+				background: desaturate(lighten($primary-color, 25%), 20%);
+			}
 		}
 
 		.referenceNote {
-			background: $dark-gray;
+			background: desaturate(lighten($primary-color, 35%), 20%);
 		}
 
 		// .mysteryNote {

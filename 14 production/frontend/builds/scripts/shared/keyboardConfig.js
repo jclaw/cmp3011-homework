@@ -1,8 +1,6 @@
 'use strict';
 
-var earApp = angular.module('earApp', []);
-
-earApp
+angular.module('earApp')
 .service('keyboardConfig', function() {
 
 	var twoOctASCII = {
