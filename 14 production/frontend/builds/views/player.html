@@ -1,4 +1,5 @@
-<div class="small-12 large-8 large-offset-2 columns" ng-controller="PlayerCtrl" >
+<div ng-controller="KeyboardCtrl">
+<div class="small-12 large-8 large-offset-2 columns" ng-controller="PlayerCtrl" ng-init="init()">
 	<div class="player-container">
 		<div class="player-content">
 			<div class="progress" role="progressbar" tabindex="0" aria-valuenow="50" aria-valuemin="0" aria-valuetext="50 percent" aria-valuemax="100">
@@ -29,4 +30,12 @@
 			<button class="button large round float-right" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" ng-click="nextLevel()">continue</button>
 		</div>
 	</div>
+
+	<script src="vendor/JZZ/minified/JZZ.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/MIDI.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.synth.MIDIjs.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.synth.OSC.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.input.Kbd.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.input.ASCII.js"></script>
+</div>
 </div>

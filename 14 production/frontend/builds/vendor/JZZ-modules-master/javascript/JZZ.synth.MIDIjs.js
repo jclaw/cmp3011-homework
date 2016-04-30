@@ -3,7 +3,6 @@
   if (!JZZ.synth) JZZ.synth = {};
 
   function _name(name) { return name ? name : 'JZZ.synth.MIDIjs'; }
-
   var _waiting = false;
   var _running = false;
   var _bad = false;

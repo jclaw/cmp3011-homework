@@ -1,5 +1,8 @@
+'use strict';
+
 angular.module('earApp')
 .controller('PlayerCtrl', function($scope, $timeout, keyboardConfig) {
+
 	$scope.level = 0;
 	$scope.levels = 6;
 	$scope.numErrors = Array($scope.levels).fill(0);
@@ -159,6 +162,8 @@ angular.module('earApp')
 			$scope.playSpecialNote('referenceNote')
 		}, 1800);
 	}
+
+
 
 });
 
