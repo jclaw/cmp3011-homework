@@ -4,8 +4,8 @@ angular.module('earApp')
 .controller('PlayerCtrl', function($scope, $timeout, keyboardConfig) {
 
 	$scope.level = 0;
-	$scope.levels = 6;
-	$scope.numErrors = Array($scope.levels).fill(0);
+	$scope.levels = 10;
+	$scope.errorList = [[]];
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
 
@@ -45,6 +45,7 @@ angular.module('earApp')
 
 	$scope.nextLevel = function() {
 		$scope.level++;
+		$scope.errorList.push([]);
 		if ($scope.level < $scope.levels) {
 			initiateMysteryNote();
 		} else {
@@ -106,8 +107,8 @@ angular.module('earApp')
 				console.log('incorrect');
 				$scope.action = 'error';
 				$scope.errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
-				$scope.numErrors[$scope.level]++;
-				console.log($scope.numErrors);
+				$scope.errorList[$scope.level].push($scope.mysteryNote - $scope.currNote);
+				console.log($scope.errorList);
 				$scope.$apply();
 				if ($scope.errorTimer != null) {
 					$timeout.cancel($scope.errorTimer);
@@ -155,9 +156,6 @@ angular.module('earApp')
 
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
-		// for (var i = 0; i < $scope.levels; i++) {
-		// 	$scope.numErrors[i] = 0;
-		// }
 		$timeout(function() {
 			$scope.playSpecialNote('referenceNote')
 		}, 1800);

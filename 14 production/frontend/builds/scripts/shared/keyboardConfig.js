@@ -3,39 +3,58 @@
 angular.module('earApp')
 .service('keyboardConfig', function() {
 
-	var twoOctASCII = {
+	var keyboardSettings = {
 		startingNote: {
 			note: 'C',
-			octave: 4
+			octave: 4,
+			midi: 0			// redefined below
+		},
+		endingNote: {
+			note: '',		// redefined below
+			octave: 0,		// redefined below
+			midi: 0			// redefined below
 		},
 		ASCII: [
 			'R', '5', 'T', '6', 'Y', 'U', '8', 'I', '9', 'O', '0', 'P', '[ C', 'F', 'V', 'G', 'B', 'N', 'J', 'M', 'K', ',', 'L', '.', '/'
 		],
-		noteAssignments: {}
+		noteAssignments: {},	// redefined below
+		notesInKeyboard: [] 	// redefined below
 	}
 
-	generateNoteAssignments(twoOctASCII);
+	var notes = [
+		'C','C#','D','D#','E','F','F#','G','G#','A','A#','B'
+	]
 
-	this.data = twoOctASCII;
+	computeFields(keyboardSettings);
+	this.data = keyboardSettings;
 
+	//////////////////////////////////////////////
 
-	function generateNoteAssignments(obj) {
-		var notes = [
-			'C','C#','D','D#','E','F','F#','G','G#','A','A#','B'
-		]
-		var noteIndex = notes.indexOf(obj.startingNote.note);
-		var octave = obj.startingNote.octave;
-		for (var i = 0; i < obj.ASCII.length; i++) {
+	function computeFields(data) {
+
+		var s = data.startingNote;
+		data.startingNote.midi = JZZ.MIDI.noteValue(s.note + s.octave);
+
+		var noteIndex = notes.indexOf(data.startingNote.note);
+		var octave = data.startingNote.octave;
+		for (var i = 0; i < data.ASCII.length; i++) {
 			if (noteIndex >= 12) { // cycle through octave
 				octave++;
 				noteIndex = 0;
 			}
-			var characters = obj.ASCII[i].split(' ');
+			var characters = data.ASCII[i].split(' ');
 			$.each(characters, function(index, value) {
-				obj.noteAssignments[value] = notes[noteIndex] + octave;
+				data.noteAssignments[value] = notes[noteIndex] + octave;
 			})
+			data.notesInKeyboard.push({
+				note: notes[noteIndex],
+				octave: octave,
+				midi: JZZ.MIDI.noteValue(notes[noteIndex] + octave)
+			});
 			noteIndex++;
 		}
+
+		data.endingNote = data.notesInKeyboard[data.notesInKeyboard.length - 1];
 	}
 
 });

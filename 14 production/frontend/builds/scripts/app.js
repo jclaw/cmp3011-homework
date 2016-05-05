@@ -10,6 +10,9 @@ app.config(function($routeProvider){
   .when('/', {
     templateUrl: 'views/player.html'
   })
+  .when('/results', {
+	templateUrl: 'views/results.html'
+  })
 })
 
 // var app = angular

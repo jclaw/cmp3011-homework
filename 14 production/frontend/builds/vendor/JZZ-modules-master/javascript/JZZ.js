@@ -311,7 +311,7 @@
   }
   // Jazz-Plugin
   function _tryJazzPlugin() {
-    var div = document.createElement('div'); 
+    var div = document.createElement('div');
     div.style.visibility='hidden';
     document.body.appendChild(div);
     var obj = document.createElement('object');
@@ -454,7 +454,7 @@
             manufacturer: _engine._allOuts[name].manufacturer,
             version: _engine._allOuts[name].version,
             type: 'MIDI-out',
-            engine: _engine._type            
+            engine: _engine._type
           },
           _close: function(port){ _engine._closeOut(port); },
           _send: function(a){ this.plugin.MidiOutRaw(a.slice()); }
@@ -490,7 +490,7 @@
             manufacturer: _engine._allIns[name].manufacturer,
             version: _engine._allIns[name].version,
             type: 'MIDI-in',
-            engine: _engine._type            
+            engine: _engine._type
           },
           _close: function(port){ _engine._closeIn(port); },
           handle: function(t, a) {
@@ -587,7 +587,7 @@
             name: name,
             manufacturer: _engine._allOuts[name].manufacturer,
             version: _engine._allOuts[name].version,
-            engine: _engine._type            
+            engine: _engine._type
           },
           _close: function(port){ _engine._closeOut(port); },
           _send: function(a){ this.dev.send(a.slice());}
@@ -619,7 +619,7 @@
             name: name,
             manufacturer: _engine._allIns[name].manufacturer,
             version: _engine._allIns[name].version,
-            engine: _engine._type            
+            engine: _engine._type
           },
           _close: function(port){ _engine._closeIn(port); },
           handle: function(evt) {
@@ -693,7 +693,7 @@
             manufacturer: _engine._allOuts[name].manufacturer,
             version: _engine._allOuts[name].version,
             type: 'MIDI-out',
-            engine: _engine._type            
+            engine: _engine._type
           },
           _start: function(){ document.dispatchEvent(new CustomEvent('jazz-midi', {detail:['openout', plugin.id, name]})); },
           _close: function(port){ _engine._closeOut(port); },
@@ -724,7 +724,7 @@
             manufacturer: _engine._allIns[name].manufacturer,
             version: _engine._allIns[name].version,
             type: 'MIDI-in',
-            engine: _engine._type            
+            engine: _engine._type
           },
           _start: function(){ document.dispatchEvent(new CustomEvent('jazz-midi', {detail:['openin', plugin.id, name]})); },
           _close: function(port){ _engine._closeIn(port); }

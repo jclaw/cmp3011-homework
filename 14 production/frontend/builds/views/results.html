@@ -1,0 +1,20 @@
+<div class="small-12 large-8 large-offset-2 columns" ng-controller="ResultsCtrl" ng-init="init()">
+	<div class="player-container">
+		<div class="player-content">
+			<h3 class="centered-text">Grade: 82%</h3>
+			<div id="scatter-load"></div>
+		</div>
+		<div class="player-footer">
+			<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')">next</button>
+			<button class="secondary hollow button large round" ng-if="state=='mysteryNote'">skip</button>
+			<button class="button large round float-right" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" ng-click="nextLevel()">continue</button>
+		</div>
+	</div>
+	
+	<script src="vendor/JZZ/minified/JZZ.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/MIDI.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.synth.MIDIjs.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.synth.OSC.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.input.Kbd.js"></script>
+	<script src="vendor/JZZ-modules-master/javascript/JZZ.input.ASCII.js"></script>
+</div>
