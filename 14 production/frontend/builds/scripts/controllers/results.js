@@ -21,8 +21,8 @@ angular.module('earApp')
 	        "type": "error",
 	        "score": 68
 	}, {
-	    "key": "Dolfin",
-	        "type": "success",
+	    "key": "-1",
+	        "type": "correct",
 	        "score": 50
 	}, {
 	    "key": 3,
@@ -38,7 +38,7 @@ angular.module('earApp')
 	    var margins = {
 	        "left": 40,
 	            "right": 30,
-	            "top": 30,
+	            "top": 50,
 	            "bottom": 30
 	    };
 
@@ -46,7 +46,20 @@ angular.module('earApp')
 	    var height = 300;
 
 	    // this will be our colour scale. An Ordinal scale.
-	    var colors = d3.scale.category10();
+		var pointSettings = {
+			radius: {
+				error: 16,
+				correct: 32
+			},
+			class: {
+				error: 'dot-error',
+				correct: 'dot-correct'
+			},
+			dy: {
+				error: 4,
+				correct: 8
+			}
+		};
 
 	    // we add the SVG component to the scatter-load div
 	    var svg = d3.select("#scatter-load").append("svg").attr("width", width).attr("height", height).append("g")
@@ -73,7 +86,7 @@ angular.module('earApp')
 
 
 	    // this is the actual definition of our x axis. The orientation refers to where the labels appear - for the x axis, below or above the line. Tick padding refers to how much space between the tick and the label. There are other parameters too - see https://github.com/mbostock/d3/wiki/SVG-Axes for more information
-	    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2);
+	    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2).outerTickSize(0);
 
 	    // this is where we select the axis we created a few lines earlier. See how we select the axis item. in our svg we appended a g element with a x axis class. To pull that back up, we do this svg select, then 'call' the appropriate axis object for rendering.
 	    svg.selectAll("g.x.axis").call(xAxis);
@@ -85,7 +98,11 @@ angular.module('earApp')
 
 	    // we 'enter' the data, making the SVG group (to contain a circle and text) with a class node. This corresponds with what we told the data it should be above.
 
-	    var dataGroup = datapoints.enter().append("g").attr("class", "node")
+	    var dataGroup = datapoints.enter().append("g").attr("class", function (d) {
+			var c = 'node ';
+			c += d.key > 0 ? 'node-error' : 'node-correct';
+			return c;
+		})
 	    // this is how we set the position of the items. Translate is an incredibly useful function for rotating and positioning items
 	    .attr('transform', function (d) {
 	        return "translate(" + x(d.score) + ")";
@@ -93,21 +110,24 @@ angular.module('earApp')
 
 	    // we add our first graphics element! A circle!
 	    dataGroup.append("circle")
-	        .attr("r", 5)
-	        .attr("class", "dot")
-	        .style("fill", function (d) {
-	            // remember the ordinal scales? We use the colors scale to get a colour for our type. Now each node will be coloured
-	            // by who makes the datapoint.
-	            return colors(d.type);
-	    });
+	        .attr("r", function(d) {
+				return pointSettings.radius[d.type];
+			})
+	        .attr("class", "dot");
 
 	    // now we add some text, so we can see what each item is.
 	    dataGroup.append("text")
 	        .style("text-anchor", "middle")
-	        .attr("dy", -10)
+	        .attr("dy", function(d) {
+				return pointSettings.dy[d.type];
+			})
 	        .text(function (d) {
 	            // this shouldn't be a surprising statement.
-	            return d.key;
+				if (d.key > 0) {
+					return d.key
+				} else {
+					return '\uf00c'; // check icon in font awesome
+				};
 	    });
 	}
 });

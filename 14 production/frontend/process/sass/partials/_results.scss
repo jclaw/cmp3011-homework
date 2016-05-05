@@ -12,18 +12,39 @@ body {
 	stroke-width: 1px;
 }
 text {
-	stroke: none;
-	fill: #666666;
-	font-size: .6em;
-	font-family:"Helvetica Neue"
+	// fill: #666666;
+	font-size: .8em;
+	font-family:"Helvetica Neue";
+	font-weight: 600;
 }
 .label {
 	fill: #414241;
 }
 .node {
 	cursor:pointer;
+
+	.dot {
+		opacity: .8;
+		cursor: pointer;
+	}
+
+	&.node-error {
+		.dot {
+			fill: $alert-color;
+		}
+	}
+
+	&.node-correct {
+		.dot {
+			fill: $success-color;
+		}
+		text {
+			font-family: 'FontAwesome';
+			font-size: 1.5em;
+		}
+	}
 }
-.dot {
-	opacity: .7;
-	cursor: pointer;
+
+.tick {
+	display: none;
 }

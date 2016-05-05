@@ -32,6 +32,12 @@ angular.module('earApp')
 		return [keyboardSettings.startingNote, keyboardSettings.endingNote];
 	}
 
+	this.stringNote = function(value) {
+		var d = keyboardSettings;
+		var element = d.notesInKeyboard[value - d.startingNote.midi];
+		return element.note + element.octave;
+	}
+
 	//////////////////////////////////////////////
 
 	function computeFields(data) {
