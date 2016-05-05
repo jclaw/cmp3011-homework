@@ -37,9 +37,9 @@ angular.module('earApp')
 	    // just to have some space around items.
 	    var margins = {
 	        "left": 40,
-	            "right": 30,
-	            "top": 50,
-	            "bottom": 30
+            "right": 40,
+            "top": 50,
+            "bottom": 30
 	    };
 
 	    var width = 500;

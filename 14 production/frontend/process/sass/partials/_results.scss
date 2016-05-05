@@ -2,6 +2,12 @@ body {
 	font-family:"Helvetica Neue";
 	color: #686765;
 }
+
+.numberline svg {
+	display: block;
+	margin: 0 auto;
+}
+
 .name {
 	float:right;
 	color:#27aae1;
@@ -12,7 +18,7 @@ body {
 	stroke-width: 1px;
 }
 text {
-	// fill: #666666;
+	fill: #333;
 	font-size: .8em;
 	font-family:"Helvetica Neue";
 	font-weight: 600;
