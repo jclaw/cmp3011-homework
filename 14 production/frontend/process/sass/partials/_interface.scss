@@ -65,10 +65,16 @@
 			&.referenceNote {
 				background: desaturate(lighten($primary-color, 25%), 20%);
 			}
+			&.mysteryNote.found {
+				background: desaturate(lighten($success-color, 25%), 20%);
+			}
 		}
 
 		.referenceNote {
 			background: desaturate(lighten($primary-color, 35%), 20%);
+		}
+		.mysteryNote.found {
+			background: $success-color;
 		}
 
 		// .mysteryNote {

@@ -4,7 +4,7 @@ angular.module('earApp')
 .controller('PlayerCtrl', function($scope, $rootScope, $timeout, keyboardConfig, localStorageService) {
 
 	$scope.level = 0;
-	$scope.levels = 3;
+	$scope.levels = 6;
 	$scope.gameData = [[]];
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
@@ -74,6 +74,7 @@ angular.module('earApp')
 			$scope[type + 'Playing'] = true;
 			var time = 1800;
 			makeNote(note, time);
+			$($scope.piano.getKeysDOM()).removeClass(type);
 			$($scope.piano.getKeyDOM(note)).addClass(type);
 
 			$timeout(function(){
@@ -87,6 +88,7 @@ angular.module('earApp')
 
 	function initiateMysteryNote() {
 		// TODO: account for smaller keyboard sizes when screen size changes
+		$($scope.piano.getKeysDOM()).removeClass('found');
 		$scope.piano.noteOff(0, $scope.referenceNote);
 		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max, $scope.referenceNote);
 		$scope.action = 'waiting';
@@ -115,13 +117,14 @@ angular.module('earApp')
 
 	function processNote(midi) {
 		$scope.currNote = Number(midi);
-		if ($scope.state == 'mysteryNote' && !$scope.mysteryNotePlaying) {
+		if ($scope.state == 'mysteryNote' && !$scope.mysteryNotePlaying && $scope.action != 'success') {
 			if ($scope.currNote == $scope.mysteryNote) {
 				// correct note
 				console.log('correct');
 				resetOrbClasses();
 				resetOrbTimers();
 				$scope.action = 'success';
+				$($scope.piano.getKeyDOM($scope.mysteryNote)).addClass('found');
 				$scope.level++;
 				if ($scope.level < $scope.levels) {
 					updateSavedData();
