@@ -131,7 +131,7 @@ angular.module('earApp')
 					updateSavedData();
 				}
 				$scope.$apply();
-			} else {
+			} else if ($scope.currNote != $scope.referenceNote){
 				// incorrect note
 				console.log('incorrect');
 				$scope.action = 'error';
