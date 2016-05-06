@@ -101,6 +101,15 @@
 		text-align: center;
 	}
 
+	.progress {
+		border-radius: 20px;
+		overflow: hidden;
+		.progress-meter {
+			transition: width 500ms;
+		}
+
+	}
+
 	.orb-container {
 		height: 200px;
 		margin: 30px;
