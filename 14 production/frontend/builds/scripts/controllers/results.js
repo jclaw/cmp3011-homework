@@ -24,7 +24,7 @@ angular.module('earApp')
 			var correctNote = result[0].midi;
 
 			$.each(line, function(j, el) {
-				$scope.grade -= correctNote - el.midi;
+				$scope.grade -= Math.abs(correctNote - el.midi);
 			});
 		});
 		console.log($scope.grade);

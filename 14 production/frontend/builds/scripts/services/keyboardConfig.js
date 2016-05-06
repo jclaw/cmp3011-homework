@@ -28,6 +28,14 @@ angular.module('earApp')
 	computeFields(keyboardSettings);
 	this.data = keyboardSettings;
 
+	this.getMin = function() {
+		return keyboardSettings.startingNote;
+	}
+
+	this.getMax = function() {
+		return keyboardSettings.endingNote;
+	}
+
 	this.getRange = function() {
 		return [keyboardSettings.startingNote, keyboardSettings.endingNote];
 	}

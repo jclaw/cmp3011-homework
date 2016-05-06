@@ -1,20 +1,25 @@
 .numberlineWrapper {
-	display: block;
-	margin-left: 50px;
+	// display: block;
+	// margin-left: 50px;
 
 	.number {
-		display: inline-block;
-		height: 100px;
-		line-height: 100px;
-		float: left;
-		text-align: center;
+		// display: inline-block;
+		height: 107px;
+		line-height: 107px;
+		// float: left;
+		// text-align: right;
+
 
 		* {
+			font-weight: 600;
 			line-height: inherit;
+			margin: 0;
+
 		}
 	}
 
 	.numberline {
+		margin: 30px 10px;
 		display: inline-block;
 	}
 }
@@ -59,11 +64,46 @@ text {
 		}
 		text {
 			font-family: 'FontAwesome';
-			font-size: 1.5em;
+			font-size: 1.2em;
 		}
 	}
 }
 
 .tick {
-	display: none;
+	// display: none;
+	text {
+		display: none;
+	}
+}
+
+.piano-row {
+
+	img {
+		width: 460px;
+		margin-left: 30px;
+	}
+}
+
+.category {
+	display: table-cell;
+	vertical-align: bottom;
+	height: 65px;
+	width: inherit;
+}
+
+table {
+	th {
+		border-right: 1px solid $light-gray;
+	}
+	h4 {
+		margin-bottom: 0;
+	}
+}
+
+.align-center {
+	text-align: center;
+}
+
+.align-right {
+	text-align: right;
 }

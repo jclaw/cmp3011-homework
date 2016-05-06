@@ -88,6 +88,10 @@
 	border-radius: 71px;
 	overflow: hidden;
 
+	.player-header {
+		padding: 38px 62px 28px;
+		border-bottom: 1px solid $medium-gray;
+	}
 
 	.player-content {
 		padding: 38px 62px 28px;
@@ -212,4 +216,8 @@
 
 .centered-text {
 	text-align: center;
+}
+
+.bold {
+	font-weight: bold;
 }

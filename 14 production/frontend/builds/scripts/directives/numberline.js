@@ -30,24 +30,26 @@ angular.module('earApp')
 			});
 		};
 
-		var kbdMinMax = keyboardConfig.getRange();
+		var kbdMin = keyboardConfig.getMin();
+		var kbdMax = keyboardConfig.getMax();
+		var keyboard = keyboardConfig.data;
 
 		// just to have some space around items.
 	    var margins = {
-	        "left": 40,
-            "right": 40,
-            "top": 50,
-            "bottom": 30
+	        "left": 20,
+            "right": 20,
+            "top": 20,
+            "bottom": 20
 	    };
 
 	    var width = 500;
-	    var height = 100;
+	    var height = 40;
 
 	    // this will be our colour scale. An Ordinal scale.
 		var pointSettings = {
 			radius: {
-				error: 16,
-				correct: 32
+				error: 10,
+				correct: 16
 			},
 			class: {
 				error: 'dot-error',
@@ -55,7 +57,7 @@ angular.module('earApp')
 			},
 			dy: {
 				error: 4,
-				correct: 8
+				correct: 7
 			}
 		};
 
@@ -67,7 +69,7 @@ angular.module('earApp')
 	    // the domain define the min and max variables to show. In this case, it's the min and max scores of items.
 	    // this is made a compact piece of code due to d3.extent which gives back the max and min of the score variable within the dataset
 	    var x = d3.scale.linear()
-	        .domain([kbdMinMax[0].midi, kbdMinMax[1].midi])
+	        .domain([kbdMin.midi, kbdMax.midi])
 	    // the range maps the domain to values from 0 to the width minus the left and right margins (used to space out the visualization)
 	        .range([0, width - margins.left - margins.right]);
 
@@ -75,7 +77,12 @@ angular.module('earApp')
 	    svg.append("g").attr("class", "x axis");
 
 	    // this is the actual definition of our x axis. The orientation refers to where the labels appear - for the x axis, below or above the line. Tick padding refers to how much space between the tick and the label. There are other parameters too - see https://github.com/mbostock/d3/wiki/SVG-Axes for more information
-	    var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2).outerTickSize(0);
+	    // var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2).outerTickSize(0);
+		var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(keyboard.notesInKeyboard.length).tickPadding(2).tickFormat(function(d) {
+			var index = d - kbdMin.midi;
+			var el = keyboard.notesInKeyboard[index];
+			return el.note;
+		})
 
 	    // this is where we select the axis we created a few lines earlier. See how we select the axis item. in our svg we appended a g element with a x axis class. To pull that back up, we do this svg select, then 'call' the appropriate axis object for rendering.
 	    svg.selectAll("g.x.axis").call(xAxis);

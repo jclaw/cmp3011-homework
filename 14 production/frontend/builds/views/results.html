@@ -1,11 +1,53 @@
 <div class="small-12 large-8 large-offset-2 columns" ng-controller="ResultsCtrl" ng-init="init()">
 	<div class="player-container">
+		<div class="player-header">
+			<h3 class="centered-text grade">Grade: <span class="bold">{{(grade / maxGrade) * 100 | number: 2}}%</span></h3>
+		</div>
 		<div class="player-content">
-			<h3 class="centered-text">Grade: {{(grade / maxGrade) * 100 | number: 2}}%</h3>
-			<div ng-repeat="line in numberlines track by $index" class="numberlineWrapper">
-				<div class="number"><h4>{{$index + 1}}.</h4></div>
-				<numberline class="numberline"></numberline>
+
+
+			<!-- <div class="row piano-row">
+				<div class="medium-2 columns">
+					<h4 class="category">Levels</h4>
+				</div>
+				<div class="medium-10 columns">
+					<img src="images/kbd.png">
+				</div>
+
 			</div>
+			<div class="row">
+				<div class="numberlineWrapper medium-2 columns">
+					<div class="number" ng-repeat="line in numberlines" ><h4>{{$index + 1}}.</h4></div>
+				</div>
+
+				<div class="numberlineWrapper medium-10 columns">
+					<numberline class="numberline" ng-repeat="line in numberlines" ></numberline>
+				</div>
+			</div> -->
+			<table>
+				<thead>
+					<tr class="row piano-row">
+						<th class="small-2 columns">
+							<h4 class="align-center">Levels</h4>
+						</th>
+						<td class="small-10 columns">
+							<!-- <img src="images/kbd.png"> -->
+							<h4 class="align-center">Performance</h4>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="row" ng-repeat="line in numberlines" >
+						<th class="numberlineWrapper small-2 columns">
+							<div class="number" ><h4>{{$index + 1}}</h4></div>
+						</th>
+						<td class="numberlineWrapper small-10 columns">
+							<numberline class="numberline" ></numberline>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
 		</div>
 		<div class="player-footer">
 			<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')">next</button>
