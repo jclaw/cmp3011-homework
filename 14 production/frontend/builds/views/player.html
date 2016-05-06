@@ -25,9 +25,13 @@
 			<div id=loading>*** MIDI.js is loading soundfont... ***</div>
 		</div>
 		<div class="player-footer">
-			<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')">next</button>
-			<button class="secondary hollow button large round" ng-if="state=='mysteryNote'">skip</button>
-			<button class="button large round float-right" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" ng-click="nextLevel()">continue</button>
+			<div ng-if="!gameover">
+				<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')">next</button>
+				<button class="secondary hollow button large round" ng-if="state=='mysteryNote'">skip</button>
+				<button class="button large round float-right" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" ng-click="nextLevel()">continue</button>
+			</div>
+			<a href="#/results" class="button large round fixed middle" ng-if="gameover">see results</a>
+
 		</div>
 	</div>
 

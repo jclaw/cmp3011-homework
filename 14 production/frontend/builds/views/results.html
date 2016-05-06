@@ -1,8 +1,11 @@
 <div class="small-12 large-8 large-offset-2 columns" ng-controller="ResultsCtrl" ng-init="init()">
 	<div class="player-container">
 		<div class="player-content">
-			<h3 class="centered-text">Grade: 82%</h3>
-			<div class="numberline" id="scatter-load"></div>
+			<h3 class="centered-text">Grade: {{(grade / maxGrade) * 100 | number: 2}}%</h3>
+			<div ng-repeat="line in numberlines track by $index" class="numberlineWrapper">
+				<div class="number"><h4>{{$index + 1}}.</h4></div>
+				<numberline class="numberline"></numberline>
+			</div>
 		</div>
 		<div class="player-footer">
 			<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')">next</button>

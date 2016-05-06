@@ -1,11 +1,22 @@
-body {
-	font-family:"Helvetica Neue";
-	color: #686765;
-}
-
-.numberline svg {
+.numberlineWrapper {
 	display: block;
-	margin: 0 auto;
+	margin-left: 50px;
+
+	.number {
+		display: inline-block;
+		height: 100px;
+		line-height: 100px;
+		float: left;
+		text-align: center;
+
+		* {
+			line-height: inherit;
+		}
+	}
+
+	.numberline {
+		display: inline-block;
+	}
 }
 
 .name {
@@ -28,19 +39,21 @@ text {
 }
 .node {
 	cursor:pointer;
-
+	position: relative;
 	.dot {
 		opacity: .8;
 		cursor: pointer;
 	}
 
 	&.node-error {
+		z-index: 0;
 		.dot {
 			fill: $alert-color;
 		}
 	}
 
 	&.node-correct {
+		z-index: 10;
 		.dot {
 			fill: $success-color;
 		}

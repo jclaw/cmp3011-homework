@@ -2,7 +2,8 @@
 
 var app = angular
 .module('earApp', [
-	'ngRoute'
+	'ngRoute',
+	'LocalStorageModule'
 ]);
 
 app.config(function($routeProvider){
