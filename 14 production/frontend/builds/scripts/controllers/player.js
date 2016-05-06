@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('earApp')
-.controller('PlayerCtrl', function($scope, $timeout, keyboardConfig, localStorageService) {
+.controller('PlayerCtrl', function($scope, $rootScope, $timeout, keyboardConfig, localStorageService) {
 
 	$scope.level = 0;
 	$scope.levels = 3;
@@ -22,19 +22,36 @@ angular.module('earApp')
 	$scope.errorClass = '';
 
 	$scope.viewData = {
-		title: '',
+		title: 'hi',
 		subtitle: '',
 		subtitleLink: '',
 		set: function(state) {
-			if (state == 'referenceNote') {
-				this.title = 'Can you hear that? It’s your reference note.';
-				this.subtitle = 'I don’t hear anything. Help!';
-			} else if (state == 'mysteryNote') {
-				this.title = 'Identify the mystery note.';
-				this.subtitle = 'Use the keyboard below.';
+			var stateMap = {
+				'referenceNote' : {
+					title: 'Play the blue note to hear your reference note.',
+					subtitle: 'I don’t hear anything. Help!'
+				},
+				'mysteryNote' : {
+					title: 'Identify the mystery note.',
+					subtitle: 'Use the keyboard below.'
+				}
+			}
+			if (stateMap[state]) {
+				var viewData = this;
+				$.each(stateMap[state], function(key, value) {
+					viewData[key] = value;
+				});
 			}
 		}
 	}
+
+	$scope.key = 'none'
+
+    $rootScope.$on('keypress', function (evt, obj, key) {
+        $scope.$apply(function () {
+            $scope.key = key;
+        });
+    })
 
 	$scope.setState = function(state) {
 		if ($scope.state == 'referenceNote' && state == 'mysteryNote') {
@@ -53,7 +70,7 @@ angular.module('earApp')
 
 	$scope.playSpecialNote = function(type) {
 		if (typeof type == 'string') {
-			var note = $scope[type] // get note from previously defined scope var
+			var note = $scope[type]; // get note from previously defined scope var
 			$scope[type + 'Playing'] = true;
 			var time = 1800;
 			makeNote(note, time);
@@ -119,13 +136,14 @@ angular.module('earApp')
 				console.log('incorrect');
 				$scope.action = 'error';
 				$scope.errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
+				console.log($scope.gameData);
 				var errorNote = {
 					key: $scope.gameData[$scope.level].length, // sets key to which error number this is. the mystery note is already in the list
 					type: 'error',
 					midi: $scope.currNote
 				};
 				$scope.gameData[$scope.level].push(errorNote);
-				console.log($scope.gameData);
+				// console.log($scope.gameData);
 				$scope.$apply();
 				if ($scope.errorTimer != null) {
 					$timeout.cancel($scope.errorTimer);
@@ -183,10 +201,19 @@ angular.module('earApp')
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
 		deleteSavedData();
-		$timeout(function() {
-			$scope.playSpecialNote('referenceNote')
-		}, 1800);
+		$($scope.piano.getKeyDOM($scope.referenceNote)).addClass('referenceNote');
+		// $timeout(function() {
+		// 	$scope.playSpecialNote('referenceNote')
+		// }, 1800);
 	}
+
+	$scope.$on('$stateChangeStart', function( event ) {
+		console.log('here');
+		var answer = confirm("Are you sure you want to leave this page?")
+		if (!answer) {
+			event.preventDefault();
+		}
+	});
 
 
 
