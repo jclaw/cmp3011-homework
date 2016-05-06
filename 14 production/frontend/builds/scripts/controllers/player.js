@@ -9,6 +9,7 @@ angular.module('earApp')
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
 	$scope.gameover = false;
+	$scope.notesToSkip = [$scope.referenceNote];
 	var localStorageKey = 'gameData';
 
 	var keyboard = keyboardConfig.data;
@@ -63,6 +64,7 @@ angular.module('earApp')
 	}
 
 	$scope.nextLevel = function() {
+		console.log('next level');
 		$scope.gameData.push([]);
 		initiateMysteryNote();
 
@@ -90,24 +92,29 @@ angular.module('earApp')
 		// TODO: account for smaller keyboard sizes when screen size changes
 		$($scope.piano.getKeysDOM()).removeClass('found');
 		$scope.piano.noteOff(0, $scope.referenceNote);
-		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max, $scope.referenceNote);
+		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max);
 		$scope.action = 'waiting';
 		$scope.playSpecialNote('mysteryNote');
-		var mysteryNote = {
+		var mysteryNoteObj = {
 			key: -1,
 			type: 'correct',
 			midi: $scope.mysteryNote
 		};
-		$scope.gameData[$scope.level].push(mysteryNote);
+		$scope.gameData[$scope.level].push(mysteryNoteObj);
+		$scope.notesToSkip.push($scope.mysteryNote);
 		console.log($scope.gameData);
 	}
 
-	function selectRandNote(min, max, skip) {
+	function selectRandNote(min, max) {
 		var note;
+		var exists = false;
 		do {
 			note = Math.floor(Math.random() * (max - min + 1)) + min;
+			if ($scope.notesToSkip.indexOf(note) != -1) {
+				exists = true;
+			}
 		}
-		while (note == skip);
+		while (exists);
 		return note;
 	}
 
@@ -146,7 +153,6 @@ angular.module('earApp')
 					midi: $scope.currNote
 				};
 				$scope.gameData[$scope.level].push(errorNote);
-				// console.log($scope.gameData);
 				$scope.$apply();
 				if ($scope.errorTimer != null) {
 					$timeout.cancel($scope.errorTimer);
@@ -205,18 +211,8 @@ angular.module('earApp')
 		$scope.viewData.set($scope.state);
 		deleteSavedData();
 		$($scope.piano.getKeyDOM($scope.referenceNote)).addClass('referenceNote');
-		// $timeout(function() {
-		// 	$scope.playSpecialNote('referenceNote')
-		// }, 1800);
 	}
 
-	$scope.$on('$stateChangeStart', function( event ) {
-		console.log('here');
-		var answer = confirm("Are you sure you want to leave this page?")
-		if (!answer) {
-			event.preventDefault();
-		}
-	});
 
 
 

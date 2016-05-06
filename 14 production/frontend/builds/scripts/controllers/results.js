@@ -27,14 +27,12 @@ angular.module('earApp')
 				$scope.grade -= Math.abs(correctNote - el.midi) / 2;
 			});
 		});
-		console.log($scope.grade);
 	}
 
 	function loadSavedData() {
 		var savedData = localStorageService.get(localStorageKey);
 		if (savedData) {
 			$scope.numberlines = savedData;
-			console.log(savedData);
 		} else {
 			alert('error!');
 		}
