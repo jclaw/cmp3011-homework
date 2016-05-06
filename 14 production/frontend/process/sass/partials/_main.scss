@@ -4,7 +4,9 @@ body {
 }
 
 .top-bar {
-	background: $primary-color;
+	$topbar-bg-color: $primary-color;
+	$topbar-bg: $topbar-bg-color;
+	background: $topbar-bg;
 }
 
 .site-content {
