@@ -4649,7 +4649,13 @@ body {
   background: #e6e6e6; }
 
 .top-bar {
-  background: #2199e8; }
+  background: #2199e8;
+  color: white;
+  font-size: 1.3em; }
+  .top-bar .title {
+    font-weight: 600; }
+  .top-bar .logo {
+    height: 30px; }
 
 .site-content {
   margin-top: 40px; }
