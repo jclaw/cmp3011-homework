@@ -15,7 +15,7 @@ angular.module('earApp')
 			midi: 0			// redefined below
 		},
 		ASCII: [
-			'R', '5', 'T', '6', 'Y', 'U', '8', 'I', '9', 'O', '0', 'P', '[ C', 'F', 'V', 'G', 'B', 'N', 'J', 'M', 'K', ',', 'L', '.', '/'
+			'Q', '2', 'W', '3', 'E', 'R', '5', 'T', '6', 'Y', '7', 'U', 'I C', 'F', 'V', 'G', 'B', 'N', 'J', 'M', 'K', ',', 'L', '.', '/'
 		],
 		noteAssignments: {},	// redefined below
 		notesInKeyboard: [] 	// redefined below
