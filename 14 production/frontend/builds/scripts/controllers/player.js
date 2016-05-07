@@ -107,11 +107,11 @@ angular.module('earApp')
 
 	function selectRandNote(min, max) {
 		var note;
-		var exists = false;
+		var exists = true;
 		do {
 			note = Math.floor(Math.random() * (max - min + 1)) + min;
-			if ($scope.notesToSkip.indexOf(note) != -1) {
-				exists = true;
+			if ($scope.notesToSkip.indexOf(note) == -1) {
+				exists = false;
 			}
 		}
 		while (exists);
