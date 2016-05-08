@@ -1,0 +1,106 @@
+.orb-container {
+	height: 200px;
+	margin: 30px;
+	margin-top: 100px;
+	.orb {
+		$max-diameter: 200px;
+		$rest-diameter: $max-diameter - 50;
+		$outer-diameter: $rest-diameter;
+		margin: 0 auto;
+		height: $max-diameter;
+		width: 400px;
+		position: relative;
+		text-align: center;
+		line-height: $max-diameter;
+		@include transition(all .3s);
+
+		.orb-icon {
+			position: absolute;
+			z-index: 100;
+			line-height: 200px;
+			opacity: 0;
+			@include transition(all .3s);
+			left: 0;
+			right: 0;
+			text-align: center;
+		}
+
+		* {
+			border-radius: 1000px;
+		}
+
+		.orb-outer {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			@include orb-diameter($outer-diameter);
+			@include transition(all .3s .1s);
+			background: lighten($primary-color, 25%);
+
+			.orb-inner {
+				$scale: .6;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				background: $primary-color;
+				@include orb-diameter($outer-diameter * $scale);
+				@include transition(all .3s);
+			}
+		}
+
+		&.reveal-play {
+			@include icon-reveal(fa-play);
+		}
+
+		&.hover {
+			@include icon-reveal(fa-play);
+			.orb-outer {
+				@include orb-diameter($outer-diameter * 1.2);
+				animation-duration: 4000ms;
+			}
+			.orb-inner {
+				@include orb-diameter($outer-diameter - 15);
+				animation-duration: 3000ms;
+			}
+		}
+
+		&.playing {
+			.orb-outer {
+				@include orb-diameter($max-diameter);
+				animation-duration: 400ms;
+			}
+			.orb-inner {
+				@include orb-diameter($max-diameter - 20);
+				animation-duration: 200ms;
+			}
+		}
+
+		&.error {
+			@include icon-reveal(fa-times);
+			$min-error-diameter: 5px;
+			$max-error-diameter: $rest-diameter - 20px;
+			$num-errors: 24;
+			$offset: ($max-error-diameter - $min-error-diameter) / ($num-errors - 1);
+			@for $i from 0 through $num-errors - 1 {
+				&.e-#{$i} {
+					@include error-styles($min-error-diameter + ($offset * ($num-errors - $i)));
+				}
+			}
+
+		}
+
+		&.success {
+			@include icon-reveal(fa-check);
+			$outer-diameter-success: $max-diameter;
+			.orb-outer {
+				background: lighten($success-color, 25%);
+				@include orb-diameter($outer-diameter-success);
+
+			}
+			.orb-inner {
+				background: $success-color;
+				@include orb-diameter($outer-diameter-success - 20);
+			}
+		}
+	}
+}
