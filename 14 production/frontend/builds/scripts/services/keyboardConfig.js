@@ -4,19 +4,19 @@ angular.module('earApp')
 .service('keyboardConfig', function(noteLogicHelpers) {
 
 	var kbdSettings = {
-		startingNote: 	{ midi: 62 },
-		endingNote: 	{ midi: 74 },
+		startingNote: 	{ midi: 59 },
+		endingNote: 	{ midi: 76 },
 		assignments: [{
 			startingKbdChar: 'Z',
-			startingMidi: 62,
-			endingMidi: 74
+			startingMidi: 59,
+			endingMidi: 76
 		}]
 	}
 
 	var charLayout = [
 		['1','2','3','4','5','6','7','8','9','0','-','='],
 		['Q','W','E','R','T','Y','U','I','O','P','[',']','\\'],
-		['A','S','D','F','G','H','J','K','L',';','\''],
+		['A','S','D','F','G','H','J','K','L', ';','\''],
 		['Z','X','C','V','B','N','M',',','.','/']
 	]
 
@@ -56,7 +56,6 @@ angular.module('earApp')
 	//////////////////////////////////////////////
 
 	function computeFields(data) {
-
 		data.ASCII = setKeyboard(data.assignments);
 		data.startingNote = noteLogicHelpers.getNoteObj(data.startingNote.midi);
 		data.endingNote = noteLogicHelpers.getNoteObj(data.endingNote.midi);
@@ -104,8 +103,10 @@ angular.module('earApp')
 			if (!isBlackKey && layoutRow != 0) {
 				console.log('valid arrangment');
 
-				var upperIndex = startCharIndex + 1,
-					lowerIndex = startCharIndex;
+
+				var lowerIndex = startCharIndex;
+				console.log(startingNote);
+				var upperIndex = noteLogicHelpers.isBlackKey({midi:(startingNote.midi + 1)}) ? 1 : 2;
 
 				console.log(upperIndex,lowerIndex);
 				// loop

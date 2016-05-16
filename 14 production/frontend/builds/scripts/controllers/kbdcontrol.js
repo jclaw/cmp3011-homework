@@ -13,15 +13,23 @@ $scope.synth = JZZ.synth.MIDIjs({ soundfontUrl: "./soundfont/", instrument: "aco
 
 var min = keyboardConfig.getMinString(),
 	max = keyboardConfig.getMaxString();
-console.log(min);
+console.log(max);
+console.log(noteAssignments);
+// noteAssignments = {
+// 	',': 'G5',
+// 	'.': 'A5',
+// 	';': 'A#5',
+// 	'/': 'B5'
+// }
 $scope.ascii = JZZ.input.ASCII(noteAssignments);
 $scope.piano = JZZ.input.Kbd({
   	parent: 'piano',
       from: min,
-      320: { to: 'C5' },
-      450: { to: 'E5' },
-      610: { to: max },
-      900: { to: max },
+	  to: max,
+    //   320: { to: 'C5' },
+    //   450: { to: 'E5' },
+    //   610: { to: max },
+    //   900: { to: max },
       onCreate: function() {
 		  displayNoteAssignments(this);
       }

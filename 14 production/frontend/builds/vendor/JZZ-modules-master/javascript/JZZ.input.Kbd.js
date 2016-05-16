@@ -133,13 +133,12 @@
 	this.keys[midi].className = this.keys[midi].className + ' playing';
     // _style(this.keys[midi], this.locs[midi]);
 
-
-	// processNote(midi, 'on', this.playing);
 	var noteData = {
 		value: midi,
 		state: 'on',
 		playing: this.playing
 	}
+	console.log(noteData, 'press');
 	var event = new CustomEvent('noteOn', { 'detail': noteData});
 	document.dispatchEvent(event);
     this.noteOn(midi);
@@ -149,7 +148,6 @@
 	this.keys[midi].className = this.keys[midi].className.replace(/\b playing\b/,'');
     // _style(this.keys[midi], this.locs[midi]);
 
-	// processNote(midi, 'off', this.playing);
 	var noteData = {
 		value: midi,
 		state: 'off',
@@ -171,10 +169,9 @@
 			state: 'on',
 			playing: this.playing
 		}
+		console.log(noteData);
 		var event = new CustomEvent('noteOn', { 'detail': noteData});
 		document.dispatchEvent(event);
-		// processNote(midi, 'on', this.playing);
-
 
         // _style(this.keys[midi], this.locs[midi]);
       }
@@ -190,8 +187,6 @@
 		}
 		var event = new CustomEvent('noteOff', { 'detail': noteData});
 		document.dispatchEvent(event);
-		// processNote(midi, 'off', this.playing);
-
 
         // _style(this.keys[midi], this.locs[midi]);
       }
