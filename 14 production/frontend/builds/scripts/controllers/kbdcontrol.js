@@ -3,8 +3,7 @@
 angular.module('earApp')
 .controller('KeyboardCtrl', function($scope, keyboardConfig) {
 
-var config = keyboardConfig.data;
-console.log(config);
+var noteAssignments = keyboardConfig.getNoteAssignments();
 
 function loaded() { document.getElementById('loading').innerHTML = ''; }
 
@@ -12,16 +11,17 @@ $scope.synth = JZZ.synth.MIDIjs({ soundfontUrl: "./soundfont/", instrument: "aco
   .or(function(){ loaded(); alert('Cannot load MIDI.js!\n' + this.err()); })
   .and(function(){ loaded(); });
 
+var min = keyboardConfig.getMinString(),
+	max = keyboardConfig.getMaxString();
 
-$scope.ascii = JZZ.input.ASCII(config.noteAssignments);
+$scope.ascii = JZZ.input.ASCII(noteAssignments);
 $scope.piano = JZZ.input.Kbd({
   	parent: 'piano',
-      from: 'C4',
-      to: 'B4',
+      from: min,
       320: { to: 'C5' },
       450: { to: 'E5' },
-      610: { to: 'C6' },
-      900: { to: 'C6' },
+      610: { to: max },
+      900: { to: max },
       onCreate: function() {
 		  displayNoteAssignments(this);
       }
@@ -34,7 +34,7 @@ $scope.piano.connect($scope.synth);
 
 function displayNoteAssignments(ref) {
 	var assignments = {};
-	$.each(config.noteAssignments, function(char, noteValue) {
+	$.each(noteAssignments, function(char, noteValue) {
 		// create note assignment display
 		// swapping key and value essentially
 		if (noteValue in assignments) {
