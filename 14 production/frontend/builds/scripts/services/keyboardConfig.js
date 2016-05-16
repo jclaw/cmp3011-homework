@@ -101,19 +101,13 @@ angular.module('earApp')
 				if (startCharIndex != -1) break;
 			}
 			var isBlackKey = noteLogicHelpers.isBlackKey({noteChar:startingNote.noteChar});
-			if ((!isBlackKey && layoutRow != 0) || isBlackKey) {
+			if (!isBlackKey && layoutRow != 0) {
 				console.log('valid arrangment');
 
-				var upperIndex, lowerIndex;
-				if (isBlackKey) {
-					// do something here
-					upperIndex = startCharIndex;
-					lowerIndex = startCharIndex + 1;
-				} else {
-					upperIndex = startCharIndex + 1;
+				var upperIndex = startCharIndex + 1,
 					lowerIndex = startCharIndex;
-				}
 
+				console.log(upperIndex,lowerIndex);
 				// loop
 				for (var m = pref.startingMidi; m <= pref.endingMidi; m++) {
 					var charToAdd;
@@ -137,11 +131,14 @@ angular.module('earApp')
 
 				}
 
+			} else if (isBlackKey) {
+				console.log("can't start with a black key");
+				return -1;
 			} else {
-				console.log('invalid');
+				console.log('invalid layout row');
 			}
 		});
-
+		console.log(ascii);
 		return ascii;
 	}
 

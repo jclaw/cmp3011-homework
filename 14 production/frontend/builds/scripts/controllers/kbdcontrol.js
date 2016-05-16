@@ -13,7 +13,7 @@ $scope.synth = JZZ.synth.MIDIjs({ soundfontUrl: "./soundfont/", instrument: "aco
 
 var min = keyboardConfig.getMinString(),
 	max = keyboardConfig.getMaxString();
-
+console.log(min);
 $scope.ascii = JZZ.input.ASCII(noteAssignments);
 $scope.piano = JZZ.input.Kbd({
   	parent: 'piano',
