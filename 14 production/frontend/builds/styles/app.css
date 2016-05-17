@@ -4188,6 +4188,40 @@ table.hover tr:nth-of-type(even):hover {
   margin: 0 auto;
   display: block; }
 
+.centered-text {
+  text-align: center; }
+
+.bold {
+  font-weight: bold; }
+
+.player-container {
+  background: white;
+  border-radius: 71px;
+  overflow: hidden; }
+  .player-container .player-header {
+    padding: 38px 62px 28px;
+    border-bottom: 1px solid #cacaca; }
+  .player-container .player-content {
+    padding: 38px 62px 28px; }
+  .player-container .player-prompt {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto; }
+    .player-container .player-prompt.lower {
+      margin-top: 120px; }
+  .player-container .progress {
+    border-radius: 20px;
+    overflow: hidden; }
+    .player-container .progress .progress-meter {
+      transition: width 500ms; }
+  .player-container .player-footer {
+    background: #cacaca;
+    padding: 26px 38px; }
+    .player-container .player-footer .button {
+      margin-bottom: 0; }
+
 #piano {
   display: block;
   margin: 0 auto; }
@@ -4223,426 +4257,431 @@ table.hover tr:nth-of-type(even):hover {
     background: black; }
     #piano .keys .blackKey .inner {
       color: white; }
+  #piano .keys .referenceNote {
+    background: #a0cce8; }
+    #piano .keys .referenceNote.color-pulse {
+      -webkit-animation: color-pulse 1s infinite;
+              animation: color-pulse 1s infinite; }
+
+@-webkit-keyframes color-pulse {
+  from {
+    background-color: #a0cce8; }
+  50% {
+    background-color: #77b5de; }
+  to {
+    background-color: #a0cce8; } }
+
+@keyframes color-pulse {
+  from {
+    background-color: #a0cce8; }
+  50% {
+    background-color: #77b5de; }
+  to {
+    background-color: #a0cce8; } }
+  #piano .keys .mysteryNote.found {
+    background: #3adb76; }
   #piano .keys .playing:not(.referenceNote):not(.mysteryNote) {
     background: #cacaca; }
   #piano .keys .playing.referenceNote {
-    background: #a0cce8; }
+    -webkit-animation: none;
+            animation: none;
+    background: #63aad9; }
   #piano .keys .playing.mysteryNote.found {
     background: #b0e4c4; }
-  #piano .keys .referenceNote {
-    background: #c9e2f2; }
-  #piano .keys .mysteryNote.found {
-    background: #3adb76; }
   #piano .keys:hover .inner {
     opacity: 0; }
 
-.player-container {
-  background: white;
-  border-radius: 71px;
-  overflow: hidden; }
-  .player-container .player-header {
-    padding: 38px 62px 28px;
-    border-bottom: 1px solid #cacaca; }
-  .player-container .player-content {
-    padding: 38px 62px 28px; }
-  .player-container .player-prompt {
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto; }
-    .player-container .player-prompt.lower {
-      margin-top: 120px; }
-  .player-container .progress {
-    border-radius: 20px;
-    overflow: hidden; }
-    .player-container .progress .progress-meter {
-      transition: width 500ms; }
-  .player-container .orb-container {
+.orb-container {
+  height: 200px;
+  margin: 30px;
+  margin-top: 100px; }
+  .orb-container .orb {
+    margin: 0 auto;
     height: 200px;
-    margin: 30px;
-    margin-top: 100px; }
-    .player-container .orb-container .orb {
-      margin: 0 auto;
-      height: 200px;
-      width: 0px;
-      position: relative;
-      text-align: center;
+    width: 400px;
+    position: relative;
+    text-align: center;
+    line-height: 200px;
+    transition: all 0.3s; }
+    .orb-container .orb .orb-icon {
+      position: absolute;
+      z-index: 100;
       line-height: 200px;
-      transition: all 0.3s; }
-      .player-container .orb-container .orb .playbutton {
-        position: absolute;
-        z-index: 100;
-        line-height: 200px;
-        margin-left: -9px;
-        opacity: 0;
-        transition: all 0.3s; }
-      .player-container .orb-container .orb * {
-        border-radius: 1000px; }
-      .player-container .orb-container .orb .orb-outer {
+      opacity: 0;
+      transition: all 0.3s;
+      left: 0;
+      right: 0;
+      text-align: center; }
+    .orb-container .orb * {
+      border-radius: 1000px; }
+    .orb-container .orb .orb-outer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 150px;
+      width: 150px;
+      margin: -75px 0 0 -75px;
+      line-height: 150px;
+      transition: all 0.3s 0.1s;
+      background: #95cef4; }
+      .orb-container .orb .orb-outer .orb-inner {
         position: absolute;
         top: 50%;
-        left: -50%;
-        height: 150px;
-        width: 150px;
-        margin: -75px 0 0 -75px;
-        line-height: 150px;
-        transition: all 0.3s 0.1s;
-        background: #95cef4; }
-        .player-container .orb-container .orb .orb-outer .orb-inner {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          background: #2199e8;
-          height: 90px;
-          width: 90px;
-          margin: -45px 0 0 -45px;
-          line-height: 90px;
-          transition: all 0.3s; }
-      .player-container .orb-container .orb:hover .playbutton {
+        left: 50%;
+        background: #2199e8;
+        height: 90px;
+        width: 90px;
+        margin: -45px 0 0 -45px;
+        line-height: 90px;
+        transition: all 0.3s; }
+    .orb-container .orb.reveal-play .fa-play {
+      margin-left: 6px; }
+      .orb-container .orb.reveal-play .fa-play.orb-icon {
         opacity: 1;
         font-size: 3em;
-        margin-left: -14px;
         transition: all 0.3s 0.2s; }
-      .player-container .orb-container .orb:hover .orb-outer {
-        height: 180px;
-        width: 180px;
-        margin: -90px 0 0 -90px;
-        line-height: 180px;
-        -webkit-animation-duration: 4000ms;
-                animation-duration: 4000ms; }
-      .player-container .orb-container .orb:hover .orb-inner {
-        height: 135px;
-        width: 135px;
-        margin: -67.5px 0 0 -67.5px;
-        line-height: 135px;
-        -webkit-animation-duration: 3000ms;
-                animation-duration: 3000ms; }
-      .player-container .orb-container .orb.playing .orb-outer {
-        height: 200px;
-        width: 200px;
-        margin: -100px 0 0 -100px;
-        line-height: 200px;
-        -webkit-animation-duration: 400ms;
-                animation-duration: 400ms; }
-      .player-container .orb-container .orb.playing .orb-inner {
-        height: 180px;
-        width: 180px;
-        margin: -90px 0 0 -90px;
-        line-height: 180px;
-        -webkit-animation-duration: 200ms;
-                animation-duration: 200ms; }
-      .player-container .orb-container .orb.error.e-0 .orb-outer {
-        background: #f8bdb4;
-        height: 133.04348px;
-        width: 133.04348px;
-        margin: -66.52174px 0 0 -66.52174px;
-        line-height: 133.04348px; }
-      .player-container .orb-container .orb.error.e-0 .orb-inner {
-        background: #ec5840;
-        height: 123.04348px;
-        width: 123.04348px;
-        margin: -61.52174px 0 0 -61.52174px;
-        line-height: 123.04348px; }
-      .player-container .orb-container .orb.error.e-1 .orb-outer {
-        background: #f8bdb4;
-        height: 130px;
-        width: 130px;
-        margin: -65px 0 0 -65px;
-        line-height: 130px; }
-      .player-container .orb-container .orb.error.e-1 .orb-inner {
-        background: #ec5840;
-        height: 120px;
-        width: 120px;
-        margin: -60px 0 0 -60px;
-        line-height: 120px; }
-      .player-container .orb-container .orb.error.e-2 .orb-outer {
-        background: #f8bdb4;
-        height: 126.95652px;
-        width: 126.95652px;
-        margin: -63.47826px 0 0 -63.47826px;
-        line-height: 126.95652px; }
-      .player-container .orb-container .orb.error.e-2 .orb-inner {
-        background: #ec5840;
-        height: 116.95652px;
-        width: 116.95652px;
-        margin: -58.47826px 0 0 -58.47826px;
-        line-height: 116.95652px; }
-      .player-container .orb-container .orb.error.e-3 .orb-outer {
-        background: #f8bdb4;
-        height: 123.91304px;
-        width: 123.91304px;
-        margin: -61.95652px 0 0 -61.95652px;
-        line-height: 123.91304px; }
-      .player-container .orb-container .orb.error.e-3 .orb-inner {
-        background: #ec5840;
-        height: 113.91304px;
-        width: 113.91304px;
-        margin: -56.95652px 0 0 -56.95652px;
-        line-height: 113.91304px; }
-      .player-container .orb-container .orb.error.e-4 .orb-outer {
-        background: #f8bdb4;
-        height: 120.86957px;
-        width: 120.86957px;
-        margin: -60.43478px 0 0 -60.43478px;
-        line-height: 120.86957px; }
-      .player-container .orb-container .orb.error.e-4 .orb-inner {
-        background: #ec5840;
-        height: 110.86957px;
-        width: 110.86957px;
-        margin: -55.43478px 0 0 -55.43478px;
-        line-height: 110.86957px; }
-      .player-container .orb-container .orb.error.e-5 .orb-outer {
-        background: #f8bdb4;
-        height: 117.82609px;
-        width: 117.82609px;
-        margin: -58.91304px 0 0 -58.91304px;
-        line-height: 117.82609px; }
-      .player-container .orb-container .orb.error.e-5 .orb-inner {
-        background: #ec5840;
-        height: 107.82609px;
-        width: 107.82609px;
-        margin: -53.91304px 0 0 -53.91304px;
-        line-height: 107.82609px; }
-      .player-container .orb-container .orb.error.e-6 .orb-outer {
-        background: #f8bdb4;
-        height: 114.78261px;
-        width: 114.78261px;
-        margin: -57.3913px 0 0 -57.3913px;
-        line-height: 114.78261px; }
-      .player-container .orb-container .orb.error.e-6 .orb-inner {
-        background: #ec5840;
-        height: 104.78261px;
-        width: 104.78261px;
-        margin: -52.3913px 0 0 -52.3913px;
-        line-height: 104.78261px; }
-      .player-container .orb-container .orb.error.e-7 .orb-outer {
-        background: #f8bdb4;
-        height: 111.73913px;
-        width: 111.73913px;
-        margin: -55.86957px 0 0 -55.86957px;
-        line-height: 111.73913px; }
-      .player-container .orb-container .orb.error.e-7 .orb-inner {
-        background: #ec5840;
-        height: 101.73913px;
-        width: 101.73913px;
-        margin: -50.86957px 0 0 -50.86957px;
-        line-height: 101.73913px; }
-      .player-container .orb-container .orb.error.e-8 .orb-outer {
-        background: #f8bdb4;
-        height: 108.69565px;
-        width: 108.69565px;
-        margin: -54.34783px 0 0 -54.34783px;
-        line-height: 108.69565px; }
-      .player-container .orb-container .orb.error.e-8 .orb-inner {
-        background: #ec5840;
-        height: 98.69565px;
-        width: 98.69565px;
-        margin: -49.34783px 0 0 -49.34783px;
-        line-height: 98.69565px; }
-      .player-container .orb-container .orb.error.e-9 .orb-outer {
-        background: #f8bdb4;
-        height: 105.65217px;
-        width: 105.65217px;
-        margin: -52.82609px 0 0 -52.82609px;
-        line-height: 105.65217px; }
-      .player-container .orb-container .orb.error.e-9 .orb-inner {
-        background: #ec5840;
-        height: 95.65217px;
-        width: 95.65217px;
-        margin: -47.82609px 0 0 -47.82609px;
-        line-height: 95.65217px; }
-      .player-container .orb-container .orb.error.e-10 .orb-outer {
-        background: #f8bdb4;
-        height: 102.6087px;
-        width: 102.6087px;
-        margin: -51.30435px 0 0 -51.30435px;
-        line-height: 102.6087px; }
-      .player-container .orb-container .orb.error.e-10 .orb-inner {
-        background: #ec5840;
-        height: 92.6087px;
-        width: 92.6087px;
-        margin: -46.30435px 0 0 -46.30435px;
-        line-height: 92.6087px; }
-      .player-container .orb-container .orb.error.e-11 .orb-outer {
-        background: #f8bdb4;
-        height: 99.56522px;
-        width: 99.56522px;
-        margin: -49.78261px 0 0 -49.78261px;
-        line-height: 99.56522px; }
-      .player-container .orb-container .orb.error.e-11 .orb-inner {
-        background: #ec5840;
-        height: 89.56522px;
-        width: 89.56522px;
-        margin: -44.78261px 0 0 -44.78261px;
-        line-height: 89.56522px; }
-      .player-container .orb-container .orb.error.e-12 .orb-outer {
-        background: #f8bdb4;
-        height: 96.52174px;
-        width: 96.52174px;
-        margin: -48.26087px 0 0 -48.26087px;
-        line-height: 96.52174px; }
-      .player-container .orb-container .orb.error.e-12 .orb-inner {
-        background: #ec5840;
-        height: 86.52174px;
-        width: 86.52174px;
-        margin: -43.26087px 0 0 -43.26087px;
-        line-height: 86.52174px; }
-      .player-container .orb-container .orb.error.e-13 .orb-outer {
-        background: #f8bdb4;
-        height: 93.47826px;
-        width: 93.47826px;
-        margin: -46.73913px 0 0 -46.73913px;
-        line-height: 93.47826px; }
-      .player-container .orb-container .orb.error.e-13 .orb-inner {
-        background: #ec5840;
-        height: 83.47826px;
-        width: 83.47826px;
-        margin: -41.73913px 0 0 -41.73913px;
-        line-height: 83.47826px; }
-      .player-container .orb-container .orb.error.e-14 .orb-outer {
-        background: #f8bdb4;
-        height: 90.43478px;
-        width: 90.43478px;
-        margin: -45.21739px 0 0 -45.21739px;
-        line-height: 90.43478px; }
-      .player-container .orb-container .orb.error.e-14 .orb-inner {
-        background: #ec5840;
-        height: 80.43478px;
-        width: 80.43478px;
-        margin: -40.21739px 0 0 -40.21739px;
-        line-height: 80.43478px; }
-      .player-container .orb-container .orb.error.e-15 .orb-outer {
-        background: #f8bdb4;
-        height: 87.3913px;
-        width: 87.3913px;
-        margin: -43.69565px 0 0 -43.69565px;
-        line-height: 87.3913px; }
-      .player-container .orb-container .orb.error.e-15 .orb-inner {
-        background: #ec5840;
-        height: 77.3913px;
-        width: 77.3913px;
-        margin: -38.69565px 0 0 -38.69565px;
-        line-height: 77.3913px; }
-      .player-container .orb-container .orb.error.e-16 .orb-outer {
-        background: #f8bdb4;
-        height: 84.34783px;
-        width: 84.34783px;
-        margin: -42.17391px 0 0 -42.17391px;
-        line-height: 84.34783px; }
-      .player-container .orb-container .orb.error.e-16 .orb-inner {
-        background: #ec5840;
-        height: 74.34783px;
-        width: 74.34783px;
-        margin: -37.17391px 0 0 -37.17391px;
-        line-height: 74.34783px; }
-      .player-container .orb-container .orb.error.e-17 .orb-outer {
-        background: #f8bdb4;
-        height: 81.30435px;
-        width: 81.30435px;
-        margin: -40.65217px 0 0 -40.65217px;
-        line-height: 81.30435px; }
-      .player-container .orb-container .orb.error.e-17 .orb-inner {
-        background: #ec5840;
-        height: 71.30435px;
-        width: 71.30435px;
-        margin: -35.65217px 0 0 -35.65217px;
-        line-height: 71.30435px; }
-      .player-container .orb-container .orb.error.e-18 .orb-outer {
-        background: #f8bdb4;
-        height: 78.26087px;
-        width: 78.26087px;
-        margin: -39.13043px 0 0 -39.13043px;
-        line-height: 78.26087px; }
-      .player-container .orb-container .orb.error.e-18 .orb-inner {
-        background: #ec5840;
-        height: 68.26087px;
-        width: 68.26087px;
-        margin: -34.13043px 0 0 -34.13043px;
-        line-height: 68.26087px; }
-      .player-container .orb-container .orb.error.e-19 .orb-outer {
-        background: #f8bdb4;
-        height: 75.21739px;
-        width: 75.21739px;
-        margin: -37.6087px 0 0 -37.6087px;
-        line-height: 75.21739px; }
-      .player-container .orb-container .orb.error.e-19 .orb-inner {
-        background: #ec5840;
-        height: 65.21739px;
-        width: 65.21739px;
-        margin: -32.6087px 0 0 -32.6087px;
-        line-height: 65.21739px; }
-      .player-container .orb-container .orb.error.e-20 .orb-outer {
-        background: #f8bdb4;
-        height: 72.17391px;
-        width: 72.17391px;
-        margin: -36.08696px 0 0 -36.08696px;
-        line-height: 72.17391px; }
-      .player-container .orb-container .orb.error.e-20 .orb-inner {
-        background: #ec5840;
-        height: 62.17391px;
-        width: 62.17391px;
-        margin: -31.08696px 0 0 -31.08696px;
-        line-height: 62.17391px; }
-      .player-container .orb-container .orb.error.e-21 .orb-outer {
-        background: #f8bdb4;
-        height: 69.13043px;
-        width: 69.13043px;
-        margin: -34.56522px 0 0 -34.56522px;
-        line-height: 69.13043px; }
-      .player-container .orb-container .orb.error.e-21 .orb-inner {
-        background: #ec5840;
-        height: 59.13043px;
-        width: 59.13043px;
-        margin: -29.56522px 0 0 -29.56522px;
-        line-height: 59.13043px; }
-      .player-container .orb-container .orb.error.e-22 .orb-outer {
-        background: #f8bdb4;
-        height: 66.08696px;
-        width: 66.08696px;
-        margin: -33.04348px 0 0 -33.04348px;
-        line-height: 66.08696px; }
-      .player-container .orb-container .orb.error.e-22 .orb-inner {
-        background: #ec5840;
-        height: 56.08696px;
-        width: 56.08696px;
-        margin: -28.04348px 0 0 -28.04348px;
-        line-height: 56.08696px; }
-      .player-container .orb-container .orb.error.e-23 .orb-outer {
-        background: #f8bdb4;
-        height: 63.04348px;
-        width: 63.04348px;
-        margin: -31.52174px 0 0 -31.52174px;
-        line-height: 63.04348px; }
-      .player-container .orb-container .orb.error.e-23 .orb-inner {
-        background: #ec5840;
-        height: 53.04348px;
-        width: 53.04348px;
-        margin: -26.52174px 0 0 -26.52174px;
-        line-height: 53.04348px; }
-      .player-container .orb-container .orb.success .orb-outer {
-        background: #a6efc1;
-        height: 200px;
-        width: 200px;
-        margin: -100px 0 0 -100px;
-        line-height: 200px; }
-      .player-container .orb-container .orb.success .orb-inner {
-        background: #3adb76;
-        height: 180px;
-        width: 180px;
-        margin: -90px 0 0 -90px;
-        line-height: 180px; }
-  .player-container .player-footer {
-    background: #cacaca;
-    padding: 26px 38px; }
-    .player-container .player-footer .button {
-      margin-bottom: 0; }
-
-.centered-text {
-  text-align: center; }
-
-.bold {
-  font-weight: bold; }
+    .orb-container .orb.hover .fa-play {
+      margin-left: 6px; }
+      .orb-container .orb.hover .fa-play.orb-icon {
+        opacity: 1;
+        font-size: 3em;
+        transition: all 0.3s 0.2s; }
+    .orb-container .orb.hover .orb-outer {
+      height: 180px;
+      width: 180px;
+      margin: -90px 0 0 -90px;
+      line-height: 180px;
+      -webkit-animation-duration: 4000ms;
+              animation-duration: 4000ms; }
+    .orb-container .orb.hover .orb-inner {
+      height: 135px;
+      width: 135px;
+      margin: -67.5px 0 0 -67.5px;
+      line-height: 135px;
+      -webkit-animation-duration: 3000ms;
+              animation-duration: 3000ms; }
+    .orb-container .orb.playing .orb-outer {
+      height: 200px;
+      width: 200px;
+      margin: -100px 0 0 -100px;
+      line-height: 200px;
+      -webkit-animation-duration: 400ms;
+              animation-duration: 400ms; }
+    .orb-container .orb.playing .orb-inner {
+      height: 180px;
+      width: 180px;
+      margin: -90px 0 0 -90px;
+      line-height: 180px;
+      -webkit-animation-duration: 200ms;
+              animation-duration: 200ms; }
+    .orb-container .orb.error .fa-times.orb-icon {
+      opacity: 1;
+      font-size: 3em;
+      transition: all 0.3s 0.2s; }
+    .orb-container .orb.error.e-0 .orb-outer {
+      background: #f8bdb4;
+      height: 135.43478px;
+      width: 135.43478px;
+      margin: -67.71739px 0 0 -67.71739px;
+      line-height: 135.43478px; }
+    .orb-container .orb.error.e-0 .orb-inner {
+      background: #ec5840;
+      height: 125.43478px;
+      width: 125.43478px;
+      margin: -62.71739px 0 0 -62.71739px;
+      line-height: 125.43478px; }
+    .orb-container .orb.error.e-1 .orb-outer {
+      background: #f8bdb4;
+      height: 130px;
+      width: 130px;
+      margin: -65px 0 0 -65px;
+      line-height: 130px; }
+    .orb-container .orb.error.e-1 .orb-inner {
+      background: #ec5840;
+      height: 120px;
+      width: 120px;
+      margin: -60px 0 0 -60px;
+      line-height: 120px; }
+    .orb-container .orb.error.e-2 .orb-outer {
+      background: #f8bdb4;
+      height: 124.56522px;
+      width: 124.56522px;
+      margin: -62.28261px 0 0 -62.28261px;
+      line-height: 124.56522px; }
+    .orb-container .orb.error.e-2 .orb-inner {
+      background: #ec5840;
+      height: 114.56522px;
+      width: 114.56522px;
+      margin: -57.28261px 0 0 -57.28261px;
+      line-height: 114.56522px; }
+    .orb-container .orb.error.e-3 .orb-outer {
+      background: #f8bdb4;
+      height: 119.13043px;
+      width: 119.13043px;
+      margin: -59.56522px 0 0 -59.56522px;
+      line-height: 119.13043px; }
+    .orb-container .orb.error.e-3 .orb-inner {
+      background: #ec5840;
+      height: 109.13043px;
+      width: 109.13043px;
+      margin: -54.56522px 0 0 -54.56522px;
+      line-height: 109.13043px; }
+    .orb-container .orb.error.e-4 .orb-outer {
+      background: #f8bdb4;
+      height: 113.69565px;
+      width: 113.69565px;
+      margin: -56.84783px 0 0 -56.84783px;
+      line-height: 113.69565px; }
+    .orb-container .orb.error.e-4 .orb-inner {
+      background: #ec5840;
+      height: 103.69565px;
+      width: 103.69565px;
+      margin: -51.84783px 0 0 -51.84783px;
+      line-height: 103.69565px; }
+    .orb-container .orb.error.e-5 .orb-outer {
+      background: #f8bdb4;
+      height: 108.26087px;
+      width: 108.26087px;
+      margin: -54.13043px 0 0 -54.13043px;
+      line-height: 108.26087px; }
+    .orb-container .orb.error.e-5 .orb-inner {
+      background: #ec5840;
+      height: 98.26087px;
+      width: 98.26087px;
+      margin: -49.13043px 0 0 -49.13043px;
+      line-height: 98.26087px; }
+    .orb-container .orb.error.e-6 .orb-outer {
+      background: #f8bdb4;
+      height: 102.82609px;
+      width: 102.82609px;
+      margin: -51.41304px 0 0 -51.41304px;
+      line-height: 102.82609px; }
+    .orb-container .orb.error.e-6 .orb-inner {
+      background: #ec5840;
+      height: 92.82609px;
+      width: 92.82609px;
+      margin: -46.41304px 0 0 -46.41304px;
+      line-height: 92.82609px; }
+    .orb-container .orb.error.e-7 .orb-outer {
+      background: #f8bdb4;
+      height: 97.3913px;
+      width: 97.3913px;
+      margin: -48.69565px 0 0 -48.69565px;
+      line-height: 97.3913px; }
+    .orb-container .orb.error.e-7 .orb-inner {
+      background: #ec5840;
+      height: 87.3913px;
+      width: 87.3913px;
+      margin: -43.69565px 0 0 -43.69565px;
+      line-height: 87.3913px; }
+    .orb-container .orb.error.e-8 .orb-outer {
+      background: #f8bdb4;
+      height: 91.95652px;
+      width: 91.95652px;
+      margin: -45.97826px 0 0 -45.97826px;
+      line-height: 91.95652px; }
+    .orb-container .orb.error.e-8 .orb-inner {
+      background: #ec5840;
+      height: 81.95652px;
+      width: 81.95652px;
+      margin: -40.97826px 0 0 -40.97826px;
+      line-height: 81.95652px; }
+    .orb-container .orb.error.e-9 .orb-outer {
+      background: #f8bdb4;
+      height: 86.52174px;
+      width: 86.52174px;
+      margin: -43.26087px 0 0 -43.26087px;
+      line-height: 86.52174px; }
+    .orb-container .orb.error.e-9 .orb-inner {
+      background: #ec5840;
+      height: 76.52174px;
+      width: 76.52174px;
+      margin: -38.26087px 0 0 -38.26087px;
+      line-height: 76.52174px; }
+    .orb-container .orb.error.e-10 .orb-outer {
+      background: #f8bdb4;
+      height: 81.08696px;
+      width: 81.08696px;
+      margin: -40.54348px 0 0 -40.54348px;
+      line-height: 81.08696px; }
+    .orb-container .orb.error.e-10 .orb-inner {
+      background: #ec5840;
+      height: 71.08696px;
+      width: 71.08696px;
+      margin: -35.54348px 0 0 -35.54348px;
+      line-height: 71.08696px; }
+    .orb-container .orb.error.e-11 .orb-outer {
+      background: #f8bdb4;
+      height: 75.65217px;
+      width: 75.65217px;
+      margin: -37.82609px 0 0 -37.82609px;
+      line-height: 75.65217px; }
+    .orb-container .orb.error.e-11 .orb-inner {
+      background: #ec5840;
+      height: 65.65217px;
+      width: 65.65217px;
+      margin: -32.82609px 0 0 -32.82609px;
+      line-height: 65.65217px; }
+    .orb-container .orb.error.e-12 .orb-outer {
+      background: #f8bdb4;
+      height: 70.21739px;
+      width: 70.21739px;
+      margin: -35.1087px 0 0 -35.1087px;
+      line-height: 70.21739px; }
+    .orb-container .orb.error.e-12 .orb-inner {
+      background: #ec5840;
+      height: 60.21739px;
+      width: 60.21739px;
+      margin: -30.1087px 0 0 -30.1087px;
+      line-height: 60.21739px; }
+    .orb-container .orb.error.e-13 .orb-outer {
+      background: #f8bdb4;
+      height: 64.78261px;
+      width: 64.78261px;
+      margin: -32.3913px 0 0 -32.3913px;
+      line-height: 64.78261px; }
+    .orb-container .orb.error.e-13 .orb-inner {
+      background: #ec5840;
+      height: 54.78261px;
+      width: 54.78261px;
+      margin: -27.3913px 0 0 -27.3913px;
+      line-height: 54.78261px; }
+    .orb-container .orb.error.e-14 .orb-outer {
+      background: #f8bdb4;
+      height: 59.34783px;
+      width: 59.34783px;
+      margin: -29.67391px 0 0 -29.67391px;
+      line-height: 59.34783px; }
+    .orb-container .orb.error.e-14 .orb-inner {
+      background: #ec5840;
+      height: 49.34783px;
+      width: 49.34783px;
+      margin: -24.67391px 0 0 -24.67391px;
+      line-height: 49.34783px; }
+    .orb-container .orb.error.e-15 .orb-outer {
+      background: #f8bdb4;
+      height: 53.91304px;
+      width: 53.91304px;
+      margin: -26.95652px 0 0 -26.95652px;
+      line-height: 53.91304px; }
+    .orb-container .orb.error.e-15 .orb-inner {
+      background: #ec5840;
+      height: 43.91304px;
+      width: 43.91304px;
+      margin: -21.95652px 0 0 -21.95652px;
+      line-height: 43.91304px; }
+    .orb-container .orb.error.e-16 .orb-outer {
+      background: #f8bdb4;
+      height: 48.47826px;
+      width: 48.47826px;
+      margin: -24.23913px 0 0 -24.23913px;
+      line-height: 48.47826px; }
+    .orb-container .orb.error.e-16 .orb-inner {
+      background: #ec5840;
+      height: 38.47826px;
+      width: 38.47826px;
+      margin: -19.23913px 0 0 -19.23913px;
+      line-height: 38.47826px; }
+    .orb-container .orb.error.e-17 .orb-outer {
+      background: #f8bdb4;
+      height: 43.04348px;
+      width: 43.04348px;
+      margin: -21.52174px 0 0 -21.52174px;
+      line-height: 43.04348px; }
+    .orb-container .orb.error.e-17 .orb-inner {
+      background: #ec5840;
+      height: 33.04348px;
+      width: 33.04348px;
+      margin: -16.52174px 0 0 -16.52174px;
+      line-height: 33.04348px; }
+    .orb-container .orb.error.e-18 .orb-outer {
+      background: #f8bdb4;
+      height: 37.6087px;
+      width: 37.6087px;
+      margin: -18.80435px 0 0 -18.80435px;
+      line-height: 37.6087px; }
+    .orb-container .orb.error.e-18 .orb-inner {
+      background: #ec5840;
+      height: 27.6087px;
+      width: 27.6087px;
+      margin: -13.80435px 0 0 -13.80435px;
+      line-height: 27.6087px; }
+    .orb-container .orb.error.e-19 .orb-outer {
+      background: #f8bdb4;
+      height: 32.17391px;
+      width: 32.17391px;
+      margin: -16.08696px 0 0 -16.08696px;
+      line-height: 32.17391px; }
+    .orb-container .orb.error.e-19 .orb-inner {
+      background: #ec5840;
+      height: 22.17391px;
+      width: 22.17391px;
+      margin: -11.08696px 0 0 -11.08696px;
+      line-height: 22.17391px; }
+    .orb-container .orb.error.e-20 .orb-outer {
+      background: #f8bdb4;
+      height: 26.73913px;
+      width: 26.73913px;
+      margin: -13.36957px 0 0 -13.36957px;
+      line-height: 26.73913px; }
+    .orb-container .orb.error.e-20 .orb-inner {
+      background: #ec5840;
+      height: 16.73913px;
+      width: 16.73913px;
+      margin: -8.36957px 0 0 -8.36957px;
+      line-height: 16.73913px; }
+    .orb-container .orb.error.e-21 .orb-outer {
+      background: #f8bdb4;
+      height: 21.30435px;
+      width: 21.30435px;
+      margin: -10.65217px 0 0 -10.65217px;
+      line-height: 21.30435px; }
+    .orb-container .orb.error.e-21 .orb-inner {
+      background: #ec5840;
+      height: 11.30435px;
+      width: 11.30435px;
+      margin: -5.65217px 0 0 -5.65217px;
+      line-height: 11.30435px; }
+    .orb-container .orb.error.e-22 .orb-outer {
+      background: #f8bdb4;
+      height: 15.86957px;
+      width: 15.86957px;
+      margin: -7.93478px 0 0 -7.93478px;
+      line-height: 15.86957px; }
+    .orb-container .orb.error.e-22 .orb-inner {
+      background: #ec5840;
+      height: 5.86957px;
+      width: 5.86957px;
+      margin: -2.93478px 0 0 -2.93478px;
+      line-height: 5.86957px; }
+    .orb-container .orb.error.e-23 .orb-outer {
+      background: #f8bdb4;
+      height: 10.43478px;
+      width: 10.43478px;
+      margin: -5.21739px 0 0 -5.21739px;
+      line-height: 10.43478px; }
+    .orb-container .orb.error.e-23 .orb-inner {
+      background: #ec5840;
+      height: 0.43478px;
+      width: 0.43478px;
+      margin: -0.21739px 0 0 -0.21739px;
+      line-height: 0.43478px; }
+    .orb-container .orb.success .fa-check.orb-icon {
+      opacity: 1;
+      font-size: 3em;
+      transition: all 0.3s 0.2s; }
+    .orb-container .orb.success .orb-outer {
+      background: #a6efc1;
+      height: 200px;
+      width: 200px;
+      margin: -100px 0 0 -100px;
+      line-height: 200px; }
+    .orb-container .orb.success .orb-inner {
+      background: #3adb76;
+      height: 180px;
+      width: 180px;
+      margin: -90px 0 0 -90px;
+      line-height: 180px; }
 
 body {
   font-family: helvetica;
