@@ -1,0 +1,45 @@
+.player-container {
+	background: white;
+	border-radius: 71px;
+	overflow: hidden;
+
+	.player-header {
+		padding: 38px 62px 28px;
+		border-bottom: 1px solid $medium-gray;
+	}
+
+	.player-content {
+		padding: 38px 62px 28px;
+	}
+
+	.player-prompt {
+		text-align: center;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: auto;
+		// transition: margin-top 500ms;
+
+		&.lower {
+			margin-top: 120px;
+		}
+	}
+
+	.progress {
+		border-radius: 20px;
+		overflow: hidden;
+		.progress-meter {
+			transition: width 500ms;
+		}
+
+	}
+
+	.player-footer {
+		background: $medium-gray;
+		padding: 26px 38px;
+
+		.button {
+			margin-bottom: 0;
+		}
+	}
+}

@@ -32,7 +32,7 @@ angular.module('earApp')
 
 		var kbdMin = keyboardConfig.getMin();
 		var kbdMax = keyboardConfig.getMax();
-		var keyboard = keyboardConfig.data;
+		var notesInKeyboard = keyboardConfig.getNotesInKeyboard();
 
 		// just to have some space around items.
 	    var margins = {
@@ -78,9 +78,9 @@ angular.module('earApp')
 
 	    // this is the actual definition of our x axis. The orientation refers to where the labels appear - for the x axis, below or above the line. Tick padding refers to how much space between the tick and the label. There are other parameters too - see https://github.com/mbostock/d3/wiki/SVG-Axes for more information
 	    // var xAxis = d3.svg.axis().scale(x).orient("bottom").tickPadding(2).outerTickSize(0);
-		var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(keyboard.notesInKeyboard.length).tickPadding(2).tickFormat(function(d) {
+		var xAxis = d3.svg.axis().scale(x).orient("bottom").ticks(notesInKeyboard.length).tickPadding(2).tickFormat(function(d) {
 			var index = d - kbdMin.midi;
-			var el = keyboard.notesInKeyboard[index];
+			var el = notesInKeyboard[index];
 			return el.note;
 		})
 

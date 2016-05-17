@@ -10,8 +10,10 @@
 				<h6><a ng-href="{{viewData.subtitleLink}}">{{viewData.subtitle}}</a></h6>
 			</div>
 			<div class="orb-container">
-				<div class="orb {{action}} {{errorClass}}" ng-if="state=='mysteryNote'" ng-class="{'playing': mysteryNotePlaying}">
-					<i class="playbutton fa fa-play fa-2x" aria-hidden="true" ng-click="playSpecialNote('mysteryNote');"></i>
+				<div class="orb {{action}} {{errorClass}} {{orbClasses}}" ng-if="state=='mysteryNote'" ng-class="{'playing': mysteryNotePlaying}" ng-click="playMysteryNote()" space-key="ng-click" hover-class>
+					<i class="orb-icon fa fa-play fa-2x" aria-hidden="true"></i>
+					<i class="orb-icon fa fa-check fa-2x" aria-hidden="true"></i>
+					<i class="orb-icon fa fa-times fa-2x" aria-hidden="true"></i>
 					<div class="orb-outer animated infinite pulse-1 _2000ms ease-in-out">
 						<div class="orb-inner animated infinite pulse-4 _1500ms ease-in-out">
 						</div>
@@ -26,9 +28,9 @@
 		</div>
 		<div class="player-footer">
 			<div ng-if="!gameover">
-				<button class="primary button large round fixed middle" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')" enter-key="setState('mysteryNote')">next</button>
+				<button class="primary button large round fixed middle success" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')" enter-key="ng-click">next</button>
 				<button class="secondary hollow button large round" ng-if="state=='mysteryNote'">skip</button>
-				<button class="button large round float-right success" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" enter-key="nextLevel()" ng-click="nextLevel()">continue</button>
+				<button class="button large round float-right success" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" enter-key="ng-click" ng-click="nextLevel()">continue</button>
 			</div>
 			<a id="see-results" href="#/results" class="button large round fixed middle" ng-if="gameover" enter-key>see results</a>
 			<!-- <div keypress-events>typed: {{key}}</div> -->

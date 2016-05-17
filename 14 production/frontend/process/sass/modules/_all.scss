@@ -16,3 +16,28 @@
 		@include orb-diameter($diam - 10);
 	}
 }
+
+@mixin icon-reveal($className) {
+	@if $className == fa-play {
+		.#{$className} {
+			margin-left: 6px;
+			@include icon-reveal-helper();
+		}
+	} @else if $className == fa-check {
+		.#{$className} {
+			@include icon-reveal-helper();
+		}
+	} @else if $className == fa-times {
+		.#{$className} {
+			@include icon-reveal-helper();
+		}
+	}
+}
+
+@mixin icon-reveal-helper() {
+	&.orb-icon {
+		opacity: 1;
+		font-size: 3em;
+		@include transition(all .3s .2s);
+	}
+}

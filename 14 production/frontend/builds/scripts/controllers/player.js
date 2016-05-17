@@ -12,11 +12,9 @@ angular.module('earApp')
 	$scope.notesToSkip = [$scope.referenceNote];
 	var localStorageKey = 'gameData';
 
-	var keyboard = keyboardConfig.data;
-	var min = JZZ.MIDI.noteValue(keyboard.startingNote.note + keyboard.startingNote.octave);
 	$scope.kbdRange = {
-		min: min,
-		max: min + keyboard.ASCII.length - 1
+		min: keyboardConfig.getMin().midi,
+		max: keyboardConfig.getMax().midi
 	};
 	$scope.errorTimer = null;
 	$scope.action = '';
@@ -34,7 +32,7 @@ angular.module('earApp')
 				},
 				'mysteryNote' : {
 					title: 'Identify the mystery note.',
-					subtitle: 'Use the keyboard below.'
+					subtitle: ''
 				}
 			}
 			if (stateMap[state]) {
@@ -46,7 +44,7 @@ angular.module('earApp')
 		}
 	}
 
-	$scope.key = 'none'
+	$scope.key = 'none';
 
     $rootScope.$on('keypress', function (evt, obj, key) {
         $scope.$apply(function () {
@@ -87,21 +85,34 @@ angular.module('earApp')
 		}
 	}
 
+	$scope.playMysteryNote = function() {
+		var note = $scope.mysteryNote;
+		var time = 1800;
+
+		resetOrbClasses();
+
+		makeNote(note, time, 'mysteryNote'); // will set $scope.mysteryNotePlaying to true until note is off
+
+	}
 
 	function initiateMysteryNote() {
 		// TODO: account for smaller keyboard sizes when screen size changes
-		$($scope.piano.getKeysDOM()).removeClass('found');
+
+		$($scope.piano.getKeysDOM()).removeClass('mysteryNote found color-pulse');
+		console.log($scope.referenceNote);
 		$scope.piano.noteOff(0, $scope.referenceNote);
 		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max);
+		var note = $scope.mysteryNote;
+		$($scope.piano.getKeyDOM(note)).addClass('mysteryNote');
 		$scope.action = 'waiting';
-		$scope.playSpecialNote('mysteryNote');
+		$scope.orbClasses = 'reveal-play';
 		var mysteryNoteObj = {
 			key: -1,
 			type: 'correct',
-			midi: $scope.mysteryNote
+			midi: note
 		};
 		$scope.gameData[$scope.level].push(mysteryNoteObj);
-		$scope.notesToSkip.push($scope.mysteryNote);
+		$scope.notesToSkip.push(note);
 		console.log($scope.gameData);
 	}
 
@@ -118,8 +129,17 @@ angular.module('earApp')
 		return note;
 	}
 
-	function makeNote(note, duration) {
+	function makeNote(note, duration, scopeVar) {
+
+		if (scopeVar) {
+			$scope[scopeVar + 'Playing'] = true;
+			$timeout(function(){
+				$scope[scopeVar + 'Playing'] = false;
+			}, duration);
+		}
+
 		$scope.piano.noteOn(0, note, 120).wait(duration).noteOff(0, note);
+
 	}
 
 	function processNote(midi) {
@@ -157,7 +177,7 @@ angular.module('earApp')
 				if ($scope.errorTimer != null) {
 					$timeout.cancel($scope.errorTimer);
 				}
-				$scope.errorTimer = $timeout(resetOrbClasses, 2000);
+				$scope.errorTimer = $timeout(resetOrbClasses, 4000);
 
 			}
 		}
@@ -175,6 +195,7 @@ angular.module('earApp')
 	function resetOrbClasses() {
 		$scope.action = 'waiting';
 		$scope.errorClass = '';
+		$scope.orbClasses = '';
 	}
 
 	function resetOrbTimers() {
@@ -210,7 +231,7 @@ angular.module('earApp')
 	$scope.init = function() {
 		$scope.viewData.set($scope.state);
 		deleteSavedData();
-		$($scope.piano.getKeyDOM($scope.referenceNote)).addClass('referenceNote');
+		$($scope.piano.getKeyDOM($scope.referenceNote)).addClass('referenceNote color-pulse');
 	}
 
 
