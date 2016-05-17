@@ -6,8 +6,6 @@ angular.module('earApp')
 		restrict: 'E',
 		replace: false,
 		link: function(scope, element, attrs) {
-			// console.log(scope);
-			// element = angular.element(element);
 			showScatterPlot(scope.line, element);
 			d3.selectAll('.node-correct').moveToFront();
 		}

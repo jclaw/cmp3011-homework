@@ -15,11 +15,9 @@ angular.module('earApp')
 	keyboard.config = {};
 
 	keyboard.initialize = function() {
-		console.log(keyboard.config);
 		kbdSettings.assignments = [];
 		var startingNote = keyboard.config.assignments[0].midi;
 		var endingNote = startingNote + keyboard.config.range - 1;
-		console.log(startingNote);
 		var lastIndex = keyboard.config.assignments.length-1;
 		$.each(keyboard.config.assignments, function(index, pref) {
 			var endMidi = index == lastIndex ? endingNote : keyboard.config.assignments[index+1].midi - 1;
@@ -77,8 +75,6 @@ angular.module('earApp')
 		data.noteAssignments = {};
 		data.notesInKeyboard = [];
 
-		console.log(data);
-
 		var noteIndex = noteLogicHelpers.getIndexOfNote(data.startingNote.noteString);
 		var octave = data.startingNote.octave;
 		for (var i = 0; i < data.ASCII.length; i++) {
@@ -116,15 +112,11 @@ angular.module('earApp')
 			}
 			var isBlackKey = noteLogicHelpers.isBlackKey({noteString:startingNote.noteString});
 			if (!isBlackKey && layoutRow != 0) {
-				console.log('valid arrangment');
-
 
 				var lowerIndex = startCharIndex;
-				// console.log(startingNote);
 				var upperIndex = lowerIndex;
 				upperIndex += noteLogicHelpers.isBlackKey({midi:(startingNote.midi + 1)}) ? 1 : 2;
 
-				console.log(lowerIndex, upperIndex);
 				// loop
 				for (var m = pref.startMidi; m <= pref.endMidi; m++) {
 					var charToAdd;
