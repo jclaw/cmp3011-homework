@@ -62,7 +62,6 @@ angular.module('earApp')
 	}
 
 	$scope.nextLevel = function() {
-		console.log('next level');
 		$scope.gameData.push([]);
 		initiateMysteryNote();
 
@@ -99,7 +98,6 @@ angular.module('earApp')
 		// TODO: account for smaller keyboard sizes when screen size changes
 
 		$($scope.piano.getKeysDOM()).removeClass('mysteryNote found color-pulse');
-		console.log($scope.referenceNote);
 		$scope.piano.noteOff(0, $scope.referenceNote);
 		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max);
 		var note = $scope.mysteryNote;
@@ -113,7 +111,6 @@ angular.module('earApp')
 		};
 		$scope.gameData[$scope.level].push(mysteryNoteObj);
 		$scope.notesToSkip.push(note);
-		console.log($scope.gameData);
 	}
 
 	function selectRandNote(min, max) {
@@ -147,7 +144,6 @@ angular.module('earApp')
 		if ($scope.state == 'mysteryNote' && !$scope.mysteryNotePlaying && $scope.action != 'success') {
 			if ($scope.currNote == $scope.mysteryNote) {
 				// correct note
-				console.log('correct');
 				resetOrbClasses();
 				resetOrbTimers();
 				$scope.action = 'success';
@@ -163,10 +159,8 @@ angular.module('earApp')
 				$scope.$apply();
 			} else if ($scope.currNote != $scope.referenceNote){
 				// incorrect note
-				console.log('incorrect');
 				$scope.action = 'error';
 				$scope.errorClass = 'e-' + (Math.abs($scope.mysteryNote - $scope.currNote));
-				console.log($scope.gameData);
 				var errorNote = {
 					key: $scope.gameData[$scope.level].length, // sets key to which error number this is. the mystery note is already in the list
 					type: 'error',
@@ -183,10 +177,8 @@ angular.module('earApp')
 		}
 		else if ($scope.mysteryNotePlaying) {
 			// mystery note is playing
-			console.log('skipping the mystery note');
 		} else {
 			// not in mystery not selection mode
-			console.log('wrong mode');
 		}
 
 
