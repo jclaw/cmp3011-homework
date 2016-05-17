@@ -3,18 +3,10 @@
 angular.module('earApp')
 .controller('KeyboardCtrl', function($scope, keyboardConfig) {
 
-// keyboardConfig.initialize({
-// 	range: 25,
-// 	assignments: [
-// 		{char: 'Q', midi: 48},
-// 		{char: 'Z', midi: 60}
-// 	]
-// });
-
 keyboardConfig.config = {
-	range: 13,
+	range: 20,
 	assignments: [
-		{char: 'Z', midi: 60}
+		{char: 'Q', midi: 48}
 	]
 };
 keyboardConfig.initialize();

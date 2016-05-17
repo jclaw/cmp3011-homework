@@ -7,7 +7,7 @@ angular.module('earApp')
 	$scope.levels = 6;
 	$scope.gameData = [[]];
 	$scope.state = 'referenceNote';
-	$scope.referenceNote = 64;
+	$scope.referenceNote = 55;
 	$scope.gameover = false;
 	$scope.notesToSkip = [$scope.referenceNote];
 	var localStorageKey = 'gameData';

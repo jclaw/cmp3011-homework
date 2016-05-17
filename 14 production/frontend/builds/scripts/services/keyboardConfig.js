@@ -121,8 +121,10 @@ angular.module('earApp')
 
 				var lowerIndex = startCharIndex;
 				// console.log(startingNote);
-				var upperIndex = noteLogicHelpers.isBlackKey({midi:(startingNote.midi + 1)}) ? 1 : 2;
+				var upperIndex = lowerIndex;
+				upperIndex += noteLogicHelpers.isBlackKey({midi:(startingNote.midi + 1)}) ? 1 : 2;
 
+				console.log(lowerIndex, upperIndex);
 				// loop
 				for (var m = pref.startMidi; m <= pref.endMidi; m++) {
 					var charToAdd;
