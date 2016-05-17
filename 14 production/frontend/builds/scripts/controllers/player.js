@@ -7,16 +7,14 @@ angular.module('earApp')
 	$scope.levels = 6;
 	$scope.gameData = [[]];
 	$scope.state = 'referenceNote';
-	$scope.referenceNote = 55;
+	$scope.referenceNote = 64;
 	$scope.gameover = false;
 	$scope.notesToSkip = [$scope.referenceNote];
 	var localStorageKey = 'gameData';
 
-	var keyboard = keyboardConfig.data;
-	var min = JZZ.MIDI.noteValue(keyboard.startingNote.note + keyboard.startingNote.octave);
 	$scope.kbdRange = {
-		min: min,
-		max: min + keyboard.ASCII.length - 1
+		min: keyboardConfig.getMin().midi,
+		max: keyboardConfig.getMax().midi
 	};
 	$scope.errorTimer = null;
 	$scope.action = '';
@@ -46,7 +44,7 @@ angular.module('earApp')
 		}
 	}
 
-	$scope.key = 'none'
+	$scope.key = 'none';
 
     $rootScope.$on('keypress', function (evt, obj, key) {
         $scope.$apply(function () {
@@ -101,7 +99,7 @@ angular.module('earApp')
 		// TODO: account for smaller keyboard sizes when screen size changes
 
 		$($scope.piano.getKeysDOM()).removeClass('mysteryNote found color-pulse');
-
+		console.log($scope.referenceNote);
 		$scope.piano.noteOff(0, $scope.referenceNote);
 		$scope.mysteryNote = selectRandNote($scope.kbdRange.min, $scope.kbdRange.max);
 		var note = $scope.mysteryNote;

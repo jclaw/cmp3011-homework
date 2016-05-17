@@ -138,7 +138,6 @@
 		state: 'on',
 		playing: this.playing
 	}
-	console.log(noteData, 'press');
 	var event = new CustomEvent('noteOn', { 'detail': noteData});
 	document.dispatchEvent(event);
     this.noteOn(midi);
@@ -169,7 +168,6 @@
 			state: 'on',
 			playing: this.playing
 		}
-		console.log(noteData);
 		var event = new CustomEvent('noteOn', { 'detail': noteData});
 		document.dispatchEvent(event);
 

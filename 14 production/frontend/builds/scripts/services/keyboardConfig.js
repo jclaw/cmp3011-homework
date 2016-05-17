@@ -2,55 +2,70 @@
 
 angular.module('earApp')
 .service('keyboardConfig', function(noteLogicHelpers) {
-
-	var kbdSettings = {
-		startingNote: 	{ midi: 59 },
-		endingNote: 	{ midi: 76 },
-		assignments: [{
-			startingKbdChar: 'Z',
-			startingMidi: 59,
-			endingMidi: 76
-		}]
-	}
+	var keyboard = this;
+	var kbdSettings = {};
 
 	var charLayout = [
 		['1','2','3','4','5','6','7','8','9','0','-','='],
 		['Q','W','E','R','T','Y','U','I','O','P','[',']','\\'],
-		['A','S','D','F','G','H','J','K','L', ';','\''],
+		['A','S','D','F','G','H','J','K','L',';','\''],
 		['Z','X','C','V','B','N','M',',','.','/']
 	]
 
-	computeFields(kbdSettings);
-	this.data = kbdSettings;
+	keyboard.config = {};
 
-	this.getMin = function() {
+	keyboard.initialize = function() {
+		console.log(keyboard.config);
+		kbdSettings.assignments = [];
+		var startingNote = keyboard.config.assignments[0].midi;
+		var endingNote = startingNote + keyboard.config.range - 1;
+		console.log(startingNote);
+		var lastIndex = keyboard.config.assignments.length-1;
+		$.each(keyboard.config.assignments, function(index, pref) {
+			var endMidi = index == lastIndex ? endingNote : keyboard.config.assignments[index+1].midi - 1;
+			kbdSettings.assignments[index] = {
+				startChar: pref.char,
+				startMidi: pref.midi,
+				endMidi: endMidi
+			}
+		})
+		kbdSettings.startingNote = {midi: startingNote};
+		kbdSettings.endingNote = {midi: endingNote};
+		computeFields(kbdSettings);
+	}
+
+	keyboard.getMin = function() {
 		return kbdSettings.startingNote;
 	}
 
-	this.getMax = function() {
+	keyboard.getMax = function() {
 		return kbdSettings.endingNote;
 	}
 
-	this.getMinString = function() {
-		return kbdSettings.startingNote.noteChar + kbdSettings.startingNote.octave;
+	keyboard.getMinString = function() {
+		return kbdSettings.startingNote.noteString + kbdSettings.startingNote.octave;
 	}
 
-	this.getMaxString = function() {
-		return kbdSettings.endingNote.noteChar + kbdSettings.endingNote.octave;
+	keyboard.getMaxString = function() {
+		return kbdSettings.endingNote.noteString + kbdSettings.endingNote.octave;
 	}
 
-	this.getRange = function() {
+	keyboard.getRange = function() {
 		return [kbdSettings.startingNote, kbdSettings.endingNote];
 	}
 
-	this.stringNote = function(value) {
+	keyboard.stringNote = function(value) {
 		var d = kbdSettings;
 		var element = d.notesInKeyboard[value - d.startingNote.midi];
-		return element.noteChar + element.octave;
+		return element.noteString + element.octave;
 	}
 
-	this.getNoteAssignments = function() {
+	keyboard.getNoteAssignments = function() {
 		return kbdSettings.noteAssignments;
+	}
+
+	keyboard.getNotesInKeyboard = function() {
+		return kbdSettings.notesInKeyboard;
 	}
 
 	//////////////////////////////////////////////
@@ -64,7 +79,7 @@ angular.module('earApp')
 
 		console.log(data);
 
-		var noteIndex = noteLogicHelpers.getIndexOfNote(data.startingNote.noteChar);
+		var noteIndex = noteLogicHelpers.getIndexOfNote(data.startingNote.noteString);
 		var octave = data.startingNote.octave;
 		for (var i = 0; i < data.ASCII.length; i++) {
 			if (noteIndex >= 12) { // cycle through octave
@@ -73,14 +88,14 @@ angular.module('earApp')
 			}
 
 			var characters = data.ASCII[i].split(' ');
-			var noteChar = noteLogicHelpers.getNoteByIndex(noteIndex);
+			var noteString = noteLogicHelpers.getNoteByIndex(noteIndex);
 			$.each(characters, function(index, value) {
-				data.noteAssignments[value] = noteChar + octave;
+				data.noteAssignments[value] = noteString + octave;
 			})
 			data.notesInKeyboard.push({
-				noteChar: noteChar,
+				noteString: noteString,
 				octave: octave,
-				midi: JZZ.MIDI.noteValue(noteChar + octave)
+				midi: JZZ.MIDI.noteValue(noteString + octave)
 			});
 			noteIndex++;
 		}
@@ -91,26 +106,25 @@ angular.module('earApp')
 	function setKeyboard(config) {
 		var ascii = [];
 		$.each(config, function(index, pref) {
-			var startingNote = noteLogicHelpers.getNoteObj(pref.startingMidi),
-				endingNote = noteLogicHelpers.getNoteObj(pref.endingMidi);
-			var noteRange = pref.endingMidi - pref.startingMidi;
+			var startingNote = noteLogicHelpers.getNoteObj(pref.startMidi),
+				endingNote = noteLogicHelpers.getNoteObj(pref.endMidi);
+			var noteRange = pref.endMidi - pref.startMidi;
 			var layoutRow, startCharIndex;
 			for (layoutRow = 0; layoutRow < charLayout.length; layoutRow++) {
-				startCharIndex = charLayout[layoutRow].indexOf(pref.startingKbdChar);
+				startCharIndex = charLayout[layoutRow].indexOf(pref.startChar);
 				if (startCharIndex != -1) break;
 			}
-			var isBlackKey = noteLogicHelpers.isBlackKey({noteChar:startingNote.noteChar});
+			var isBlackKey = noteLogicHelpers.isBlackKey({noteString:startingNote.noteString});
 			if (!isBlackKey && layoutRow != 0) {
 				console.log('valid arrangment');
 
 
 				var lowerIndex = startCharIndex;
-				console.log(startingNote);
+				// console.log(startingNote);
 				var upperIndex = noteLogicHelpers.isBlackKey({midi:(startingNote.midi + 1)}) ? 1 : 2;
 
-				console.log(upperIndex,lowerIndex);
 				// loop
-				for (var m = pref.startingMidi; m <= pref.endingMidi; m++) {
+				for (var m = pref.startMidi; m <= pref.endMidi; m++) {
 					var charToAdd;
 					if (noteLogicHelpers.isBlackKey({midi: m})) {
 						charToAdd = charLayout[layoutRow - 1][upperIndex];
@@ -139,7 +153,6 @@ angular.module('earApp')
 				console.log('invalid layout row');
 			}
 		});
-		console.log(ascii);
 		return ascii;
 	}
 
