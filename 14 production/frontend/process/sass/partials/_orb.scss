@@ -52,7 +52,7 @@
 			@include icon-reveal(fa-play);
 		}
 
-		&.hover {
+		&.hover:not(.error, .success) {
 			@include icon-reveal(fa-play);
 			.orb-outer {
 				@include orb-diameter($outer-diameter * 1.2);
