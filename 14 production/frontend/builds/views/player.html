@@ -29,8 +29,8 @@
 		<div class="player-footer">
 			<div ng-if="!gameover">
 				<button class="primary button large round fixed middle success" ng-if="state=='referenceNote'" ng-click="setState('mysteryNote')" enter-key="ng-click">next</button>
-				<button class="secondary hollow button large round" ng-if="state=='mysteryNote'">skip</button>
-				<button class="button large round float-right success" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" enter-key="ng-click" ng-click="nextLevel()">continue</button>
+				<button class="secondary hollow button large round" ng-if="state=='mysteryNote'" ng-class="{'disabled': action == 'success'}" ng-click="skip()">skip</button>
+				<button class="button large round float-right success" ng-class="{'disabled': action != 'success'}" ng-if="state=='mysteryNote'" enter-key="ng-click" ng-click="continue()">continue</button>
 			</div>
 			<a id="see-results" href="#/results" class="button large round fixed middle" ng-if="gameover" enter-key>see results</a>
 			<!-- <div keypress-events>typed: {{key}}</div> -->
