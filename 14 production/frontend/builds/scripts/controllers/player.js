@@ -28,7 +28,7 @@ angular.module('earApp')
 			var stateMap = {
 				'referenceNote' : {
 					title: 'Play the blue note to hear your reference note.',
-					subtitle: 'I don’t hear anything. Help!'
+					subtitle: ''
 				},
 				'mysteryNote' : {
 					title: 'Identify the mystery note.',
