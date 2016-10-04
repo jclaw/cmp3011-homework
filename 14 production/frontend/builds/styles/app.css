@@ -4340,20 +4340,20 @@ table.hover tr:nth-of-type(even):hover {
         opacity: 1;
         font-size: 3em;
         transition: all 0.3s 0.2s; }
-    .orb-container .orb.hover .fa-play {
+    .orb-container .orb.hover:not(.error):not(.success):not(.playing) .fa-play {
       margin-left: 6px; }
-      .orb-container .orb.hover .fa-play.orb-icon {
+      .orb-container .orb.hover:not(.error):not(.success):not(.playing) .fa-play.orb-icon {
         opacity: 1;
         font-size: 3em;
         transition: all 0.3s 0.2s; }
-    .orb-container .orb.hover .orb-outer {
+    .orb-container .orb.hover:not(.error):not(.success):not(.playing) .orb-outer {
       height: 180px;
       width: 180px;
       margin: -90px 0 0 -90px;
       line-height: 180px;
       -webkit-animation-duration: 4000ms;
               animation-duration: 4000ms; }
-    .orb-container .orb.hover .orb-inner {
+    .orb-container .orb.hover:not(.error):not(.success):not(.playing) .orb-inner {
       height: 135px;
       width: 135px;
       margin: -67.5px 0 0 -67.5px;
@@ -4771,3 +4771,7 @@ table h4 {
 
 .align-right {
   text-align: right; }
+
+.secondary {
+  text-align: center;
+  color: grey; }
