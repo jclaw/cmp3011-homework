@@ -4,7 +4,7 @@ angular.module('earApp')
 .controller('PlayerCtrl', function($scope, $rootScope, $timeout, keyboardConfig, localStorageService) {
 
 	$scope.level = 0;
-	$scope.levels = 6;
+	$scope.levels = 2;
 	$scope.gameData = [[]];
 	$scope.state = 'referenceNote';
 	$scope.referenceNote = 55;
@@ -28,7 +28,7 @@ angular.module('earApp')
 			var stateMap = {
 				'referenceNote' : {
 					title: 'Play the blue note to hear your reference note.',
-					subtitle: 'I don’t hear anything. Help!'
+					subtitle: ''
 				},
 				'mysteryNote' : {
 					title: 'Identify the mystery note.',
@@ -61,10 +61,27 @@ angular.module('earApp')
 		$scope.viewData.set(state);
 	}
 
-	$scope.nextLevel = function() {
+	$scope.continue = function() {
 		$scope.gameData.push([]);
 		initiateMysteryNote();
+	}
 
+	$scope.skip = function() {
+		console.log($scope.gameData);
+		$scope.gameData[$scope.level] = [];
+		$scope.nextLevel();
+		$scope.continue();
+	}
+
+	$scope.nextLevel = function() {
+		$scope.level++;
+		if ($scope.level < $scope.levels) {
+			updateSavedData();
+		} else {
+			// game over!
+			$scope.gameover = true;
+			updateSavedData();
+		}
 	}
 
 	$scope.playSpecialNote = function(type) {
@@ -148,15 +165,9 @@ angular.module('earApp')
 				resetOrbTimers();
 				$scope.action = 'success';
 				$($scope.piano.getKeyDOM($scope.mysteryNote)).addClass('found');
-				$scope.level++;
-				if ($scope.level < $scope.levels) {
-					updateSavedData();
-				} else {
-					// game over!
-					$scope.gameover = true;
-					updateSavedData();
-				}
+				$scope.nextLevel();
 				$scope.$apply();
+
 			} else if ($scope.currNote != $scope.referenceNote){
 				// incorrect note
 				$scope.action = 'error';
